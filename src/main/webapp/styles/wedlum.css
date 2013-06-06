@@ -110,23 +110,27 @@ width:100%;
 height:auto;}
 
 #ImageSorting {
+vertical-align:center;
 float:right;
-height:100%;
-background:#FF00FF;
+margin-top: auto;
+margin-bottom: auto;
 	width:10%;
 }
 
 #ImageLikes, #ImageDislikes {
+box-sizing:border-box;
+	border:solid #EBEBEB;
+	border-width:8px 0px 8px 8px;
     height:200px;
-    background: #EEE;
-    width:100%
+	-moz-box-shadow:    0 0 3px #FFF, inset 0 0 3px #FFF;
+   -webkit-box-shadow: 0 0 3px #FFF, inset 0 0 3px #FFF;
+   box-shadow:         0 0 3px #FFF, inset 0 0 3px #FFF;
 }
 
 #Countdown{
 display:block;
     height:100px;
     width:100%;
-    background:#DDD;
 }
 
 footer{
