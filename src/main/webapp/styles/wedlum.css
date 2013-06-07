@@ -1,9 +1,11 @@
-body {
+
+html, body {
+height: 100%; 
     width: 100%;
     min-width:200px;
 	margin:0;
 	padding:0;
-	background: url("../images/PageBG.png")repeat;
+	background: url("../images/paper.jpg")repeat;
 }
 
 
@@ -69,69 +71,38 @@ padding-left:0px;
 	background: url("../images/timelineDots.png") 100% 0px no-repeat;
 }
 
-
 #ResultsSection{
 margin-left:30px;}
 
 #BodyContent{
 display:block;
 width:100%;
-margin-top:12px;}
+margin-top:4px;}
 
 #CentralPhotos{
-vertical-align:top;
-width:85%;
-display:inline-block;
-margin-left:23px;
+margin:0px 15px 0px 15px;
+max-height:600px;
+
 }
 
 
 #PhotoGroup{
-    padding: 0px;
-	border:none;
-	margin:auto;
-	border-collapse: collapse;
-	border-spacing: 0;
-	width:100%;
-}
-#PhotoGroup tr{
-padding:0px;
 margin:0px;
-border:0px;}
-
-#PhotoGroup td{
-padding:0px 4px 4px 0px;
-width:auto;
-border:0px;}
+padding:0px;
+text-align: center;
+}
+#PhotoGroup li{
+width:16.66%;
+max-width:200px;
+display:inline-block;
+margin:0px;}
 
 #PhotoGroup img{
 display:block;
 width:100%;
 height:auto;}
 
-#ImageSorting {
-vertical-align:center;
-float:right;
-margin-top: auto;
-margin-bottom: auto;
-	width:10%;
-}
-
-#ImageLikes, #ImageDislikes {
-box-sizing:border-box;
-	border:solid #EBEBEB;
-	border-width:8px 0px 8px 8px;
-    height:200px;
-	-moz-box-shadow:    0 0 3px #FFF, inset 0 0 3px #FFF;
-   -webkit-box-shadow: 0 0 3px #FFF, inset 0 0 3px #FFF;
-   box-shadow:         0 0 3px #FFF, inset 0 0 3px #FFF;
-}
-
-#Countdown{
-display:block;
-    height:100px;
-    width:100%;
-}
+#image sorting:
 
 footer{
     width:100%;
