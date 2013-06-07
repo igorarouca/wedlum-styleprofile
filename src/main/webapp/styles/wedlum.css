@@ -1,140 +1,150 @@
 body {
-    width: 100%;
-    min-width:200px;
-	margin:0;
-	padding:0;
-	background: url("../images/PageBG.png")repeat;
+	width: 100%;
+	min-width: 200px;
+	margin: 0;
+	padding: 0;
+	background: url("../images/PageBG.png") repeat;
 }
-
 
 header {
-margin:0px;
-width:100%;
-background: url("../images/NavBG.png") repeat-x;
-height:41px;}
+	margin: 0px;
+	width: 100%;
+	background: url("../images/NavBG.png") repeat-x;
+	height: 41px;
+}
 
-
-#Logo{
-    font-size:14px;
-	padding:0px;
-	margin:0 0 0 20px;
-	float:left;
-    width:120px;
+#Logo {
+	font-size: 14px;
+	padding: 0px;
+	margin: 0 0 0 20px;
+	float: left;
+	width: 120px;
 	background: url("../images/Logo.png") no-repeat;
-	height:41px;
-	overflow:hidden;
-	text-indent:100%;
+	height: 41px;
+	overflow: hidden;
+	text-indent: 100%;
 }
 
-#DropdownNav{
-    display:none;
-	height:0px;
+#DropdownNav {
+	display: none;
+	height: 0px;
 }
-#TimelineList{
+
+#TimelineList {
 	background: url("../images/dottedLine.png") 0 13px repeat-x;
-    margin: 0px 29px 0 140px;
-    padding: 0px;
-	height:30px;
-	
+	margin: 0px 29px 0 140px;
+	padding: 0px;
+	height: 30px;
 }
 
-#TimelineList ul{
-margin:0px;
-padding:0px;}
-
-
-
-#TimelineList li{
-	display:inline-block;
-    margin: 8px 0 0 0 ;
-    padding:0px;
-	height:30px;
-    width:8.33%;
-	margin-right:-9px;
-	padding-left:9px;
-    overflow:hidden;
+#TimelineList ul {
+	margin: 0px;
+	padding: 0px;
 }
+
+#TimelineList li {
+	display: inline-block;
+	margin: 8px 0 0 0;
+	padding: 0px;
+	height: 30px;
+	width: 8.33%;
+	margin-right: -9px;
+	padding-left: 9px;
+	overflow: hidden;
+}
+
 li#ColorSection1 {
-width:9px;
-padding-left:0px;
+	width: 9px;
+	padding-left: 0px;
 }
 
-.TimelineMain a, .TimelineSub a{
-	display:block;
-	float:right;
-	width:100%;
-	height:13px;
-	text-indent:100%;
-    overflow:hidden;
+.TimelineMain a,.TimelineSub a {
+	display: block;
+	float: right;
+	width: 100%;
+	height: 13px;
+	text-indent: 100%;
+	overflow: hidden;
 	background: url("../images/timelineDots.png") 100% 0px no-repeat;
 }
 
-
-#ResultsSection{
-margin-left:30px;}
-
-#BodyContent{
-display:block;
-width:100%;
-margin-top:12px;}
-
-#CentralPhotos{
-vertical-align:top;
-width:85%;
-display:inline-block;
-margin-left:23px;
+#ResultsSection {
+	margin-left: 30px;
 }
 
+#BodyContent {
+	display: block;
+	width: 100%;
+	margin-top: 12px;
+}
 
-#PhotoGroup{
-    padding: 0px;
-	border:none;
-	margin:auto;
+#CentralPhotos {
+	vertical-align: top;
+	width: 85%;
+	display: inline-block;
+	margin-left: 23px;
+}
+
+#PhotoGroup {
+	padding: 0px;
+	border: none;
+	margin: auto;
 	border-collapse: collapse;
 	border-spacing: 0;
-	width:100%;
+	width: 100%;
 }
-#PhotoGroup tr{
-padding:0px;
-margin:0px;
-border:0px;}
 
-#PhotoGroup td{
-padding:0px 4px 4px 0px;
-width:auto;
-border:0px;}
+#PhotoGroup tr {
+	padding: 0px;
+	margin: 0px;
+	border: 0px;
+}
 
-#PhotoGroup img{
-display:block;
-width:100%;
-height:auto;}
+#PhotoGroup td {
+	padding: 0px 4px 4px 0px;
+	width: auto;
+	border: 0px;
+}
+
+#PhotoGroup img {
+	display: block;
+	width: 100%;
+	height: auto;
+}
 
 #ImageSorting {
-vertical-align:center;
-float:right;
-margin-top: auto;
-margin-bottom: auto;
-	width:10%;
+	vertical-align: center;
+	float: right;
+	margin-top: auto;
+	margin-bottom: auto;
+	width: 10%;
 }
 
 #ImageLikes, #ImageDislikes {
-box-sizing:border-box;
-	border:solid #EBEBEB;
-	border-width:8px 0px 8px 8px;
-    height:200px;
-	-moz-box-shadow:    0 0 3px #FFF, inset 0 0 3px #FFF;
-   -webkit-box-shadow: 0 0 3px #FFF, inset 0 0 3px #FFF;
-   box-shadow:         0 0 3px #FFF, inset 0 0 3px #FFF;
+	box-sizing: border-box;
+	border: solid #EBEBEB;
+	border-width: 8px 0px 8px 8px;
+	height: 200px;
+	-moz-box-shadow: 0 0 3px #FFF, inset 0 0 3px #FFF;
+	-webkit-box-shadow: 0 0 3px #FFF, inset 0 0 3px #FFF;
+	box-shadow: 0 0 3px #FFF, inset 0 0 3px #FFF;
 }
 
-#Countdown{
-display:block;
-    height:100px;
-    width:100%;
+.ColorSwatchMini {
+	width: 50%;
+	height: 40%;
+	-moz-transform: skew(20deg, -20deg);
+	-webkit-transform: skew(20deg, -20deg);
 }
 
-footer{
-    width:100%;
-    padding-top:100px;
-	clear:both;
+#Countdown {
+	display: block;
+	height: 100px;
+	width: 100%;
+}
+
+footer {
+	width: 100%;
+	padding-top: 100px;
+	clear: both;
 }
