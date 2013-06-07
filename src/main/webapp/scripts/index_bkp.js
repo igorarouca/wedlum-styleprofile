@@ -30,7 +30,7 @@ $(function() {
 
 	var divProto = $("#1stColor");
 
-	$(".Photo").each(function() {
+	$(".ColorSwatchSmall").each(function() {
 		var imgSrc = $(this).find("img").attr("src");
 		$(this).children().remove();
 		var divClone = divProto.clone();

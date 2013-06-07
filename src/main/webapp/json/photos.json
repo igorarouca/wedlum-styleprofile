@@ -1,0 +1,49 @@
+[
+    {
+        "id": "1",
+        "path": "1stSwatches/YellowD.png"
+    },
+
+    {
+        "id": "2",
+        "path": "1stSwatches/RedD.png"
+    },
+
+	{
+        "id": "3",
+        "path": "1stSwatches/GreyD.png"
+
+    }
+
+	{
+        "id": "4",
+        "path": "1stSwatches/BlueD.png"
+    },
+
+    {
+        "id": "5",
+        "path": "1stSwatches/GreenD.png"
+    },
+
+    {
+        "id": "6",
+        "path": "1stSwatches/OrangeD.png"
+
+    }
+
+	{
+        "id": "7",
+        "path": "1stSwatches/PurpleD.png"
+    },
+
+    {
+        "id": "8",
+        "path": "1stSwatches/Brown.png"
+    },
+
+    {
+        "id": "9",
+        "path": "1stSwatches/AquaD.png"
+
+    }
+]
