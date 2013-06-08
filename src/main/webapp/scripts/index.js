@@ -1,42 +1,41 @@
 $(function() {
 
-	var $miniProto = $(".ColorSwatchMini");
-	$miniProto.remove();
+	var $bubbleProto = $(".PreferenceBubble");
+	$bubbleProto.children().remove();
 
-	var ColorSwatchView = Backbone.View.extend({
+	var PhotoView = Backbone.View.extend({
 		events: {
-			"click img" : "colorSwatchLiked",
-			"click #Like" : "colorSwatchLiked",
-			"click #Dislike" : "colorSwatchDisliked"
+			"click #ThumbUp" : "thumbUp",
+			"click #ThumbDown" : "thumbDown"
 		},
 
-		colorSwatchLiked: function(event) {
+		thumbUp: function(event) {
 			event.preventDefault();
-			this.moveColorSwatchTo("#ImageLikes");
+			this.movePhotoTo("#PhotoThumbups");
 		},
 
-		colorSwatchDisliked: function(event) {
+		thumbDown: function(event) {
 			event.preventDefault();
-			this.moveColorSwatchTo("#ImageDislikes");
+			this.movePhotoTo("#PhotoThumbdowns");
 		},
 
-		moveColorSwatchTo: function(sortingArea) {
+		movePhotoTo: function(sortingArea) {
 			var $img = this.$("img");
-			$img.addClass("ColorSwatchMini");
+			$img.addClass("PreferenceBubble");
 			$(sortingArea).append($img);
-			this.$("p").remove();
+			this.$("span").remove();
 		}
 	});
 
-	var divProto = $("#1stColor");
+	var divProto = $("#1stPhoto");
 
 	$(".Photo").each(function() {
 		var imgSrc = $(this).find("img").attr("src");
-		$(this).children().remove();
 		var divClone = divProto.clone();
+		$(this).children().remove();
 		divClone.find("img").attr("src", imgSrc);
 		$(this).append(divClone);
-		new ColorSwatchView({ el: $(this) });
+		new PhotoView({ el: $(this) });
 	});
 
 });
