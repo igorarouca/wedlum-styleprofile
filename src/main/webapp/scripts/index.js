@@ -1,7 +1,7 @@
 $(function() {
 
 	var $bubbleProto = $(".PreferenceBubble");
-	$bubbleProto.children().remove();
+	$bubbleProto.empty();
 
 	var PhotoView = Backbone.View.extend({
 		events: {
@@ -11,19 +11,34 @@ $(function() {
 
 		thumbUp: function(event) {
 			event.preventDefault();
-			this.movePhotoTo("#PhotoThumbups");
+			var turnOff = this.movePhotoTo("#PhotoThumbups");
+			if (turnOff) {
+				$("#PhotoGroup #ThumbUp").remove();
+			}
 		},
 
 		thumbDown: function(event) {
 			event.preventDefault();
-			this.movePhotoTo("#PhotoThumbdowns");
+			var turnOff = this.movePhotoTo("#PhotoThumbdowns");
+			if (turnOff) {
+				$("#PhotoGroup #ThumbDown").remove();
+			}
 		},
 
 		movePhotoTo: function(sortingArea) {
+			var reachedLimit = false;
 			var $img = this.$("img");
-			$img.addClass("PreferenceBubble");
-			$(sortingArea).append($img);
+			$(sortingArea).children().each(function(index) {
+				if(!$(this).find("img").length) {
+					$(this).append($img);
+					if(index === 3) {
+						reachedLimit = true;
+					}
+					return false;
+				}
+			});
 			this.$("span").remove();
+			return reachedLimit;
 		}
 	});
 
