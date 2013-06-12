@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+		<meta content="utf-8" http-equiv="encoding">
+
+		<link rel="stylesheet" href="styles/photo-gallery.css" />
+		<title>Photo Gallery</title>
+	</head>
+
+	<body>
+		<div id="photo-upload"></div>
+		<div class="photo-gallery">
+			<div>
+				<img src="images/1stSwatches/YellowD.jpg"/>
+			</div>
+	
+			<div>
+				<img src="images/1stSwatches/YellowL.jpg"/>
+			</div>
+		</div>
+
+		<!-- ======================================================================= -->
+    	<script src="http://yui.yahooapis.com/3.10.3/build/yui/yui-min.js"></script>
+		<script src="scripts/photo.js" type="text/javascript"></script>
+
+		<script>
+		// Create a new YUI instance and populate it with the required modules.
+		YUI().use('uploader', function (Y) {
+		    // Uploader is available and ready for use. Add implementation
+		    // code here.
+		    if (Y.Uploader.TYPE != "none") {
+				var uploader = new Y.Uploader({width: "7em", height: "2em"}).render("#photo-upload");
+			}
+		});
+		</script>
+	    <!-- ======================================================================= -->
+	</body>
+</html>
