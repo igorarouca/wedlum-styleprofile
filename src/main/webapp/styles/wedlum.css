@@ -2,9 +2,10 @@
 html, body {
 height: 100%; 
     width: 100%;
+	min-width:800px;
 	margin:0;
 	padding:0;
-	background: url("../images/paper.jpg")repeat;
+	background: url("../images/PageBG.png")repeat;
 }
 
 
@@ -12,7 +13,7 @@ header {
 margin:0px;
 width:100%;
 background: url("../images/NavBG.png") repeat-x;
-height:41px;}
+height:48px;}
 
 
 #Logo{
@@ -22,7 +23,7 @@ height:41px;}
 	float:left;
     width:120px;
 	background: url("../images/Logo.png") no-repeat;
-	height:41px;
+	height:48px;
 	overflow:hidden;
 	text-indent:100%;
 }
@@ -51,12 +52,12 @@ padding:0px;}
     padding:0px;
 	height:30px;
     width:8.33%;
-	margin-right:-9px;
-	padding-left:9px;
+	margin-right:-7px;
+	padding-left:7px;
     overflow:hidden;
 }
 li#ColorSection1 {
-width:9px;
+width:7px;
 padding-left:0px;
 }
 
@@ -76,14 +77,12 @@ margin-left:30px;}
 #BodyContent{
 display:block;
 width:100%;
-margin-top:4px;}
+margin-top:2px;}
 
 #CentralPhotos{
-margin:0px 4%;
+padding:0px 3% 0px 1%;
 max-height:600px;
-
 }
-
 
 #PhotoGroup{
 margin:0px;
@@ -91,15 +90,32 @@ padding:0px;
 text-align: center;
 }
 #PhotoGroup li{
-width:16.66%;
-max-width:200px;
+width:14.66%;
 display:inline-block;
-margin:0px;}
+padding:10px;}
 
-#PhotoGroup img{
-display:block;
+.ColorSwatchBG{
+display:inline-block;
 width:100%;
-height:auto;}
+padding: 7%;
+background: url("../images/Shadow3.png") no-repeat;
+background-size: 100%;}
+
+#ThumbDown a, #ThumbUp a{
+display:inline-block;
+overflow:hidden;
+width:40px;
+height:40px;
+margin-top:-100px;}
+
+#ThumbDown a {
+background: url("../images/ImageThumbDownRO.png") no-repeat;
+}
+
+#PhotoGroup img {
+width:100%;
+height:auto;
+}
 
 #LowerNav{
 margin-top:50px;}
@@ -109,32 +125,37 @@ padding:0px;
 margin:0px;}
 
 #PhotoThumbups{
-float:left;
-margin-left:4%;}
-#PhotoThumbdowns{
 float:right;
 margin-right:4%;}
+#PhotoThumbdowns{
+float:left;
+margin-left:4%;}
+
+#PhotoThumbups li{
+	background: url("../images/thumbsUpFill.png") 100% 0px no-repeat;}
+
+#PhotoThumbdowns li{
+	background: url("../images/thumbsDownFill.png") 100% 0px no-repeat;}
 
 .PreferenceBubble {
     display: inline-block;
 	margin:0px;
 	padding:0px;
-    width: 15px;
-    height: 15px;
+    width: 22px;
+    height: 22px;
 	-moz-border-radius: 50%;
     -webkit-border-radius: 50%;  
 	border-radius: 50%;
 	overflow:hidden;
-	border: 2px solid white;
-  -moz-box-shadow:    0px 0px 2px 1px #CCC;
-  -webkit-box-shadow:  0px 0px 2px 1px #CCC;
-  box-shadow:          0px 0px 2px 1px #CCC;
+
+  -moz-box-shadow:    0px 0px 1px 1px #999;
+  -webkit-box-shadow:  0px 0px 1px 1px #999;
+  box-shadow:          0px 0px 1px 1px #999;
 }
 
 .PreferenceBubble  img{
-width:200%;
+width:100%;
 height:auto;
-margin: -25% 0 0 -25%;
 
 
 }
