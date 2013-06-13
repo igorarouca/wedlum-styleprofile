@@ -1,0 +1,5 @@
+@CHARSET "UTF-8";
+
+.photo-gallery div {
+	display: inline-block; 
+}

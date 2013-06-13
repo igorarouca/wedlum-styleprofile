@@ -92,25 +92,15 @@ text-align: center;
 #PhotoGroup li{
 width:14.66%;
 display:inline-block;
-padding:10px;}
+padding:1%;}
 
 .ColorSwatchBG{
-display:inline-block;
 width:100%;
+height:auto;
+padding:0px;
 padding: 7%;
-background: url("../images/Shadow3.png") no-repeat;
+background: url("../images/Shadow2.png") no-repeat;
 background-size: 100%;}
-
-#ThumbDown a, #ThumbUp a{
-display:inline-block;
-overflow:hidden;
-width:40px;
-height:40px;
-margin-top:-100px;}
-
-#ThumbDown a {
-background: url("../images/ImageThumbDownRO.png") no-repeat;
-}
 
 #PhotoGroup img {
 width:100%;
@@ -141,16 +131,17 @@ margin-left:4%;}
     display: inline-block;
 	margin:0px;
 	padding:0px;
-    width: 22px;
-    height: 22px;
+    width: 18px;
+    height: 18px;
 	-moz-border-radius: 50%;
     -webkit-border-radius: 50%;  
 	border-radius: 50%;
 	overflow:hidden;
+	border: 1px solid white;
 
-  -moz-box-shadow:    0px 0px 1px 1px #999;
-  -webkit-box-shadow:  0px 0px 1px 1px #999;
-  box-shadow:          0px 0px 1px 1px #999;
+  -moz-box-shadow:    0px 0px 1px 1px #BBB;
+  -webkit-box-shadow:  0px 0px 1px 1px #BBB;
+  box-shadow:          0px 0px 1px 1px #BBB;
 }
 
 .PreferenceBubble  img{

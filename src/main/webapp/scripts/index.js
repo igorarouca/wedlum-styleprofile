@@ -11,46 +11,49 @@ $(function() {
 
 		thumbUp: function(event) {
 			event.preventDefault();
-			var turnOff = this.movePhotoTo("#PhotoThumbups");
-			if (turnOff) {
-				$("#PhotoGroup #ThumbUp").remove();
-			}
+			this.movePhotoTo("Up");
 		},
 
 		thumbDown: function(event) {
 			event.preventDefault();
-			var turnOff = this.movePhotoTo("#PhotoThumbdowns");
-			if (turnOff) {
-				$("#PhotoGroup #ThumbDown").remove();
-			}
+			this.movePhotoTo("Down");
 		},
 
-		movePhotoTo: function(sortingArea) {
-			var reachedLimit = false;
-			var $img = this.$("img");
-			$(sortingArea).children().each(function(index) {
+		movePhotoTo: function(target) {
+			var $photo = this.$("#ColorSwatch");
+			var thumbChoice = target === "Up" ? '#ThumbUp' : '#ThumbDown';
+			var thumbImg = target === "Up" ? '#ThumbUpImg' : '#ThumbDownImg';
+			var sortingArea = target === "Up" ? '#PhotoThumbups' : '#PhotoThumbdowns';
+
+			$(sortingArea).find(".PreferenceBubble").each(function(index) {
 				if(!$(this).find("img").length) {
-					$(this).append($img);
+					$(this).append($photo);
 					if(index === 3) {
-						reachedLimit = true;
+						// Remove link option from other photos
+						$("#PhotoGroup " + thumbChoice).remove();
 					}
 					return false;
 				}
 			});
+
+			// Remove both links only from myself
 			this.$("span").remove();
-			return reachedLimit;
+			var $thumbImg = this.$(thumbImg);
+			$thumbImg.show();
+			setTimeout(function(){ $thumbImg.fadeOut(); }, 1000);
 		}
 	});
 
-	var divProto = $("#1stPhoto");
+	var $divProto = $("#1stPhoto");
 
-	$(".Photo").each(function() {
-		var imgSrc = $(this).find("img").attr("src");
-		var divClone = divProto.clone();
-		$(this).children().remove();
-		divClone.find("img").attr("src", imgSrc);
-		$(this).append(divClone);
+	$(".photo-list li").each(function() {
+		var $this = $(this);
+		var colorSwatchSrc = $this.find("img").first().attr("src");
+		$this.html($divProto.html());
+		$(this).find("#ColorSwatch").attr("src", colorSwatchSrc);
+
 		new PhotoView({ el: $(this) });
 	});
 
 });
+
