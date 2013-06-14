@@ -1,9 +1,11 @@
 package com.wedlum.styleprofile.web.controller;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -21,11 +23,19 @@ import org.apache.commons.io.IOUtils;
 
 public class UploadController extends HttpServlet {
 
+	private static final String UPLOAD_TMP_DIR = "/tmp";
 	private static final long serialVersionUID = 1L;
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
+		List<File> receivedFiles = receiveFiles(req);
+		// TODO: Add PhotoGallery Call
+		throw new IllegalStateException("Use PhotoGallery here");
+	}
+
+	private List<File> receiveFiles(HttpServletRequest req) throws FileNotFoundException, IOException {
+		List<File> receivedFiles = new ArrayList<File>();
 		DiskFileItemFactory factory = new DiskFileItemFactory();
 		
 		// Configure a repository (to ensure a secure temp location is used)
@@ -37,7 +47,6 @@ public class UploadController extends HttpServlet {
 		ServletFileUpload upload = new ServletFileUpload(factory);
 		
 		// Parse the request
-
 		try {
 			List<FileItem> items = upload.parseRequest(req);
 
@@ -45,7 +54,9 @@ public class UploadController extends HttpServlet {
 			Iterator<FileItem> iter = items.iterator();
 			while (iter.hasNext()) {
 				FileItem item = iter.next();
-				FileOutputStream out = new FileOutputStream(new File("/tmp", item.getName()));
+				File file = new File(UPLOAD_TMP_DIR, item.getName());
+				receivedFiles.add(file);
+				FileOutputStream out = new FileOutputStream(file);
 				InputStream in = item.getInputStream();
 
 				IOUtils.copy(in, out);
@@ -57,6 +68,7 @@ public class UploadController extends HttpServlet {
 		} catch (FileUploadException fue) {
 			throw new IllegalStateException(fue);
 		}
+		return receivedFiles;
 	}
 
 
