@@ -4,13 +4,16 @@ import java.io.File;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
+import com.wedlum.styleprofile.util.observer.Observer;
+
 public class PhotoGallery {
 
 	private Set<File> untagged = new LinkedHashSet<File>();
 	private Set<File> tagged = new LinkedHashSet<File>();
 
-	private PhotoGallery(PhotoSource source) {
-		source.register(new Observer<File>()  { public void notify(File photo) {
+	private PhotoGallery(PhotoSource source) { 
+		// Isn't 'source' going to be garbage collected?
+		source.addObserver(new Observer<File>()  { public void update(File photo) {
 			untagged.add(photo);
 		}});
 	}

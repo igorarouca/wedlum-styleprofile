@@ -2,16 +2,20 @@ package com.wedlum.styleprofile.business.model;
 
 import java.io.File;
 
-public class PhotoSource implements Subject<File> {
+import com.wedlum.styleprofile.util.observer.GenericSubject;
+import com.wedlum.styleprofile.util.observer.Observer;
 
-	private Observer<File> observer;
+public class PhotoSource {
+
+	private GenericSubject<File> delegate = new GenericSubject<File>();
 
 	public void addPhoto(File photo) {
-		observer.notify(photo);
+		delegate.setChanged();
+		delegate.notifyObservers(photo);
 	}
 
-	public void register(Observer<File> receiver) {
-		this.observer = receiver;
+	public void addObserver(Observer<File> observer) {
+		delegate.registerObserver(observer);
 	}
 
 }
