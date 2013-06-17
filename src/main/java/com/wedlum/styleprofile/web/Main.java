@@ -1,4 +1,4 @@
-package aMain;
+package com.wedlum.styleprofile.web;
 
 import winstone.Launcher;
 
