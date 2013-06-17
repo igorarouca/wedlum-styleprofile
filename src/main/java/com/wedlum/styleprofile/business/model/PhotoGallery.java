@@ -5,13 +5,17 @@ import java.util.LinkedHashSet;
 import java.util.Set;
 
 import com.wedlum.styleprofile.util.observer.Observer;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.stereotype.Service;
+
 
 public class PhotoGallery {
 
 	private Set<File> untagged = new LinkedHashSet<File>();
 	private Set<File> tagged = new LinkedHashSet<File>();
 
-	private PhotoGallery(PhotoSource source) { 
+    private PhotoGallery(PhotoSource source) {
 		source.addObserver(new Observer<File>()  { public void update(File photo) {
 			untagged.add(photo);
 		}});

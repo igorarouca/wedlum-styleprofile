@@ -12,6 +12,7 @@ import java.util.List;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 
+import com.wedlum.styleprofile.business.model.PhotoSource;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
@@ -20,6 +21,8 @@ import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.wedlum.styleprofile.business.model.PhotoGallery;
@@ -30,17 +33,17 @@ public class UploadController {
 	private static final long serialVersionUID = 1L;
 
 	private static final String UPLOAD_TMP_DIR = "/tmp";
-	private PhotoGallery photoGallery;
 
-	@RequestMapping(value = "/upload")
-    public ModelAndView  upload(HttpServletRequest request) throws FileNotFoundException, IOException {
+    @Autowired
+    private PhotoSource source;
+
+	@RequestMapping(value = "upload", method = RequestMethod.POST)
+    @ResponseBody
+    public String upload(HttpServletRequest request) throws FileNotFoundException, IOException {
 		List<File> receivedFiles = receiveFiles(request);
-		return new ModelAndView();
-	}
-
-	@Autowired
-	public void setPhotoGallery(PhotoGallery photoGallery) {
-		this.photoGallery = photoGallery;
+        for(File photo : receivedFiles)
+            source.addPhoto(photo);
+        return "Success";
 	}
 
 	private List<File> receiveFiles(HttpServletRequest req) throws FileNotFoundException, IOException {

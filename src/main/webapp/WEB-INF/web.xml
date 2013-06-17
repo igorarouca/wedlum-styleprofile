@@ -17,20 +17,10 @@
         </init-param>
     </servlet>
 
-	<servlet>
-		<servlet-name>uploader</servlet-name>
-		<servlet-class>com.wedlum.styleprofile.web.controller.UploadController</servlet-class>
-	</servlet>
-
     <servlet-mapping>
         <servlet-name>frontcontroller</servlet-name>
-        <url-pattern>/private</url-pattern>
+        <url-pattern>/private/*</url-pattern>
     </servlet-mapping>
-
-	<servlet-mapping>
-		<servlet-name>uploader</servlet-name>
-        <url-pattern>/upload</url-pattern>
-	</servlet-mapping>
 
 	<welcome-file-list>
 		<welcome-file>signup.jsp</welcome-file>
