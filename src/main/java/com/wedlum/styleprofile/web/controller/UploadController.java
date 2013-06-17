@@ -10,37 +10,45 @@ import java.util.Iterator;
 import java.util.List;
 
 import javax.servlet.ServletContext;
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.commons.io.IOUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
-public class UploadController extends HttpServlet {
+import com.wedlum.styleprofile.business.model.PhotoGallery;
 
-	private static final String UPLOAD_TMP_DIR = "/tmp";
+@Controller
+public class UploadController {
+
 	private static final long serialVersionUID = 1L;
 
-	@Override
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+	private static final String UPLOAD_TMP_DIR = "/tmp";
+	private PhotoGallery photoGallery;
 
-		List<File> receivedFiles = receiveFiles(req);
-		// TODO: Add PhotoGallery Call
-		throw new IllegalStateException("Use PhotoGallery here");
+	@RequestMapping(value = "/upload")
+    public ModelAndView  upload(HttpServletRequest request) throws FileNotFoundException, IOException {
+		List<File> receivedFiles = receiveFiles(request);
+		return new ModelAndView();
+	}
+
+	@Autowired
+	public void setPhotoGallery(PhotoGallery photoGallery) {
+		this.photoGallery = photoGallery;
 	}
 
 	private List<File> receiveFiles(HttpServletRequest req) throws FileNotFoundException, IOException {
 		List<File> receivedFiles = new ArrayList<File>();
 		DiskFileItemFactory factory = new DiskFileItemFactory();
-		
+
 		// Configure a repository (to ensure a secure temp location is used)
-		ServletContext servletContext = this.getServletConfig().getServletContext();
-		File repository = (File) servletContext.getAttribute("javax.servlet.context.tempdir");
+		File repository = new File(System.getProperty("java.io.tmpdir"));
 		factory.setRepository(repository);
 		
 		// Create a new file upload handler
