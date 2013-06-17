@@ -12,7 +12,6 @@ public class PhotoGallery {
 	private Set<File> tagged = new LinkedHashSet<File>();
 
 	private PhotoGallery(PhotoSource source) { 
-		// Isn't 'source' going to be garbage collected?
 		source.addObserver(new Observer<File>()  { public void update(File photo) {
 			untagged.add(photo);
 		}});
