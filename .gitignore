@@ -1,5 +1,7 @@
-target/
-.settings/
+target
+.settings
 *.iml
 *.swp
 .idea
+build.properties
+META-INF
