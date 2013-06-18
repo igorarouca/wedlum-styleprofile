@@ -25,7 +25,7 @@ var PhotoGalleryView = Backbone.View.extend({
 	el: "#photo-gallery",
 
 	events: {
-		"click li" : "photoClicked",
+		"click li" : "photoClicked"
 	},
 
 	photoClicked: function() {
@@ -62,6 +62,17 @@ var PhotoEditorView = Backbone.View.extend({
 	}
 });
 
+var Photo = Backbone.Model.extend({
+
+});
+
+var PhotoGallery = Backbone.Collection.extend({
+    url: '/photoGallery',
+    model: PhotoModel
+});
+
+
+
 $(function() {
 	var photoEditorView = new PhotoEditorView();
 	var photoGalleryView = new PhotoGalleryView();
@@ -73,3 +84,8 @@ $(function() {
 	photoGalleryView.photoEditorView = photoEditorView;
 	
 });
+
+
+function UntaggedController($scope) {
+    $scope.untaggedcount = 42;
+}

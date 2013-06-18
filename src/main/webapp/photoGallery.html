@@ -8,12 +8,13 @@
 		<title>Photo Gallery</title>
 	</head>
 
-	<body>
+	<body ng-app>
 		<div id="photo-upload"></div>
 
 		<div id="photo-gallery">
-			<div id="untagged">
+			<div id="untagged" ng-controller="UntaggedController">
 				<h2>Untagged</h2>
+                <div>{{untaggedcount}} : count</div>
 				<ul>
 					<li>
 						<img src="images/1stSwatches/RedL.jpg"/>
@@ -64,6 +65,7 @@
 		<script src="scripts/backbone.js" type="text/javascript"></script>
     	<script src="http://yui.yahooapis.com/3.10.3/build/yui/yui-min.js"></script>
 		<script src="scripts/photoGallery.js" type="text/javascript"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>
 	    <!-- ======================================================================= -->
 	</body>
 </html>
