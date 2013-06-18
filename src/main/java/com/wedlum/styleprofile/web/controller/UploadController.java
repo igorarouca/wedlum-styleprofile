@@ -9,10 +9,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 
-import com.wedlum.styleprofile.business.model.PhotoSource;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
@@ -23,13 +21,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
 
-import com.wedlum.styleprofile.business.model.PhotoGallery;
+import com.wedlum.styleprofile.business.model.PhotoSource;
 
 @Controller
 public class UploadController {
 
+	@SuppressWarnings("unused")
 	private static final long serialVersionUID = 1L;
 
 	private static final String UPLOAD_TMP_DIR = "/tmp";
