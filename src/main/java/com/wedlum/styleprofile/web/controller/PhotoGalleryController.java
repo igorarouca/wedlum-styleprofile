@@ -1,6 +1,7 @@
 package com.wedlum.styleprofile.web.controller;
 
 import com.wedlum.styleprofile.business.model.PhotoGallery;
+import com.wedlum.styleprofile.business.model.PhotoSummary;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,7 +12,8 @@ import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.List;
+import java.lang.reflect.Array;
+import java.util.*;
 
 @Controller
 @RequestMapping(value = "photoGallery")
@@ -23,7 +25,10 @@ public class PhotoGalleryController {
 
     @RequestMapping(value = "untagged", method = RequestMethod.GET)
     @ResponseBody
-    public Object untagged(HttpServletRequest request) throws FileNotFoundException, IOException {
-        return gallery.untagged();
+    public Set<PhotoSummary> untagged(HttpServletRequest request) throws FileNotFoundException, IOException {
+        Set<PhotoSummary> result = new LinkedHashSet<PhotoSummary>();
+        for(File photo: gallery.untagged())
+            result.add(new PhotoSummary(photo.getPath()));
+        return result;
     }
 }

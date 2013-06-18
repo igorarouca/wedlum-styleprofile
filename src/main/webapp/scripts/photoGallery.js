@@ -16,7 +16,7 @@ YUI().use('uploader', function(Y) {
 
 	uploader.after('fileselect', function(args) {
 		_(args.fileList).each(function(file) {
-			uploader.upload(file, 'upload');
+			uploader.upload(file, 'private/upload');
 		});
 	});
 });
@@ -36,6 +36,22 @@ var PhotoGalleryView = Backbone.View.extend({
 	render: function() {
 		return this;
 	}
+});
+
+var PhotoListView = Backbone.View.extend({
+    initialize: function() {
+        console.log('will listen to ' + this.model);
+        this.listenTo(this.model, "change reset add remove", this.render);
+    },
+    render: function(){
+        console.log('will render');
+        var that = this;
+        var html = "";
+        $(this.model.models).each(function(){
+            html += "<li><img src='" + this + "'></li>";
+        });
+        that.$el.html(html);
+    }
 });
 
 var PhotoEditorView = Backbone.View.extend({
@@ -62,15 +78,24 @@ var PhotoEditorView = Backbone.View.extend({
 	}
 });
 
-var Photo = Backbone.Model.extend({
-
+var PhotoSummary = Backbone.Model.extend({
+    path: ''
 });
 
-var PhotoGallery = Backbone.Collection.extend({
-    url: '/photoGallery',
-    model: PhotoModel
+var PhotoList = Backbone.Collection.extend({
+    model: PhotoSummary
 });
 
+var untaggedPhotos = new PhotoList();
+untaggedPhotos.url = '/private/photoGallery/untagged';
+var untaggedPhotosView = new PhotoListView({el: '#untagged', model: untaggedPhotos});
+
+untaggedPhotos.fetch();
+untaggedPhotos.trigger('change');
+
+setInterval(function(){
+    untaggedPhotos.fetch();
+}, 1000);
 
 
 $(function() {
@@ -84,8 +109,3 @@ $(function() {
 	photoGalleryView.photoEditorView = photoEditorView;
 	
 });
-
-
-function UntaggedController($scope) {
-    $scope.untaggedcount = 42;
-}
