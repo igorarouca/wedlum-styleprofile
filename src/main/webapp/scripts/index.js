@@ -2,34 +2,46 @@ var thumbUpAction = "api/colors/thumbUp/";
 var thumbDownAction = "api/colors/thumbDown/";
 
 var BubbleView = Backbone.View.extend({
-	
+
 	events: {
-		"click img" : "returnToColorSwatchList",
+		"click img" : "returnToPhotoList"
 	},
-	
-	returnToColorSwatchList : function() {
-		var thumbChoice = this.options.target === "Up" ? '#ThumbUp' : '#ThumbDown';
+
+	returnToPhotoList : function() {
+		var thumbChoice = this.options.target === "Up" ? '#thumb-up' : '#thumb-down';
 		var thumbAction = this.options.target === "Up" ? thumbUpAction : thumbDownAction;
 		var $img = this.$("img");
 		var imgSrc = $img.attr("src");
 		var colorSwatchId = imgSrc.substring(imgSrc.lastIndexOf("/") + 1);
-		
-		$(".Photo img[src='" + imgSrc + "']").parent().show();
-		$img.remove();
-		$("#PhotoGroup " + thumbChoice).show();
+
+		$(".color-swatch-bg div img[src='" + imgSrc + "']").parent().show();
+		this.$("a").remove();
+		this.$el.append(this.options.emptyBubble.clone());
+		$("#photo-list " + thumbChoice).show();
 		$.ajax({ url: thumbAction + "remove/" + colorSwatchId });
 	},
-	
+
+	isEmpty: function() {
+		return this.$("img").length === 0;
+	},
+
+	receivePhoto: function(photo) {
+		var solidBubbleClone = this.options.solidBubble.clone();
+		$(solidBubbleClone.find("img")).replaceWith(photo);
+		this.$el.append(solidBubbleClone);
+//		this.$("span").remove();
+	}
+
 });
 
 var PhotoView = Backbone.View.extend({
 	events: {
-		"click #ThumbUp" : "thumbUp",
-		"click #ThumbDown" : "thumbDown"
+		"click .thumb-up" : "thumbUp",
+		"click .thumb-down" : "thumbDown"
 	},
 
 	colorSwatchId : function() {
-		var imgSrc = this.$("#ColorSwatch").attr("src");
+		var imgSrc = this.$("#color-swatch").attr("src");
 		return imgSrc.substring(imgSrc.lastIndexOf("/") + 1);
 	},
 
@@ -46,29 +58,35 @@ var PhotoView = Backbone.View.extend({
 	},
 
 	preventFurtherColorSwatchSelections: function(thumbChoice) {
-		$("#PhotoGroup " + thumbChoice).hide();			
+		alert("Maximum like/unlike limit reached" );			
 	},
 
 	appendPhotoToFirstAvailableBubble: function(target) {
-		var $photo = this.$("#ColorSwatch");
-		var thumbChoice = target === "Up" ? '#ThumbUp' : '#ThumbDown';
-		var sortingArea = target === "Up" ? '#PhotoThumbups' : '#PhotoThumbdowns';
+		var $photo = this.$("#color-swatch");
+		var thumbChoice = target == "Up" ? '#thumb-up' : '#thumb-down';
+		var sortingArea = target == "Up" ? this.options.ups : this.options.downs;
 		var that = this;
 
-		$(sortingArea).find(".PreferenceBubble").each(function(index) {
-			if($(this).find("img").length == 0) {
-				$(this).append($photo.clone());
-				$photo.parent().hide();
-				if(index === 3) {
-					that.preventFurtherColorSwatchSelections(thumbChoice);
-				}
-				return false;
+		for(var index = 0; index < sortingArea.length; index++) {
+			var bubble = sortingArea[index];		
+			if(bubble.isEmpty()) {
+				bubble.receivePhoto($photo.clone());			
+				this.animatePhotoSelection(target);
+				return;
 			}
-		});
+		}
+
+		that.preventFurtherColorSwatchSelections(thumbChoice);
+	},
+
+	animatePhotoSelection: function(target) {
+		this.$el.removeClass("color-swatch-bg");
+		this.$el.addClass("color-swatch-bg-selected");
+		this.animateThumb(target);
 	},
 
 	animateThumb: function(target) {
-		var thumbImg = target === "Up" ? '#ThumbUpImg' : '#ThumbDownImg';
+		var thumbImg = target === "Up" ? '#image-thumb-up' : '#image-thumb-down';
 		var $thumbImg = this.$(thumbImg);
 		$thumbImg.show();
 		setTimeout(function(){ $thumbImg.fadeOut(); }, 1000);
@@ -76,41 +94,48 @@ var PhotoView = Backbone.View.extend({
 
 	movePhotoTo: function(target) {
 		this.appendPhotoToFirstAvailableBubble(target);
-		this.animateThumb(target);
 	}
 });
 
 var IndexView = Backbone.View.extend({
 
 	createBubbleViews: function(target) {
-		var sortingArea = target === "Up" ? '#PhotoThumbups' : '#PhotoThumbdowns';
-		var $bubbleProto = $(sortingArea + " .PreferenceBubble");
+		var sortingArea = target === "Up" ? '#feedback-thumb-ups' : '#feedback-thumb-downs';
+		var $bubbleProto = $(sortingArea + " .feedback-bubble");
 
-		$bubbleProto.empty();
+		var solidBubble = $($bubbleProto.get(0)).find("a");
+		var emptyBubble = $($bubbleProto.get(1)).find("span");
+
+		solidBubble.parent().append(emptyBubble.clone());
+		solidBubble.remove();
+
+		var bubbleViews = [];
 		$bubbleProto.each(function() {
-			new BubbleView( { el : $(this), target: target });
-		});		
+			bubbleViews.push(new BubbleView( { el : $(this), target: target, solidBubble: solidBubble, emptyBubble: emptyBubble }));
+		});
+
+		return bubbleViews;
 	},
 
-	createPhotoViewsUsingFirstPhotoAsPrototype: function() {
-		var $divProto = $("#1stPhoto");
+	createPhotoViewsUsingFirstPhotoAsPrototype: function(ups, downs) {
+		var $divProto = $("#photo-div-1");
 
-		$(".photo-list li").each(function() {
+		$(".color-swatch-bg").each(function() {
 			var $this = $(this);
 			var colorSwatchSrc = $this.find("img").first().attr("src");
 			$this.html($divProto.html());
-			$(this).find("#ColorSwatch").attr("src", colorSwatchSrc);
+			$(this).find("#color-swatch").attr("src", colorSwatchSrc);
 
-			new PhotoView({ el: $(this) });
+			new PhotoView({ el: $(this), ups: ups, downs: downs });
 		});
 
 	},
 
 	render: function() {
-		this.createBubbleViews("Down");
-		this.createBubbleViews("Up");
+		var ups = this.createBubbleViews("Up");
+		var downs = this.createBubbleViews("Down");
 
-		this.createPhotoViewsUsingFirstPhotoAsPrototype();
+		this.createPhotoViewsUsingFirstPhotoAsPrototype(ups, downs);
 	}
 
 });
@@ -120,4 +145,9 @@ $(function() {
 	new IndexView().render();
 
 });
+
+var wedlum = wedlum || {};
+wedlum.ColorSessionSettings = {
+		selectionLimit: 4
+};
 

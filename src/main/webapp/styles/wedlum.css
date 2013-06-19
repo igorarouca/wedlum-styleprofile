@@ -127,6 +127,18 @@ a#timeline-list-completed {
 	background-size: 100%;
 }
 
+.color-swatch-bg-selected {
+	position: relative;
+	/*dimensions need to be set in Javascript*/
+	width: 180px;
+	height: 180px;
+	background-size: 100%;
+}
+
+.color-swatch-bg-selected div {
+	display: none;
+}
+
 #photo-group-list img {
 	display: inline-block;
 	padding: 6.14%;
