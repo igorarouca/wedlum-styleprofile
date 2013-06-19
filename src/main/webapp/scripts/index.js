@@ -7,17 +7,19 @@ var BubbleView = Backbone.View.extend({
 		"click img" : "returnToPhotoList"
 	},
 
-	returnToPhotoList : function() {
-		var thumbChoice = this.options.target === "Up" ? '#thumb-up' : '#thumb-down';
+	returnToPhotoList : function(event) {
+		event.preventDefault();
+
 		var thumbAction = this.options.target === "Up" ? thumbUpAction : thumbDownAction;
 		var $img = this.$("img");
 		var imgSrc = $img.attr("src");
 		var colorSwatchId = imgSrc.substring(imgSrc.lastIndexOf("/") + 1);
 
-		$(".color-swatch-bg div img[src='" + imgSrc + "']").parent().show();
+		var $photo = $(".color-swatch-bg-selected div img[src='" + imgSrc + "']").parent().parent();
 		this.$("a").remove();
 		this.$el.append(this.options.emptyBubble.clone());
-		$("#photo-list " + thumbChoice).show();
+		$photo.removeClass("color-swatch-bg-selected");
+		$photo.addClass("color-swatch-bg");
 		$.ajax({ url: thumbAction + "remove/" + colorSwatchId });
 	},
 
