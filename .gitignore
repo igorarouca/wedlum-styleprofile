@@ -1,3 +1,7 @@
-target/
-.settings/
-
+target
+.settings
+*.swp
+.idea
+build.properties
+META-INF
+src/main/webapp/WEB-INF/classes

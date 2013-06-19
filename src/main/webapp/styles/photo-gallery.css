@@ -1,5 +1,28 @@
 @CHARSET "UTF-8";
 
-.photo-gallery div {
+#photo-gallery li {
 	display: inline-block; 
+}
+
+#photo-editor {
+	display: table;
+	width: 100%;
+}
+
+#photo-description {
+	display: table-cell;
+	width: 25%;
+	padding: 1em;
+	border: 1px solid grey;
+}
+
+#photo-tags {
+	display: table-cell;
+	width: 75%;
+	border: 1px solid grey;
+}
+
+#photo-tags div {
+	padding: 1em;
+	border: 1px solid grey;
 }

@@ -19,7 +19,7 @@
 
     <servlet-mapping>
         <servlet-name>frontcontroller</servlet-name>
-        <url-pattern>/private</url-pattern>
+        <url-pattern>/private/*</url-pattern>
     </servlet-mapping>
 
 	<welcome-file-list>
