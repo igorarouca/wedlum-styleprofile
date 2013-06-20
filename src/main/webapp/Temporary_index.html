@@ -8,6 +8,17 @@
 	<title>Wedlum</title>
 	<link rel="stylesheet" href="styles/wedlum.css">
 	<style type="text/css">
+	#photo-div-2 .image-thumbs{
+opacity:1;
+}
+#photo-div-2 .image-thumbs .thumb-up{
+background-position:center center;
+Width:80%;
+height:80%;
+right:10%;
+opacity:1;
+}
+
 	#photo-div-3 .image-thumbs{
 opacity:1;
 }
@@ -16,6 +27,35 @@ background-position:center center;
 Width:80%;
 height:80%;
 right:10%;
+opacity:.5;
+}
+
+.thumb-counter{
+position:absolute;
+top:50%;
+left:0px;
+width:100%;
+margin-top: 35px;
+display:block;}
+
+.thumb-counter p{
+display:inline-block;
+margin:auto;
+padding:0px;
+color: #00aeef;
+font-weight:bold;
+	background: white;
+		-moz-border-radius:10px;
+	-webkit-border-radius: 10px;
+	border-radius: 10px;
+	padding:10px 8px;
+		-moz-box-shadow: 0px 0px 4px -2px #000;
+	-webkit-box-shadow: 0px 0px 4px -2px #000;
+	box-shadow: 0px 0px 4px -2px #000;}
+	
+.thumb-counter span {
+font-weight:normal;
+color:#BBB;
 }
 </style>
 </head>
@@ -91,14 +131,14 @@ right:10%;
 				--><li>
 					<div id="photo-div-2" class="color-swatch-bg">
 						<img src="images/1stSwatches/RedL.jpg">
-					<div class="image-thumbs"><a class="thumb-up" href=""><span>Thumb Up</span></a><a class="thumb-down" href=""><span>Thumb Down</span></a></div>
+					<div class="image-thumbs"><a class="thumb-up" href=""><span>Thumb Up</span></a></div>
+					<div class="thumb-counter"><p>1<span> of </span>4</p></div>
 					</div>
 				</li><!--
 				--><li>
 					<div id="photo-div-3" class="color-swatch-bg">
 						<img src="images/1stSwatches/RedD.jpg">
 					<div class="image-thumbs"><a class="thumb-up" href=""><span>Thumb Up</span></a></div>
-					<span class="thumb-counter">0 of 3</span>
 					</div>
 				</li><!--
 				--><li>

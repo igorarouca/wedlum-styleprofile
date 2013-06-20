@@ -5,6 +5,7 @@ html,body {
 	margin: 0;
 	padding: 0;
 	background: url("../images/PageBG.png") repeat;
+	font-family: arial;
 }
 
 header {
