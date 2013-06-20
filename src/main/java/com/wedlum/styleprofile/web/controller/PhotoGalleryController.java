@@ -29,7 +29,7 @@ public class PhotoGalleryController {
     public Set<PhotoSummary> untagged(HttpServletRequest request) throws FileNotFoundException, IOException {
         Set<PhotoSummary> result = new LinkedHashSet<PhotoSummary>();
         for(File photo: gallery.untagged())
-            result.add(new PhotoSummary(photo.getPath()));
+            result.add(new PhotoSummary(photo.getName()));
         return result;
     }
 }

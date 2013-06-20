@@ -48,7 +48,7 @@ var PhotoListView = Backbone.View.extend({
         var that = this;
         var html = "";
         $(this.model.models).each(function(){
-            html += "<li><img src='" + this + "'></li>";
+            html += "<li><img src='photo-storage/" + this.get('path') + "'></li>";
         });
         that.$el.html(html);
     }
@@ -88,7 +88,7 @@ var PhotoList = Backbone.Collection.extend({
 
 var untaggedPhotos = new PhotoList();
 untaggedPhotos.url = '/private/photoGallery/untagged';
-var untaggedPhotosView = new PhotoListView({el: '#untagged', model: untaggedPhotos});
+var untaggedPhotosView = new PhotoListView({el: 'ul#untagged', model: untaggedPhotos});
 
 untaggedPhotos.fetch();
 untaggedPhotos.trigger('change');
