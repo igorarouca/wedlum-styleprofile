@@ -26,3 +26,10 @@
 	padding: 1em;
 	border: 1px solid grey;
 }
+
+.thumbnail {
+    width: 16em;
+    height: 10em;
+    overflow: hidden;
+    padding: 2em;
+}

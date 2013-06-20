@@ -48,7 +48,7 @@ var PhotoListView = Backbone.View.extend({
         var that = this;
         var html = "";
         $(this.model.models).each(function(){
-            html += "<li><img src='photo-storage/" + this.get('name') + "'></li>";
+            html += "<li class='thumbnail'><img src='photo-storage/" + this.get('name') + "'></li>";
         });
         that.$el.html(html);
     }
@@ -96,6 +96,32 @@ untaggedPhotos.trigger('change');
 setInterval(function(){
     untaggedPhotos.fetch();
 }, 1000);
+
+
+$("li.thumbnail img").livequery(function(){
+    var $frame = $(this);
+    var image = new Image()
+    image.src = $frame.attr('src');
+
+    var imageWidth = image.width;
+    var imageHeight = image.height;
+    var imageRatio = image.width / image.height;
+
+    var frameWidth = $frame.parent().width();
+    var frameHeight = $frame.parent().height();
+
+    var imageFitsHorizontally = imageWidth <= frameWidth;
+    var doesFit = imageFitsHorizontally && imageHeight <= frameHeight;
+    if (doesFit)
+        return
+
+
+    if (!imageFitsHorizontally){
+        var adjustedWidth = Math.min(frameWidth, (frameHeight * imageRatio));
+        $frame.width(adjustedWidth -10);
+        $frame.height(adjustedWidth / imageRatio);
+    }
+});
 
 
 $(function() {
