@@ -1,13 +1,14 @@
 
 package com.wedlum.styleprofile.web.springconfig;
 
+import com.wedlum.styleprofile.business.model.PhotoSource;
+import com.wedlum.styleprofile.business.model.PhotoSourceUsingFileSystem;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 import com.wedlum.styleprofile.business.model.PhotoGallery;
-import com.wedlum.styleprofile.business.model.PhotoSource;
 
 @Configuration
 @EnableWebMvc
@@ -22,7 +23,7 @@ public class WebConfig {
 //		return resolver;
 //	}
 
-    private PhotoSource photoSource = new PhotoSource();
+    private PhotoSource photoSource = new PhotoSourceUsingFileSystem();
 
     @Bean
     public PhotoGallery  photoGallery(){
@@ -30,7 +31,7 @@ public class WebConfig {
     }
 
     @Bean
-    public PhotoSource  photoSource(){
+    public PhotoSource photoSource(){
         return photoSource;
     }
 

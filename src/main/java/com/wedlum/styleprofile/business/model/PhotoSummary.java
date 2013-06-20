@@ -6,27 +6,27 @@ public class PhotoSummary implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	private final int id;
-    private final String path;
+	private final String id;
+    private final String name;
 
-    public PhotoSummary(String path) {
-    	this.path = path;
-        this.id = path.hashCode();
+    public PhotoSummary(String name) {
+        this.id = name;
+        this.name = name;
     }
 
-	public int getId() {
+	public String getId() {
 		return id;
 	}
 
-	public String getPath() {
-		return path;
+	public String getName() {
+		return name;
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + id;
+		result = prime * result + id.hashCode();
 		return result;
 	}
 
@@ -46,7 +46,7 @@ public class PhotoSummary implements Serializable {
 
 	@Override
 	public String toString() {
-		return "PhotoSummary [path=" + path + "]";
+		return "PhotoSummary [name=" + name + "]";
 	}
 
 }

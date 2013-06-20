@@ -48,7 +48,7 @@ var PhotoListView = Backbone.View.extend({
         var that = this;
         var html = "";
         $(this.model.models).each(function(){
-            html += "<li><img src='photo-storage/" + this.get('path') + "'></li>";
+            html += "<li><img src='photo-storage/" + this.get('name') + "'></li>";
         });
         that.$el.html(html);
     }
