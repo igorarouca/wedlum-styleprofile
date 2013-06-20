@@ -60,19 +60,17 @@ public class UploadController {
 			List<FileItem> items = upload.parseRequest(req);
 
 			// Process the uploaded items
-			Iterator<FileItem> iter = items.iterator();
-			while (iter.hasNext()) {
-				FileItem item = iter.next();
-				File file = new File(UPLOAD_TMP_DIR, item.getName());
-				receivedFiles.add(file);
-				FileOutputStream out = new FileOutputStream(file);
-				InputStream in = item.getInputStream();
+            for (FileItem item : items) {
+                File file = new File(UPLOAD_TMP_DIR, item.getName());
+                receivedFiles.add(file);
+                FileOutputStream out = new FileOutputStream(file);
+                InputStream in = item.getInputStream();
 
-				IOUtils.copy(in, out);
+                IOUtils.copy(in, out);
 
-				IOUtils.closeQuietly(in);
-				IOUtils.closeQuietly(out);
-			}
+                IOUtils.closeQuietly(in);
+                IOUtils.closeQuietly(out);
+            }
 
 		} catch (FileUploadException fue) {
 			throw new IllegalStateException(fue);
