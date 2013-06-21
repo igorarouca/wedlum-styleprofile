@@ -1,3 +1,83 @@
+/*!
+ * Bootstrap BigModal v1.0.0
+ *
+ * Copyright 2013 Andrew Rowls
+ * Licensed under the MIT License
+ *
+ * https://github.com/eternicode/bootstrap-bigmodal
+ */
+;(function($){
+    function update(modal) {
+        modal.find('.modal-body').outerHeight(
+            modal.innerHeight() -
+                modal.find('.modal-header').outerHeight() -
+                modal.find('.modal-footer').outerHeight()
+        );
+    }
+
+    if ($.fn.modal) {
+        var bigmodals = $(),
+            modal;
+
+        $(window).resize(function() {
+            bigmodals.filter(':visible').each(function() {
+                update($(this));
+            });
+        });
+
+        $.fn.bigmodal = function(option) {
+            var ret = $.fn.modal.apply(this, arguments);
+            this.addClass('bigmodal');
+            bigmodals = bigmodals.add(this);
+            this.on('shown', function(){
+                update($(this));
+            });
+            return ret;
+        };
+    }
+    else {
+        $.fn.bigmodal = function(option){
+            return this;
+        };
+    }
+}(window.jQuery));
+
+
+
+var scaleImage = function(){
+    var $frame = $(this);
+    var image = new Image()
+    image.src = $frame.attr('src');
+
+    var imageWidth = image.width;
+    var imageHeight = image.height;
+    var imageRatio = image.width / image.height;
+
+    var frameWidth = $frame.parent().width();
+    var frameHeight = $frame.parent().height();
+
+    console.debug("frameWidth: " + frameWidth);
+
+    var imageFitsHorizontally = imageWidth <= frameWidth;
+    var doesFit = imageFitsHorizontally && imageHeight <= frameHeight;
+    if (doesFit){
+        $frame.width(imageWidth);
+        $frame.height(imageHeight);
+        return;
+    }
+
+    if (!imageFitsHorizontally){
+        var adjustedWidth = Math.min(frameWidth, (frameHeight * imageRatio));
+        $frame.width(adjustedWidth);
+        $frame.height(adjustedWidth / imageRatio);
+    }
+
+    
+};
+
+
+
+
 /* TODO:
  * - Define (2) models for photos (gallery info vs editor info)
  * - Define collections tagged and untagged photos and respective JSON files
@@ -21,61 +101,19 @@ YUI().use('uploader', function(Y) {
 	});
 });
 
-var PhotoGalleryView = Backbone.View.extend({
-	el: "#photo-gallery",
-
-	events: {
-		"click li" : "photoClicked"
-	},
-
-	photoClicked: function() {
-		this.$el.hide();
-		this.photoEditorView.$el.show();
-	},
-
-	render: function() {
-		return this;
-	}
-});
 
 var PhotoListView = Backbone.View.extend({
     initialize: function() {
-        console.log('will listen to ' + this.model);
         this.listenTo(this.model, "change reset add remove", this.render);
     },
     render: function(){
-        console.log('will render');
         var that = this;
         var html = "";
         $(this.model.models).each(function(){
-            html += "<li class='thumbnail'><img src='photo-storage/" + this.get('name') + "'></li>";
+            html += "<li class='thumbnail'><img src='photo-storage/" + this.get('name') + "'/></li>";
         });
         that.$el.html(html);
     }
-});
-
-var PhotoEditorView = Backbone.View.extend({
-	el: "#photo-editor",
-
-	events: {
-		"click #save-button" : "save"
-	},
-
-	returnToGallery: function() {
-		this.$el.hide();
-		this.photoGalleryView.$el.show();
-	},
-
-	save: function() {
-		var that = this;
-		$.ajax({ url: "photoGallery.html", complete: function() {
-			that.returnToGallery();
-		}});		
-	},
-
-	render: function() {
-		return this;
-	}
 });
 
 var PhotoSummary = Backbone.Model.extend({
@@ -99,39 +137,20 @@ setInterval(function(){
 
 
 $("li.thumbnail img").livequery(function(){
-    var $frame = $(this);
-    var image = new Image()
-    image.src = $frame.attr('src');
-
-    var imageWidth = image.width;
-    var imageHeight = image.height;
-    var imageRatio = image.width / image.height;
-
-    var frameWidth = $frame.parent().width();
-    var frameHeight = $frame.parent().height();
-
-    var imageFitsHorizontally = imageWidth <= frameWidth;
-    var doesFit = imageFitsHorizontally && imageHeight <= frameHeight;
-    if (doesFit)
-        return
-
-
-    if (!imageFitsHorizontally){
-        var adjustedWidth = Math.min(frameWidth, (frameHeight * imageRatio));
-        $frame.width(adjustedWidth -10);
-        $frame.height(adjustedWidth / imageRatio);
-    }
+    scaleImage.apply(this);
 });
 
 
-$(function() {
-	var photoEditorView = new PhotoEditorView();
-	var photoGalleryView = new PhotoGalleryView();
-
-	photoGalleryView.render();
-	photoEditorView.$el.hide();
-
-	photoEditorView.photoGalleryView = photoGalleryView;
-	photoGalleryView.photoEditorView = photoEditorView;
-	
+$("#photo-modal #close").click(function(){
+    $("#photo-modal").modal('hide');
 });
+
+$(".thumbnail").live("click", function(){
+    $("#photo-modal").bigmodal();
+    var src = $(this).find("img").attr('src');
+    var img = $("#big-photo");
+    img.attr('src', src);
+    scaleImage.apply(img);
+});
+
+
