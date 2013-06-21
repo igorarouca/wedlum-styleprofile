@@ -53,13 +53,13 @@ var scaleImage = function(){
     var imageHeight = image.height;
     var imageRatio = image.width / image.height;
 
-    var frameWidth = $frame.parent().width();
-    var frameHeight = $frame.parent().height();
+    var widthLimit = $frame.parent().width();
+    var heightLimit = $frame.parent().height();
 
-    console.debug("frameWidth: " + frameWidth);
+    console.debug("frameWidth: " + widthLimit);
 
-    var imageFitsHorizontally = imageWidth <= frameWidth;
-    var doesFit = imageFitsHorizontally && imageHeight <= frameHeight;
+    var imageFitsHorizontally = imageWidth <= widthLimit;
+    var doesFit = imageFitsHorizontally && imageHeight <= heightLimit;
     if (doesFit){
         $frame.width(imageWidth);
         $frame.height(imageHeight);
@@ -67,12 +67,18 @@ var scaleImage = function(){
     }
 
     if (!imageFitsHorizontally){
-        var adjustedWidth = Math.min(frameWidth, (frameHeight * imageRatio));
+        var adjustedWidth = Math.min(widthLimit, (heightLimit * imageRatio));
         $frame.width(adjustedWidth);
         $frame.height(adjustedWidth / imageRatio);
     }
 
-    
+    var imageFitsVertically = $frame.height <= heightLimit;
+    if(!imageFitsVertically){
+        $frame.height(heightLimit);
+        $frame.width(heightLimit * imageRatio);
+    }
+
+
 };
 
 
