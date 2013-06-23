@@ -143,12 +143,21 @@ setInterval(function(){
 
 
 $("li.thumbnail img").livequery(function(){
-    scaleImage.apply(this);
+    setTimeout(function() {scaleImage.apply(this)});
 });
 
 
 $("#photo-modal #close").click(function(){
     $("#photo-modal").modal('hide');
+});
+
+$("#photo-modal").click(function(){
+    $("#photo-modal img").flippy({
+        color_target: "white",
+        direction: "left",
+        duration: "750",
+        verso: "<div contenteditable='true'>Tags:</div>"
+    });
 });
 
 $(".thumbnail").live("click", function(){
