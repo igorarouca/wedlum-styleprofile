@@ -143,6 +143,9 @@ setInterval(function(){
 
 
 $(function(){ $("li.thumbnail img").livequery(function(){
+    $(this).resize(function() {
+        scaleImage.apply(this);
+    });
     scaleImage.apply(this);
 })});
 
@@ -165,6 +168,9 @@ $(".thumbnail").live("click", function(){
     var src = $(this).find("img").attr('src');
     var img = $("#big-photo");
     img.attr('src', src);
+    img.resize(function() {
+        scaleImage.apply(this);
+    });
     scaleImage.apply(img);
 });
 
