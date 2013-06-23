@@ -142,9 +142,9 @@ setInterval(function(){
 }, 1000);
 
 
-$("li.thumbnail img").livequery(function(){
-    setTimeout(function() {scaleImage.apply(this)});
-});
+$(function(){ $("li.thumbnail img").livequery(function(){
+    scaleImage.apply(this);
+})});
 
 
 $("#photo-modal #close").click(function(){
