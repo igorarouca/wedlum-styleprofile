@@ -43,8 +43,8 @@
 }(window.jQuery));
 
 
-
 var scaleImage = function(){
+    $(this).load(function(){
     var $frame = $(this);
     var image = new Image()
     image.src = $frame.attr('src');
@@ -77,7 +77,8 @@ var scaleImage = function(){
         $frame.height(heightLimit);
         $frame.width(heightLimit * imageRatio);
     }
-
+    });
+    $(this).load();
 
 };
 
