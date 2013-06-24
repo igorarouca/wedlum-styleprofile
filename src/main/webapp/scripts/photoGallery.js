@@ -56,8 +56,6 @@ var scaleImage = function(){
     var widthLimit = $frame.parent().width();
     var heightLimit = $frame.parent().height();
 
-    console.debug("frameWidth: " + widthLimit);
-
     var imageFitsHorizontally = imageWidth <= widthLimit;
     var doesFit = imageFitsHorizontally && imageHeight <= heightLimit;
     if (doesFit){
@@ -90,12 +88,21 @@ YUI().use('uploader', function(Y) {
 
 	uploader.set("multipleFiles", true);
 	uploader.set("dragAndDropArea", "body");
-
-	uploader.after('fileselect', function(args) {
-		_(args.fileList).each(function(file) {
-			uploader.upload(file, 'private/upload');
+    uploader.notifications = {};
+	uploader.after('fileselect', function(event) {
+		_(event.fileList).each(function(file) {
+            var filename = file.get('name');
+            uploader.notifications[filename] = noty({text: '<b>Uploading</b> [<i>' + filename + '</i>]', type: 'information', layout: 'topRight'});
+			UU = uploader.upload(file, 'private/upload');
 		});
 	});
+
+    uploader.on('uploadcomplete', function(event){
+        var filename = event.file.get('name');
+        uploader.notifications[filename].setText('<b>Upload complete</b> [<i>' + filename + '</i>]');
+        uploader.notifications[filename].setType('success');
+        uploader.notifications[filename].setTimeout(2000);
+    });
 });
 
 var PhotoListView = Backbone.View.extend({
