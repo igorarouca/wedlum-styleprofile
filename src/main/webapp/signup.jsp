@@ -16,10 +16,10 @@
     <title>Welcome to Wedlum!</title>
 
     <!-- ======================================================================= -->
-    <script src="jquery-1.9.1.js" type="text/javascript"></script>
-    <script src="underscore.js" type="text/javascript"></script>
-    <script src="backbone.js" type="text/javascript"></script>
-	<script src="signup.js" type="text/javascript"></script>
+    <script src="scripts/lib/jquery-1.9.1.js" type="text/javascript"></script>
+    <script src="scripts/lib/underscore-1.4.4.js" type="text/javascript"></script>
+    <script src="scripts/lib/backbone-1.0.0.js" type="text/javascript"></script>
+	<script src="scripts/signup.js" type="text/javascript"></script>
     <!-- ======================================================================= -->
 
 </head>
