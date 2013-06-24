@@ -89,13 +89,7 @@ YUI().use('uploader', function(Y) {
 	uploader.set("multipleFiles", true);
 	uploader.set("dragAndDropArea", "body");
     uploader.notifications = {};
-	uploader.after('fileselect', function(event) {
-		_(event.fileList).each(function(file) {
-            var filename = file.get('name');
-            uploader.notifications[filename] = noty({text: '<b>Uploading</b> [<i>' + filename + '</i>]', type: 'information', layout: 'topRight'});
-			UU = uploader.upload(file, 'private/upload');
-		});
-	});
+
 
     uploader.on('uploadcomplete', function(event){
         var filename = event.file.get('name');
@@ -103,6 +97,16 @@ YUI().use('uploader', function(Y) {
         uploader.notifications[filename].setType('success');
         uploader.notifications[filename].setTimeout(2000);
     });
+
+
+	uploader.after('fileselect', function(event) {
+		_(event.fileList).each(function(file) {
+            var filename = file.get('name');
+            uploader.notifications[filename] = noty({text: '<b>Uploading</b> [<i>' + filename + '</i>]', type: 'information', layout: 'topRight'});
+			uploader.uploadAll('private/upload');
+		});
+	});
+
 });
 
 var PhotoListView = Backbone.View.extend({
