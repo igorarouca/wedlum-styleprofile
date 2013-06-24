@@ -46,7 +46,7 @@
 var scaleImage = function(){
     $(this).load(function(){
     var $frame = $(this);
-    var image = new Image()
+    var image = new Image();
     image.src = $frame.attr('src');
 
     var imageWidth = image.width;
@@ -82,16 +82,6 @@ var scaleImage = function(){
 
 };
 
-
-
-
-/* TODO:
- * - Define (2) models for photos (gallery info vs editor info)
- * - Define collections tagged and untagged photos and respective JSON files
- * - Superview loops to iterate over collections instantiating subviews for each individual photo
- * - Pull down click event to the subview passing photo id to the editor view
-*/
-
 YUI().use('uploader', function(Y) {
 	var uploader = new Y.Uploader({
 		width : "300px",
@@ -107,7 +97,6 @@ YUI().use('uploader', function(Y) {
 		});
 	});
 });
-
 
 var PhotoListView = Backbone.View.extend({
     initialize: function() {
@@ -138,24 +127,26 @@ var untaggedPhotosView = new PhotoListView({el: 'ul#untagged', model: untaggedPh
 untaggedPhotos.fetch();
 untaggedPhotos.trigger('change');
 
-setInterval(function(){
+setInterval(function() {
     untaggedPhotos.fetch();
 }, 1000);
 
 
-$(function(){ $("li.thumbnail img").livequery(function(){
-    $(this).resize(function() {
-        scaleImage.apply(this);
-    });
-    scaleImage.apply(this);
-})});
+$(function() {
+	$("li.thumbnail img").livequery(function(){
+		$(this).resize(function() {
+			scaleImage.apply(this);
+		});
 
+		scaleImage.apply(this);
+	});
+});
 
-$("#photo-modal #close").click(function(){
+$("#photo-modal #close").click(function() {
     $("#photo-modal").modal('hide');
 });
 
-$("#photo-modal").click(function(){
+$("#photo-modal").click(function() {
     $("#photo-modal img").flippy({
         color_target: "white",
         direction: "left",
@@ -164,7 +155,7 @@ $("#photo-modal").click(function(){
     });
 });
 
-$(".thumbnail").live("click", function(){
+$(".thumbnail").live("click", function() {
     $("#photo-modal").bigmodal();
     var src = $(this).find("img").attr('src');
     var img = $("#big-photo");
@@ -172,6 +163,7 @@ $(".thumbnail").live("click", function(){
     img.resize(function() {
         scaleImage.apply(this);
     });
+
     scaleImage.apply(img);
 });
 
