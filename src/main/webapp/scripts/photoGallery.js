@@ -44,39 +44,44 @@
 
 
 var scaleImage = function(){
-    $(this).load(function(){
-    var $frame = $(this);
-    var image = new Image();
-    image.src = $frame.attr('src');
+    var doScale = function(){
 
-    var imageWidth = image.width;
-    var imageHeight = image.height;
-    var imageRatio = image.width / image.height;
+        var $frame = $(this);
+        var image = new Image();
+        image.src = $frame.attr('src');
 
-    var widthLimit = $frame.parent().width();
-    var heightLimit = $frame.parent().height();
+        var imageWidth = image.width;
+        var imageHeight = image.height;
+        var imageRatio = image.width / image.height;
 
-    var imageFitsHorizontally = imageWidth <= widthLimit;
-    var doesFit = imageFitsHorizontally && imageHeight <= heightLimit;
-    if (doesFit){
-        $frame.width(imageWidth);
-        $frame.height(imageHeight);
-        return;
-    }
+        var widthLimit = $frame.parent().width();
+        var heightLimit = $frame.parent().height();
 
-    if (!imageFitsHorizontally){
-        var adjustedWidth = Math.min(widthLimit, (heightLimit * imageRatio));
-        $frame.width(adjustedWidth);
-        $frame.height(adjustedWidth / imageRatio);
-    }
+        console.log(widthLimit);
 
-    var imageFitsVertically = $frame.height <= heightLimit;
-    if(!imageFitsVertically){
-        $frame.height(heightLimit);
-        $frame.width(heightLimit * imageRatio);
-    }
-    });
-    $(this).load();
+        var imageFitsHorizontally = imageWidth <= widthLimit;
+        var doesFit = imageFitsHorizontally && imageHeight <= heightLimit;
+        if (doesFit){
+            $frame.width(imageWidth);
+            $frame.height(imageHeight);
+            return;
+        }
+
+        if (!imageFitsHorizontally){
+            var adjustedWidth = Math.min(widthLimit, (heightLimit * imageRatio));
+            $frame.width(adjustedWidth);
+            $frame.height(adjustedWidth / imageRatio);
+        }
+
+        var imageFitsVertically = $frame.height <= heightLimit;
+        if(!imageFitsVertically){
+            $frame.height(heightLimit);
+            $frame.width(heightLimit * imageRatio);
+        }
+    };
+
+    var that = this;
+    setTimeout(function() {  doScale.apply(that); }, 500);
 
 };
 
@@ -148,10 +153,6 @@ setInterval(function() {
 
 $(function() {
 	$("li.thumbnail img").livequery(function(){
-		$(this).resize(function() {
-			scaleImage.apply(this);
-		});
-
 		scaleImage.apply(this);
 	});
 });
@@ -160,24 +161,13 @@ $("#photo-modal #close").click(function() {
     $("#photo-modal").modal('hide');
 });
 
-$("#photo-modal").click(function() {
-    $("#photo-modal img").flippy({
-        color_target: "white",
-        direction: "left",
-        duration: "750",
-        verso: "<div contenteditable='true'>Tags:</div>"
-    });
-});
+var detailsEditor = ace.edit("photo-tags-editor");
 
 $(".thumbnail").live("click", function() {
     $("#photo-modal").bigmodal();
     var src = $(this).find("img").attr('src');
     var img = $("#big-photo");
     img.attr('src', src);
-    img.resize(function() {
-        scaleImage.apply(this);
-    });
-
     scaleImage.apply(img);
 });
 
