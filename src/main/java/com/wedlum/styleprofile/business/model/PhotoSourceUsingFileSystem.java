@@ -36,7 +36,9 @@ public class PhotoSourceUsingFileSystem implements PhotoSource {
     }
 
     private void redo(Observer<File> observer) {
-        for(File file: STORAGE.listFiles())
+        if(!STORAGE.exists()) STORAGE.mkdir();
+
+    	for(File file: STORAGE.listFiles())
             observer.update(file);
     }
 

@@ -109,17 +109,20 @@ YUI().use('uploader', function(Y) {
 
 });
 
+var PhotoSummaryView = Backbone.View.extend({
+    render: function() {
+        return "<li class='thumbnail'><img src='photo-storage/" + this.model.get('name') + "'/></li>";
+    }
+});
+
 var PhotoListView = Backbone.View.extend({
     initialize: function() {
-        this.listenTo(this.model, "change reset add remove", this.render);
+        this.listenTo(this.model, "add", this.add);
+        this.$el.empty();
     },
-    render: function(){
-        var that = this;
-        var html = "";
-        $(this.model.models).each(function(){
-            html += "<li class='thumbnail'><img src='photo-storage/" + this.get('name') + "'/></li>";
-        });
-        that.$el.html(html);
+
+    add: function(photoSummary) {
+        this.$el.append(new PhotoSummaryView({  model: photoSummary }).render());
     }
 });
 
