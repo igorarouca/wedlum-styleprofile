@@ -95,7 +95,7 @@ YUI().use('uploader', function(Y) {
         var filename = event.file.get('name');
         uploader.notifications[filename].setText('<b>Upload complete</b> [<i>' + filename + '</i>]');
         uploader.notifications[filename].setType('success');
-        uploader.notifications[filename].setTimeout(2000);
+        uploader.notifications[filename].setTimeout(2500);
     });
 
 
