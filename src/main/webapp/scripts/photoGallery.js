@@ -81,7 +81,7 @@ var scaleImage = function(){
     };
 
     var that = this;
-    setTimeout(function() {  doScale.apply(that); }, 500);
+    setInterval(function() {  doScale.apply(that); }, 500);
 
 };
 
@@ -157,7 +157,7 @@ $(function() {
 	});
 });
 
-$("#photo-modal #close").click(function() {
+$("#photo-modal").find("#close").click(function() {
     $("#photo-modal").modal('hide');
 });
 
