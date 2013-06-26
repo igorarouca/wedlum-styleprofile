@@ -111,14 +111,7 @@ $("#photo-modal #close").click(function() {
     $("#photo-modal").modal('hide');
 });
 
-$("#photo-modal").click(function() {
-    $("#photo-modal img").flippy({
-        color_target: "white",
-        direction: "left",
-        duration: "750",
-        verso: "<div contenteditable='true'>Tags:</div>"
-    });
-});
+var detailsEditor = ace.edit("photo-tags-editor");
 
 $(".thumbnail").live("click", function() {
     $("#photo-modal").bigmodal();
