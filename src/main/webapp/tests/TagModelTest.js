@@ -7,8 +7,8 @@ var template =
            John Smith\n\
    Tags\n\
        Color\n\
-           Blue\n\
-           Green";
+          Blue\n\
+          Green";
 
 var expectedPreProcessed =
 "\nPhoto\n\
@@ -18,7 +18,7 @@ var expectedPreProcessed =
 #DEDENT}#DEDENT}   Tags\n\
 #INDENT{       Color\n\
 #INDENT{          Blue\n\
-           Green#DEDENT}#DEDENT}#DEDENT}";
+          Green#DEDENT}#DEDENT}#DEDENT}";
 
 test( "It inserts INDENT and DEDENT tokens", function() {
     var subject = new wedlum.tag.TagModelParser();
