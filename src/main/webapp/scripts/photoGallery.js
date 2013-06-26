@@ -42,49 +42,6 @@
     }
 }(window.jQuery));
 
-
-var scaleImage = function(){
-    var doScale = function(){
-
-        var $frame = $(this);
-        if (!$($frame.parent()).is(":visible")) return;
-        var image = new Image();
-        image.src = $frame.attr('src');
-
-        var imageWidth = image.width;
-        var imageHeight = image.height;
-        var imageRatio = image.width / image.height;
-
-        var widthLimit = $frame.parent().width();
-        var heightLimit = $frame.parent().height();
-
-        console.log(widthLimit);
-
-        var imageFitsHorizontally = imageWidth <= widthLimit;
-        var doesFit = imageFitsHorizontally && imageHeight <= heightLimit;
-        if (doesFit){
-            if (Math.abs($frame.width() -imageWidth) > 1) $frame.width(imageWidth);
-            if (Math.abs($frame.height() -imageHeight) > 1) $frame.height(imageHeight);
-            return;
-        }
-
-        if (!imageFitsHorizontally){
-            var adjustedWidth = Math.min(widthLimit, (heightLimit * imageRatio));
-            if (Math.abs($frame.width() -adjustedWidth) > 1)$frame.width(adjustedWidth);
-            if (Math.abs($frame.height() -(adjustedWidth / imageRatio)) > 1)$frame.height(adjustedWidth / imageRatio);
-        }
-
-        var imageFitsVertically = $frame.height <= heightLimit;
-        if(!imageFitsVertically){
-            if (Math.abs($frame.height() -heightLimit) > 1)$frame.height(heightLimit);
-            if (Math.abs($frame.width() -(heightLimit * imageRatio)) > 1)$frame.width(heightLimit * imageRatio);
-        }
-    };
-
-    setTimeout(function(that){return function() {  doScale.apply(that); }}(this), 2000);
-
-};
-
 YUI().use('uploader', function(Y) {
 	var uploader = new Y.Uploader({
 		width : "300px",
@@ -150,25 +107,24 @@ setInterval(function() {
     untaggedPhotos.fetch();
 }, 1000);
 
-
-$(function() {
-	$("li.thumbnail img").livequery(function(){
-		scaleImage.apply(this);
-	});
-});
-
-$("#photo-modal").find("#close").click(function() {
+$("#photo-modal #close").click(function() {
     $("#photo-modal").modal('hide');
 });
 
-var detailsEditor = ace.edit("photo-tags-editor");
+$("#photo-modal").click(function() {
+    $("#photo-modal img").flippy({
+        color_target: "white",
+        direction: "left",
+        duration: "750",
+        verso: "<div contenteditable='true'>Tags:</div>"
+    });
+});
 
 $(".thumbnail").live("click", function() {
     $("#photo-modal").bigmodal();
     var src = $(this).find("img").attr('src');
     var img = $("#big-photo");
     img.attr('src', src);
-    scaleImage.apply(img);
 });
 
 
