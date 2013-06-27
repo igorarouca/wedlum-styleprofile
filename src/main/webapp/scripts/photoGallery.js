@@ -71,10 +71,19 @@ YUI().use('uploader', function(Y) {
 
 });
 
+var PhotoSummary = Backbone.Model.extend({
+    path: ''
+});
+
 var PhotoSummaryView = Backbone.View.extend({
     render: function() {
         return "<li class='thumbnail'><img src='photo-storage/" + this.model.get('name') + "'/></li>";
     }
+});
+
+
+var PhotoList = Backbone.Collection.extend({
+    model: PhotoSummary
 });
 
 var PhotoListView = Backbone.View.extend({
@@ -88,20 +97,15 @@ var PhotoListView = Backbone.View.extend({
     }
 });
 
-var PhotoSummary = Backbone.Model.extend({
-    path: ''
-});
-
-var PhotoList = Backbone.Collection.extend({
-    model: PhotoSummary
-});
-
 var untaggedPhotos = new PhotoList();
 untaggedPhotos.url = '/private/photoGallery/untagged';
 var untaggedPhotosView = new PhotoListView({el: 'ul#untagged', model: untaggedPhotos});
 
 untaggedPhotos.fetch();
 untaggedPhotos.trigger('change');
+
+var photoDetail = new PhotoDetail();
+var photoDetailView = new PhotoDetailView({ model: photoDetail, el: "#photo-modal" });
 
 setInterval(function() {
     untaggedPhotos.fetch();
@@ -111,13 +115,10 @@ $("#photo-modal #close").click(function() {
     $("#photo-modal").modal('hide');
 });
 
-var detailsEditor = ace.edit("photo-tags-editor");
-
 $(".thumbnail").live("click", function() {
     $("#photo-modal").bigmodal();
     var src = $(this).find("img").attr('src');
     var img = $("#big-photo");
     img.attr('src', src);
 });
-
 
