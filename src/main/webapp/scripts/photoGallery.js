@@ -87,6 +87,18 @@ var PhotoList = Backbone.Collection.extend({
 });
 
 var PhotoListView = Backbone.View.extend({
+
+    events: {
+        "click .thumbnail" : "openPhotoDetail"
+    },
+
+    openPhotoDetail: function() {
+        $("#photo-modal").bigmodal();
+        var src = $(arguments[0].target).attr('src');
+        var img = $("#big-photo");
+        img.attr('src', src);
+    },
+
     initialize: function() {
         this.listenTo(this.model, "add", this.add);
         this.$el.empty();
@@ -113,12 +125,5 @@ setInterval(function() {
 
 $("#photo-modal #close").click(function() {
     $("#photo-modal").modal('hide');
-});
-
-$(".thumbnail").live("click", function() {
-    $("#photo-modal").bigmodal();
-    var src = $(this).find("img").attr('src');
-    var img = $("#big-photo");
-    img.attr('src', src);
 });
 

@@ -14,7 +14,6 @@ wedlum.photo.template =
                - Blue";
 
 var PhotoDetail = Backbone.Model.extend({
-
     initialize: function() {
         this.set("tagModel", wedlum.photo.template);
     }
