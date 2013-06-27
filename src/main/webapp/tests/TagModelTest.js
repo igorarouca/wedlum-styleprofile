@@ -1,28 +1,18 @@
-module( "Parsing tag model" );
+module( "Tag model parser" );
 
 var template =
-"Photo\n\
-   Description\n\
-       Photographer\n\
-           John Smith\n\
-   Tags\n\
-       Color\n\
-          Blue\n\
-          Green";
+ "Photo:\n\
+    Description:\n\
+    Photographer:\n\
+        John Smith\n\
+    Tags:\n\
+        Color:\n\
+            - Blue\n\
+            - Green";
 
-var expectedPreProcessed =
-"\nPhoto\n\
-#INDENT{   Description\n\
-#INDENT{       Photographer\n\
-#INDENT{           John Smith\n\
-#DEDENT}#DEDENT}   Tags\n\
-#INDENT{       Color\n\
-#INDENT{          Blue\n\
-          Green#DEDENT}#DEDENT}#DEDENT}";
-
-test( "It inserts INDENT and DEDENT tokens", function() {
+test( "parseTagModel", function() {
     var subject = new wedlum.tag.TagModelParser();
-    var actual = subject.preProcess(template);
+    actual = subject.parse(template);
 
-    equal( actual, expectedPreProcessed );
+    equal( JSON.stringify(actual), "{\"Photo\":{\"Description\":null,\"Photographer\":\"John Smith\",\"Tags\":{\"Color\":[\"Blue\",\"Green\"]}}}");
 });
