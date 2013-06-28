@@ -1,9 +1,17 @@
 package com.wedlum.styleprofile.business.model;
 
-public class PhotoDetail {
+import org.codehaus.jackson.map.ObjectMapper;
 
-	private String id;
-	private String metadata;
+import java.io.IOException;
+import java.io.Serializable;
+import java.io.StringWriter;
+
+public class PhotoDetail implements Serializable {
+
+    private static final long serialVersionUID = 1L;
+
+	private final String id;
+	private final String metadata;
 
 	public PhotoDetail(String id, String metadata) {
 		this.id = id;
@@ -14,16 +22,8 @@ public class PhotoDetail {
 		return id;
 	}
 
-	public void setId(String id) {
-		this.id = id;
-	}
-
 	public String getMetadata() {
 		return metadata;
-	}
-
-	public void setMetadata(String metadata) {
-		this.metadata = metadata;
 	}
 
 	@Override
@@ -31,4 +31,37 @@ public class PhotoDetail {
 		return id;
 	}
 
+    @Override
+    public boolean equals(Object obj) {
+        return super.equals(obj);
+    }
+
+    @Override
+    public int hashCode() {
+        return super.hashCode();
+    }
+
+    public String toJson() {
+        ObjectMapper mapper = new ObjectMapper();
+        try {
+            StringWriter result = new StringWriter();
+            mapper.writeValue(result, this);
+            return result.toString();
+        } catch (IOException e) {
+            throw new IllegalStateException(e);
+        }
+    }
+
+    public static <T> T fromJson(String source, Class<T> c){
+        ObjectMapper mapper = new ObjectMapper();
+        try {
+            return mapper.readValue(source, c);
+        } catch (IOException e) {
+            throw new IllegalStateException(e);
+        }
+    }
+
+    public static PhotoDetail fromJson(String body) {
+        return fromJson(body, PhotoDetail.class);
+    }
 }

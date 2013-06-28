@@ -113,12 +113,12 @@ untaggedPhotosView = new PhotoListView({el: 'ul#untagged', model: untaggedPhotos
 untaggedPhotos.fetch();
 untaggedPhotos.trigger('change');
 
-var photoDetail = new PhotoDetail();
+photoDetail = new PhotoDetail();
 photoDetail.listenTo(untaggedPhotos.current, "change", function() {
     photoDetail.set("id", untaggedPhotos.current.get("id"));
     photoDetail.fetch();
 });
-var photoDetailView = new PhotoDetailView({ model: photoDetail, el: "#photo-modal" });
+photoDetailView = new PhotoDetailView({ model: photoDetail, el: "#photo-modal" });
 
 //setInterval(function() {
 //    untaggedPhotos.fetch();

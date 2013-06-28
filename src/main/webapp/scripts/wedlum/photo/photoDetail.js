@@ -26,6 +26,7 @@ var PhotoDetailView = Backbone.View.extend({
         this.detailsEditor = ace.edit("photo-tags-editor");
         this.detailsEditor.getSession().setMode("ace/mode/yaml");
         this.detailsEditor.getSession().setTabSize(3);
+        var that = this;
         this.listenTo(this.model, "change", this.update);
     },
 
@@ -35,5 +36,10 @@ var PhotoDetailView = Backbone.View.extend({
         var src = "photo-storage/" + this.model.id;
         var img = $("#big-photo");
         img.attr('src', src);
+    },
+
+    save: function(){
+        this.model.set('tagModel', this.detailsEditor.getValue());
+        this.model.save();
     }
 });
