@@ -26,9 +26,17 @@ var PhotoDetailView = Backbone.View.extend({
         this.detailsEditor.getSession().setTabSize(3);
         this.listenTo(this.model, "change", this.updateTagModelEditor);
         this.updateTagModelEditor();
+        this.options.selectedPhoto.on('change', this.selectedPhotoChanged, this);
     },
 
     updateTagModelEditor: function() {
         this.detailsEditor.getSession().setValue(this.model.get("tagModel"));
+    },
+
+    selectedPhotoChanged: function(){
+        $("#photo-modal").bigmodal();
+        var src = "photo-storage/" + this.options.selectedPhoto.get('id');
+        var img = $("#big-photo");
+        img.attr('src', src);
     }
 });

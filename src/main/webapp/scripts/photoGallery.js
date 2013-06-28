@@ -77,13 +77,13 @@ var PhotoSummary = Backbone.Model.extend({
 
 var PhotoSummaryView = Backbone.View.extend({
     render: function() {
-        return "<li class='thumbnail'><img src='photo-storage/" + this.model.get('name') + "'/></li>";
+        return "<li class='thumbnail'><img  data-photo-id='" + this.model.id + "' src='photo-storage/" + this.model.get('name') + "'/></li>";
     }
 });
 
-
 var PhotoList = Backbone.Collection.extend({
-    model: PhotoSummary
+    model: PhotoSummary,
+    current: new Backbone.Model({id: null})
 });
 
 var PhotoListView = Backbone.View.extend({
@@ -93,10 +93,7 @@ var PhotoListView = Backbone.View.extend({
     },
 
     openPhotoDetail: function() {
-        $("#photo-modal").bigmodal();
-        var src = $(arguments[0].target).attr('src');
-        var img = $("#big-photo");
-        img.attr('src', src);
+        this.model.current.set("id", $(arguments[0].target).data('photo-id'));
     },
 
     initialize: function() {
@@ -109,15 +106,15 @@ var PhotoListView = Backbone.View.extend({
     }
 });
 
-var untaggedPhotos = new PhotoList();
+untaggedPhotos = new PhotoList();
 untaggedPhotos.url = '/private/photoGallery/untagged';
-var untaggedPhotosView = new PhotoListView({el: 'ul#untagged', model: untaggedPhotos});
+untaggedPhotosView = new PhotoListView({el: 'ul#untagged', model: untaggedPhotos});
 
 untaggedPhotos.fetch();
 untaggedPhotos.trigger('change');
 
 var photoDetail = new PhotoDetail();
-var photoDetailView = new PhotoDetailView({ model: photoDetail, el: "#photo-modal" });
+var photoDetailView = new PhotoDetailView({ model: photoDetail, el: "#photo-modal", selectedPhoto: untaggedPhotos.current });
 
 setInterval(function() {
     untaggedPhotos.fetch();
