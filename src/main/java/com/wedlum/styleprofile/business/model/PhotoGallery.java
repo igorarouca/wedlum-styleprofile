@@ -34,4 +34,13 @@ public class PhotoGallery {
 		return tagged;
 	}
 
+	public PhotoDetail photoDetail(String id) {
+		for (File photo : untagged)
+			if (photo.getName().equals(id))
+				return new PhotoDetail(id, "");
+		
+		throw new IllegalStateException("Photo not found: " + id);
+				
+	}
+
 }

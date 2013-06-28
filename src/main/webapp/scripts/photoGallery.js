@@ -114,11 +114,15 @@ untaggedPhotos.fetch();
 untaggedPhotos.trigger('change');
 
 var photoDetail = new PhotoDetail();
-var photoDetailView = new PhotoDetailView({ model: photoDetail, el: "#photo-modal", selectedPhoto: untaggedPhotos.current });
+photoDetail.listenTo(untaggedPhotos.current, "change", function() {
+    photoDetail.set("id", untaggedPhotos.current.get("id"));
+    photoDetail.fetch();
+});
+var photoDetailView = new PhotoDetailView({ model: photoDetail, el: "#photo-modal" });
 
-setInterval(function() {
-    untaggedPhotos.fetch();
-}, 1000);
+//setInterval(function() {
+//    untaggedPhotos.fetch();
+//}, 1000);
 
 $("#photo-modal #close").click(function() {
     $("#photo-modal").modal('hide');
