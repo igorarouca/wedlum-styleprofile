@@ -25,6 +25,30 @@ public class PhotoSourceUsingFileSystem implements PhotoSource {
         redo(observer);
     }
 
+    @Override
+    public String getMetadata(String id) {
+        try {
+            File file = getMetadataFile(id);
+            if (!file.exists()) return "";
+            return FileUtils.readFileToString(file);
+        } catch (IOException e) {
+            throw new IllegalStateException("Error reading metadata for " + id, e);
+        }
+    }
+
+    @Override
+    public void setMetadata(String id, String metadata) {
+        try {
+            FileUtils.writeStringToFile(getMetadataFile(id), metadata);
+        } catch (IOException e) {
+            throw new IllegalStateException("Error storing metadata for " + id, e);
+        }
+    }
+
+    private File getMetadataFile(String id) {
+        return new File(STORAGE, id + ".metadata");
+    }
+
     private File store(File photo) {
         File storedPhoto = new File(STORAGE, photo.getName());
         try {
@@ -38,8 +62,11 @@ public class PhotoSourceUsingFileSystem implements PhotoSource {
     private void redo(Observer<File> observer) {
         if(!STORAGE.exists()) STORAGE.mkdir();
 
-    	for(File file: STORAGE.listFiles())
-            observer.update(file);
+    	for(File file: STORAGE.listFiles()){
+            if (file.getName().toLowerCase().endsWith(".png") || file.getName().toLowerCase().endsWith(".jpg"))
+                observer.update(file);
+        }
+
     }
 
 }

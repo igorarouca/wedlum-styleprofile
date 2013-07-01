@@ -20,14 +20,14 @@ public class PhotoDetailController {
     @RequestMapping(value="{id:.+}", method = RequestMethod.GET)
     @ResponseBody
     public String get(@PathVariable String id) throws FileNotFoundException, IOException {
-    	return new PhotoDetail(id, "").toJson();
+        return gallery.loadDetail(id);
     }
 
     @RequestMapping(value="{id:.+}", method = RequestMethod.PUT)
     @ResponseBody
     public void put(@RequestBody String body) throws FileNotFoundException, IOException {
         PhotoDetail detail = PhotoDetail.fromJson(body);
-
+        gallery.storeDetail(detail.getId(), body);
     }
 
 }

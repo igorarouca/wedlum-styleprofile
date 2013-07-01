@@ -1,24 +1,12 @@
+afterOneSecond = function(callback){
+    setTimeout(callback, 1000);
+}
+
 var wedlum = wedlum||{};
 wedlum.photo = wedlum.photo||{};
 
-
-wedlum.photo.template =
-    "Photo:\n\
-       Description:\n\
-          Photographer:\n\
-             Drue Carr\n\
-       Tags:\n\
-           Color:\n\
-               - Red\n\
-               - Green\n\
-               - Blue";
-
 var PhotoDetail = Backbone.Model.extend({
-    urlRoot: "private/photoDetail",
-
-    initialize: function() {
-        this.set("tagModel", wedlum.photo.template);
-    }
+    urlRoot: "private/photoDetail"
 });
 
 var PhotoDetailView = Backbone.View.extend({
@@ -30,8 +18,14 @@ var PhotoDetailView = Backbone.View.extend({
         this.listenTo(this.model, "change", this.update);
     },
 
+    events: {
+        "click #savePhotoDetail" : "save",
+        "click #cancelPhotoDetail" : "hide"
+    },
+
     update: function() {
-        this.detailsEditor.getSession().setValue(this.model.get("tagModel"));
+        console.debug("Update " + this.model.id);
+        this.detailsEditor.getSession().setValue(this.model.get("metadata"));
         $("#photo-modal").bigmodal();
         var src = "photo-storage/" + this.model.id;
         var img = $("#big-photo");
@@ -39,7 +33,29 @@ var PhotoDetailView = Backbone.View.extend({
     },
 
     save: function(){
-        this.model.set('tagModel', this.detailsEditor.getValue());
-        this.model.save();
+        this.model.set('metadata', this.detailsEditor.getValue());
+        var saveButton = this.$el.find("#savePhotoDetail");
+        saveButton.html("Saving...");
+        var that = this;
+
+        that.model.save({}, {
+            success: function(){
+                wedlum.notifier.notifySuccess("Photo details saved for " + that.model.id);
+                afterOneSecond(function() {
+                    saveButton.html("Save");
+                    that.hide();
+            });},
+            error: function(){
+                wedlum.notifier.notifyFailure("Error saving " + that.model.id);
+                afterOneSecond(function() {
+                    saveButton.html("Save");
+            });
+        }});
+    },
+
+    hide: function(){
+        this.$el.bigmodal('hide');
     }
+
+
 });

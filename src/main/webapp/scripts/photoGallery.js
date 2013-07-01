@@ -89,7 +89,7 @@ var PhotoList = Backbone.Collection.extend({
 var PhotoListView = Backbone.View.extend({
 
     events: {
-        "click .thumbnail" : "openPhotoDetail"
+        "click .thumbnail img" : "openPhotoDetail"
     },
 
     openPhotoDetail: function() {

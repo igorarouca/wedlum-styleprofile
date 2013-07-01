@@ -53,11 +53,3 @@
 .bigmodal .modal-body {
     max-height: none;
 }
-
-.bigmodal button {
-    position: absolute;
-    right: 0;
-    bottom: 0;
-    width: 8em;
-    height: 3em;
-}

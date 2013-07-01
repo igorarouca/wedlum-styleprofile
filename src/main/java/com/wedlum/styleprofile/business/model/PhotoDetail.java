@@ -10,19 +10,34 @@ public class PhotoDetail implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-	private final String id;
-	private final String metadata;
+	private String id;
+	private String metadata;
+
+    public PhotoDetail(){
+    }
 
 	public PhotoDetail(String id, String metadata) {
 		this.id = id;
 		this.metadata = metadata;
-	}
+    }
 
-	public String getId() {
+    public String getId() {
 		return id;
 	}
 
 	public String getMetadata() {
+        if (this.metadata == null || this.metadata.isEmpty()){
+            return
+                    "Photo:\n"+
+                            "   Description:\n"+
+                            "   Photographer:\n"+
+                            "       Drue Carr\n"+
+                            "   Tags:\n"+
+                            "       Color:\n"+
+                            "           - Red\n"+
+                            "           - Green\n"+
+                            "           - Blue";
+        }
 		return metadata;
 	}
 
