@@ -5,17 +5,34 @@ afterOneSecond = function(callback){
 var wedlum = wedlum||{};
 wedlum.photo = wedlum.photo||{};
 
+wedlum.photo.template =
+    "Photo:\n\
+       Description:\n\
+          Photographer:\n\
+             Drue Carr\n\
+       Tags:\n\
+           Color:\n\
+               - Red\n\
+               - Green\n\
+               - Blue";
+
 var PhotoDetail = Backbone.Model.extend({
     urlRoot: "private/photoDetail"
 });
 
 var PhotoDetailView = Backbone.View.extend({
     initialize: function() {
+        var that = this;
         this.detailsEditor = ace.edit("photo-tags-editor");
         this.detailsEditor.getSession().setMode("ace/mode/yaml");
         this.detailsEditor.getSession().setTabSize(3);
-        var that = this;
         this.listenTo(this.model, "change", this.update);
+        this.detailsEditor.on("changeSelection", function(){
+            var line = that.detailsEditor.getCursorPosition().row;
+            that.$el.find("#scopePhotoDetail").html(
+                new wedlum.tag.TagModelParser().pathGivenLine(
+                    that.detailsEditor.getValue(), line));
+        });
     },
 
     events: {
@@ -30,6 +47,7 @@ var PhotoDetailView = Backbone.View.extend({
         var src = "photo-storage/" + this.model.id;
         var img = $("#big-photo");
         img.attr('src', src);
+
     },
 
     save: function(){
