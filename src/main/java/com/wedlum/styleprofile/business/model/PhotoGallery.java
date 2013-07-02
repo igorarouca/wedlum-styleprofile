@@ -1,6 +1,5 @@
 package com.wedlum.styleprofile.business.model;
 
-import java.io.File;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
@@ -8,14 +7,14 @@ import com.wedlum.styleprofile.util.observer.Observer;
 
 public class PhotoGallery {
 
-	private Set<File> untagged = new LinkedHashSet<File>();
+	private Set<String> untagged = new LinkedHashSet<String>();
     private PhotoSource source;
 
     private PhotoGallery(PhotoSource source) {
         this.source = source;
-        source.addObserver(new Observer<File>() {
-            public void update(File photo) {
-                untagged.add(photo);
+        source.addObserver(new Observer<String>() {
+            public void update(String photoId) {
+                untagged.add(photoId);
             }
         });
 	}
@@ -24,13 +23,13 @@ public class PhotoGallery {
 		return new PhotoGallery(photoSource);
 	}
 
-	public Set<File> untagged() {
+	public Set<String> untagged() {
 		return untagged;
 	}
 
 	public PhotoDetail photoDetail(String id) {
-		for (File photo : untagged)
-			if (photo.getName().equals(id))
+		for (String photoId : untagged)
+			if (photoId.equals(id))
 				return new PhotoDetail(id, "");
 		
 		throw new IllegalStateException("Photo not found: " + id);

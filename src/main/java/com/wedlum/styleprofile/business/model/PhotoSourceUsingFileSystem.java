@@ -12,20 +12,19 @@ public class PhotoSourceUsingFileSystem implements PhotoSource {
 
     public static File STORAGE = new File("photo-storage");
 
-    private GenericSubject<File> delegate = new GenericSubject<File>();
+    private GenericSubject<String> delegate = new GenericSubject<String>();
 
     public void addPhoto(File photo) {
-        File storedPhoto = store(photo);
-        delegate.setChanged();
-		delegate.notifyObservers(storedPhoto);
+        String photoId = store(photo);
+    	delegate.setChanged();
+		delegate.notifyObservers(photoId);
 	}
 
-    public void addObserver(Observer<File> observer) {
+    public void addObserver(Observer<String> observer) {
         delegate.registerObserver(observer);
         redo(observer);
     }
 
-    @Override
     public String getMetadata(String id) {
         try {
             File file = getMetadataFile(id);
@@ -36,7 +35,6 @@ public class PhotoSourceUsingFileSystem implements PhotoSource {
         }
     }
 
-    @Override
     public void setMetadata(String id, String metadata) {
         try {
             FileUtils.writeStringToFile(getMetadataFile(id), metadata);
@@ -49,22 +47,22 @@ public class PhotoSourceUsingFileSystem implements PhotoSource {
         return new File(STORAGE, id + ".metadata");
     }
 
-    private File store(File photo) {
+    private String store(File photo) {
         File storedPhoto = new File(STORAGE, photo.getName());
         try {
             FileUtils.copyFile(photo, storedPhoto);
         } catch (IOException e) {
             throw new IllegalStateException(e);
         }
-        return storedPhoto;
+        return storedPhoto.getName();
     }
 
-    private void redo(Observer<File> observer) {
+    private void redo(Observer<String> observer) {
         if(!STORAGE.exists()) STORAGE.mkdir();
 
     	for(File file: STORAGE.listFiles()){
             if (file.getName().toLowerCase().endsWith(".png") || file.getName().toLowerCase().endsWith(".jpg"))
-                observer.update(file);
+                observer.update(file.getName());
         }
 
     }
