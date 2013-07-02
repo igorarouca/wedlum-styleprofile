@@ -41,6 +41,9 @@ public class PhotoSourceUsingFileSystem implements PhotoSource {
         } catch (IOException e) {
             throw new IllegalStateException("Error storing metadata for " + id, e);
         }
+
+        delegate.setChanged();
+        delegate.notifyObservers(id);
     }
 
     private File getMetadataFile(String id) {
