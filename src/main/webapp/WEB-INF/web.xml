@@ -23,6 +23,6 @@
     </servlet-mapping>
 
 	<welcome-file-list>
-		<welcome-file>signup.jsp</welcome-file>
+		<welcome-file>colorSession1.html</welcome-file>
 	</welcome-file-list>
 </web-app>

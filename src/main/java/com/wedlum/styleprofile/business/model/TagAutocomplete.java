@@ -1,12 +1,13 @@
 package com.wedlum.styleprofile.business.model;
 
-import com.wedlum.styleprofile.util.observer.Observer;
-import org.yaml.snakeyaml.Yaml;
-
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+
+import org.yaml.snakeyaml.Yaml;
+
+import com.wedlum.styleprofile.util.observer.Observer;
 
 public class TagAutocomplete {
 
@@ -24,13 +25,15 @@ public class TagAutocomplete {
         LinkedHashMap<String, List<String>> result = new LinkedHashMap<String, List<String>>();
         Yaml yaml = new Yaml();
         for(String source : storage.values()){
-            Map<String, Object> model = (Map<String, Object>) yaml.load(source);
+            @SuppressWarnings("unchecked")
+			Map<String, Object> model = (Map<String, Object>) yaml.load(source);
             traverse("Root", model, result);
         }
         return result;
     }
 
-    private void traverse(String parent, Map<String, Object> model, LinkedHashMap<String, List<String>> result) {
+    @SuppressWarnings("unchecked")
+	private void traverse(String parent, Map<String, Object> model, LinkedHashMap<String, List<String>> result) {
         List<String> children = new ArrayList<String>();
         if (!result.containsKey(parent)) result.put(parent, new ArrayList<String>());
         for(String key : model.keySet()){
@@ -43,7 +46,7 @@ public class TagAutocomplete {
             } else if (value instanceof String){
                 result.get(child).add((String) value);
             } else if (value instanceof ArrayList){
-                ArrayList list = (ArrayList) value;
+                ArrayList<String> list = (ArrayList<String>) value;
                 for(Object each : list){
                     result.get(child).add((String) each);
                 }

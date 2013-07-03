@@ -1,6 +1,5 @@
 package com.wedlum.styleprofile.web.controller;
 
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.LinkedHashSet;
