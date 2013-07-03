@@ -13,7 +13,7 @@ public class TagAutocomplete {
 
     private LinkedHashMap<String,String> storage = new LinkedHashMap<String, String>();
 
-    public TagAutocomplete(final PhotoSource photoSource) {
+    private TagAutocomplete(final PhotoSource photoSource) {
         photoSource.addObserver(new Observer<String>() {
             public void update(String id) {
                 storage.put(id, photoSource.getMetadata(id));
@@ -24,16 +24,17 @@ public class TagAutocomplete {
     public Map<String,List<String>> getSuggestions() {
         LinkedHashMap<String, List<String>> result = new LinkedHashMap<String, List<String>>();
         Yaml yaml = new Yaml();
+
         for(String source : storage.values()) {
             @SuppressWarnings("unchecked")
 			Map<String, Object> model = (Map<String, Object>) yaml.load(source);
+            if (model == null) continue;
             traverse("Root", model, result);
         }
         return result;
     }
 
     @SuppressWarnings("unchecked")
-    // TODO: Consider a "full" recursive approach to simplify this code
 	private void traverse(String parent, Map<String, Object> model, LinkedHashMap<String, List<String>> result) {
         List<String> children = new ArrayList<String>();
 
@@ -49,7 +50,9 @@ public class TagAutocomplete {
             children.add(key);
 
             Object value = model.get(key);
-            if (value instanceof LinkedHashMap) {
+
+            if (value instanceof LinkedHashMap){
+                //noinspection unchecked
                 traverse(child, (Map<String, Object>) value,result);
             } else if (value instanceof String) {
                 result.get(child).add((String) value);
@@ -64,5 +67,9 @@ public class TagAutocomplete {
         }
 
         result.get(parent).addAll(children);
+    }
+
+    public static TagAutocomplete on(PhotoSource photoSource) {
+        return new TagAutocomplete(photoSource);
     }
 }

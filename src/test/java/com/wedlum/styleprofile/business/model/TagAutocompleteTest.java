@@ -12,7 +12,7 @@ public class TagAutocompleteTest {
     @Test
     public void testAutocomplete(){
         PhotoSourceMock photoSourceMock = new PhotoSourceMock();
-        TagAutocomplete subject = new TagAutocomplete(photoSourceMock);
+        TagAutocomplete subject = TagAutocomplete.on(photoSourceMock);
 
         photoSourceMock.setMetadata("42.png",
                 "Tag:\n" +
@@ -26,6 +26,18 @@ public class TagAutocompleteTest {
                 "Root/Tag [Sub-Tag]\n" +
                 "Root/Tag/Sub-Tag [Tag Value 1, Tag Value 2]",
                 toString(suggestMap)
+        );
+    }
+
+    @Test
+    public void testEmptyInput(){
+        PhotoSourceMock photoSourceMock = new PhotoSourceMock();
+        TagAutocomplete subject = TagAutocomplete.on(photoSourceMock);
+
+        photoSourceMock.setMetadata("42.png","");
+
+        Map<String, List<String>> suggestMap = subject.getSuggestions();
+        Assert.assertEquals("", toString(suggestMap)
         );
     }
 
