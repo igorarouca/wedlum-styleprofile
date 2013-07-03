@@ -3,13 +3,11 @@ package com.wedlum.styleprofile.web.controller;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.LinkedHashSet;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 
-import com.wedlum.styleprofile.business.model.TagAutocomplete;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.wedlum.styleprofile.business.model.PhotoGallery;
 import com.wedlum.styleprofile.business.model.PhotoSummary;
+import com.wedlum.styleprofile.business.model.TagAutocomplete;
 
 @Controller
 @RequestMapping(value = "photoGallery")
@@ -37,7 +36,7 @@ public class PhotoGalleryController {
 
     @RequestMapping(value = "autocomplete", method = RequestMethod.GET)
     @ResponseBody
-    public Map<String, List<String>> autocomplete(HttpServletRequest request) throws FileNotFoundException, IOException {
+    public Map<String, Set<String>> autocomplete(HttpServletRequest request) throws FileNotFoundException, IOException {
         return tagAutocomplete.getSuggestions();
     }
 }

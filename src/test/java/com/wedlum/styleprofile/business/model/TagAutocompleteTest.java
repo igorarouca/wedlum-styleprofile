@@ -1,11 +1,12 @@
 package com.wedlum.styleprofile.business.model;
 
-import junit.framework.Assert;
-import org.junit.Test;
-
 import java.util.Arrays;
-import java.util.List;
 import java.util.Map;
+import java.util.Set;
+
+import junit.framework.Assert;
+
+import org.junit.Test;
 
 public class TagAutocompleteTest {
 
@@ -20,7 +21,7 @@ public class TagAutocompleteTest {
                 "      - Tag Value 1\n" +
                 "      - Tag Value 2");
 
-        Map<String, List<String>> suggestMap = subject.getSuggestions();
+        Map<String, Set<String>> suggestMap = subject.getSuggestions();
         Assert.assertEquals(
                 "Root [Tag]\n" +
                 "Root/Tag [Sub-Tag]\n" +
@@ -36,14 +37,26 @@ public class TagAutocompleteTest {
 
         photoSourceMock.setMetadata("42.png","");
 
-        Map<String, List<String>> suggestMap = subject.getSuggestions();
+        Map<String, Set<String>> suggestMap = subject.getSuggestions();
         Assert.assertEquals("", toString(suggestMap)
         );
     }
 
-    private String toString(Map<String,List<String>> suggestMap) {
+    @Test
+    public void testDuplicateOutuputEntries() {
+    	 PhotoSourceMock photoSourceMock = new PhotoSourceMock();
+         TagAutocomplete subject = TagAutocomplete.on(photoSourceMock);
+
+         photoSourceMock.setMetadata("42.png", "Tag:");
+         photoSourceMock.setMetadata("43.png", "Tag:");
+
+         Map<String, Set<String>> suggestMap = subject.getSuggestions();
+         Assert.assertEquals("Root [Tag]", toString(suggestMap));
+	}
+
+    private String toString(Map<String, Set<String>> suggestMap) {
         String result = "";
-        for(Map.Entry<String, List<String>> entry : suggestMap.entrySet())
+        for(Map.Entry<String, Set<String>> entry : suggestMap.entrySet())
             result += entry.getKey() + " " + Arrays.toString(entry.getValue().toArray()) + "\n" ;
         return result.trim();
     }
