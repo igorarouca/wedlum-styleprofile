@@ -23,9 +23,9 @@ public class TagAutocompleteTest {
 
         Map<String, Set<String>> suggestMap = subject.getSuggestions();
         Assert.assertEquals(
-                "Root [Tag]\n" +
+                "Root/Tag/Sub-Tag [Tag Value 1, Tag Value 2]\n" +
                 "Root/Tag [Sub-Tag]\n" +
-                "Root/Tag/Sub-Tag [Tag Value 1, Tag Value 2]",
+                "Root [Tag]",
                 toString(suggestMap)
         );
     }
