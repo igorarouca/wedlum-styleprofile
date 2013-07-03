@@ -94,6 +94,7 @@ var PhotoListView = Backbone.View.extend({
 
     openPhotoDetail: function() {
         this.model.current.set("id", $(arguments[0].target).data('photo-id'));
+        this.model.current.trigger('change');
     },
 
     initialize: function() {
@@ -117,6 +118,7 @@ photoDetail = new PhotoDetail();
 photoDetail.listenTo(untaggedPhotos.current, "change", function() {
     photoDetail.set("id", untaggedPhotos.current.get("id"));
     photoDetail.fetch();
+    photoDetail.trigger("change");
 });
 photoDetailView = new PhotoDetailView({ model: photoDetail, el: "#photo-modal" });
 
