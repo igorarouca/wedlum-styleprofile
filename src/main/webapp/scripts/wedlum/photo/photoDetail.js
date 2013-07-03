@@ -27,11 +27,17 @@ var PhotoDetailView = Backbone.View.extend({
         this.detailsEditor.getSession().setMode("ace/mode/yaml");
         this.detailsEditor.getSession().setTabSize(3);
         this.listenTo(this.model, "change", this.update);
+
+        wedlum.photo.keybindings.Autocomplete = function(){
+            alert(wedlum.photo.autocompleteSuggestions.get(that.scope));
+        };
+
         this.detailsEditor.on("changeSelection", function(){
             var line = that.detailsEditor.getCursorPosition().row;
+            that.scope = "Root" + new wedlum.tag.TagModelParser().pathGivenLine(
+                that.detailsEditor.getValue(), line);
             that.$el.find("#scopePhotoDetail").html(
-                new wedlum.tag.TagModelParser().pathGivenLine(
-                    that.detailsEditor.getValue(), line));
+                that.scope);
         });
     },
 
@@ -44,6 +50,7 @@ var PhotoDetailView = Backbone.View.extend({
         console.debug("Update " + this.model.id);
         this.detailsEditor.getSession().setValue(this.model.get("metadata"));
         $("#photo-modal").bigmodal();
+        wedlum.photo.autocompleteSuggestions.fetch();
         var src = "photo-storage/" + this.model.id;
         var img = $("#big-photo");
         img.attr('src', src);

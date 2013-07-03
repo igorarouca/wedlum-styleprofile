@@ -30,6 +30,11 @@ public class TagAutocomplete {
             @SuppressWarnings("unchecked")
 			Map<String, Object> model = (Map<String, Object>) yaml.load(source);
             if (model == null) continue;
+            Object metadata = yaml.load(model.get("metadata").toString());
+            if (!(metadata instanceof Map))
+                continue;
+            model = (Map<String, Object>) metadata;
+
             traverse("Root", model, result);
         }
 

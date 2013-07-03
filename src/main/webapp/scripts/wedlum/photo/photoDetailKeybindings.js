@@ -21,9 +21,9 @@ wedlum.photo = wedlum.photo||{};
     wedlum.photo.keybindings = {
         init: function() {
             var space = '32';
+            var that = this;
             $.ctrl(space, function() {
-                //wedlum.photo.autocomplete.suggest();
-                alert("Autocomplete");
+                if (that.Autocomplete) that.Autocomplete();
                 return false;
             });
         }
