@@ -15,16 +15,16 @@ public class TagAutocompleteTest {
         TagAutocomplete subject = new TagAutocomplete(photoSourceMock);
 
         photoSourceMock.setMetadata("42.png",
-                "Leaf:\n" +
-                "   SubLeaf: \n" +
-                "      - it's a leaf\n" +
-                "      - it's another leaf");
+                "Tag:\n" +
+                "   Sub-Tag: \n" +
+                "      - Tag Value 1\n" +
+                "      - Tag Value 2");
 
         Map<String, List<String>> suggestMap = subject.getSuggestions();
         Assert.assertEquals(
-                "Root [Leaf]\n" +
-                "Root/Leaf [SubLeaf]\n" +
-                "Root/Leaf/SubLeaf [it's a leaf, it's another leaf]",
+                "Root [Tag]\n" +
+                "Root/Tag [Sub-Tag]\n" +
+                "Root/Tag/Sub-Tag [Tag Value 1, Tag Value 2]",
                 toString(suggestMap)
         );
     }
