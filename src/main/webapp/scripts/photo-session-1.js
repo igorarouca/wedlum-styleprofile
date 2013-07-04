@@ -59,13 +59,12 @@ var PhotoView = Backbone.View.extend({
 		this.movePhotoTo("Down");
 	},
 
-	preventFurtherColorSwatchSelections: function(thumbChoice) {
-		alert("Maximum like/unlike limit reached" );			
+    preventFurtherColorSwatchSelections: function () {
+        alert("Maximum like/unlike limit reached" );
 	},
 
 	appendPhotoToFirstAvailableBubble: function(target) {
 		var $photo = this.$("#color-swatch");
-		var thumbChoice = target == "Up" ? '#thumb-up' : '#thumb-down';
 		var sortingArea = target == "Up" ? this.options.ups : this.options.downs;
 		var that = this;
 
@@ -78,7 +77,7 @@ var PhotoView = Backbone.View.extend({
 			}
 		}
 
-		that.preventFurtherColorSwatchSelections(thumbChoice);
+		that.preventFurtherColorSwatchSelections();
 	},
 
 	animatePhotoSelection: function(target) {
