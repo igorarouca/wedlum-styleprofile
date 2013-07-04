@@ -28,8 +28,30 @@ var PhotoDetailView = Backbone.View.extend({
         this.detailsEditor.getSession().setTabSize(3);
         this.listenTo(this.model, "change", this.update);
 
+
+        $("[data-suggestion=true]").live("click", function(e){
+            var selected = $(this).html();
+            if (wedlum.photo.autocompleteSuggestions.isBranch(that.scope))
+                selected += ":";
+            that.detailsEditor.insert(selected);
+            $("#autocomplete").offset({top: -10000});
+            that.detailsEditor.focus();
+            e.preventDefault();
+        });
         wedlum.photo.keybindings.Autocomplete = function(){
-            alert(wedlum.photo.autocompleteSuggestions.get(that.scope));
+            $(function(){
+                var suggestions = wedlum.photo.autocompleteSuggestions.get(that.scope);
+                if (!suggestions){
+                    wedlum.notifier.notifyWarning("There are no suggestions for path: " + that.scope);
+                    return;
+                }
+                $("#autocomplete").offset($(".ace_cursor").offset())
+                $("#autocomplete").html(_(suggestions).map(function(suggestion){
+                    return "<a href='.' data-suggestion=true>" + suggestion + "</a>";
+                }).join("</br>"));
+            });
+
+            $("body").contextMenu({x:0, y:0});
         };
 
         this.detailsEditor.on("changeSelection", function(){
