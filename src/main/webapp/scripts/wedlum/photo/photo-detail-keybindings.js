@@ -8,7 +8,9 @@ $.ctrl = function(key, callback, args) {
 
             if (e.keyCode == key && (e.ctrlKey || e.metaKey)) {
                 callback.apply(this, args);
+                return false;
             }
+            return true;
         });
 };
 

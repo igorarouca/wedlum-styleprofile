@@ -24,38 +24,28 @@ var PhotoDetailView = Backbone.View.extend({
         this.detailsEditor.getSession().setTabSize(3);
         this.listenTo(this.model, "change", this.update);
 
+        codiad.autocomplete._getEditor = function(){
+            return that.detailsEditor;
+        };
 
-        $("[data-suggestion=true]").live("click", function(e) {
-            var selected = $(this).html();
-            if (wedlum.photo.tagAutocomplete.isBranch(that.scope))
-                selected += ":";
-            that.detailsEditor.insert(selected);
-            $("#autocomplete").offset({top: -10000});
-            that.detailsEditor.focus();
-            e.preventDefault();
-        });
+        codiad.autocomplete.getSuggestions = function(){
+            var result = {};
+            _(wedlum.photo.tagAutocomplete.get(that.scope)).each(function(suggestion) {
+                result[suggestion + (wedlum.photo.tagAutocomplete.isBranch(that.scope + "/" + suggestion) ?":":"") + " "] = 0;
+            });
+            return result;
+        }
 
         wedlum.photo.keybindings.Autocomplete = function() {
             $(function(){
-                var suggestions = wedlum.photo.tagAutocomplete.get(that.scope);
-                if (!suggestions){
-                    wedlum.notifier.warning("There are no suggestions for path: " + that.scope);
-                    return;
-                }
-                var $autocomplete = $("#autocomplete");
-                $autocomplete.offset($(".ace_cursor").offset());
-                $autocomplete.html(_(suggestions).map(function(suggestion) {
-                    return "<a href='.' data-suggestion=true>" + suggestion + "</a>";
-                }).join("</br>"));
+                codiad.autocomplete.suggest();
             });
         };
 
         this.detailsEditor.on("changeSelection", function() {
             var line = that.detailsEditor.getCursorPosition().row;
-            that.scope = "Root" + new wedlum.photo.TagModelParser().pathGivenLine(
-                that.detailsEditor.getValue(), line);
-            that.$el.find("#scopePhotoDetail").html(
-                that.scope);
+            that.scope = "Root" + new wedlum.photo.TagModelParser().pathGivenLine(that.detailsEditor.getValue(), line);
+            that.$el.find("#scopePhotoDetail").html(that.scope);
         });
     },
 

@@ -7,7 +7,7 @@ wedlum.photo.TagAutocomplete = Backbone.Model.extend({
     isBranch: function(scope) {
         var validScopes = _(this.attributes).keys();
         return _(validScopes).any(function (validScope) {
-            return (validScope.indexOf(scope + '/') == 0);
+            return (validScope == scope);
         });
     }
 });
