@@ -29,14 +29,15 @@ public class PhotoDetail implements Serializable {
         if (this.metadata == null || this.metadata.isEmpty()){
             return
                     "Photo:\n"+
-                            "   Description:\n"+
-                            "   Photographer:\n"+
-                            "       Drue Carr\n"+
-                            "   Tags:\n"+
-                            "       Color:\n"+
-                            "           - Red\n"+
-                            "           - Green\n"+
-                            "           - Blue";
+                    "   Description:\n"+
+                    "   Photographer:\n"+
+                    "       Drue Carr\n"+
+                    "   Tags:\n"+
+                    "       Color:\n"+
+                    "           Hue:\n"+
+                    "           Saturation:\n"+
+                    "           Value:\n" +
+                    "       Palette:\n";
         }
 		return metadata;
 	}
