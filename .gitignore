@@ -6,3 +6,5 @@ build.properties
 META-INF
 src/main/webapp/WEB-INF/classes
 photo-storage
+src/main/webapp/QUnitAdapter.js
+src/main/webapp/equiv.js
