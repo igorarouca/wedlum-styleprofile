@@ -22,17 +22,18 @@ public class TagAutocomplete {
         });
     }
 
-    public Map<String, Set<String>> getSuggestions() {
+    @SuppressWarnings("unchecked")
+	public Map<String, Set<String>> getSuggestions() {
         LinkedHashMap<String, Set<String>> result = new LinkedHashMap<String, Set<String>>();
         Yaml yaml = new Yaml();
 
         for(String source : storage.values()) {
-            @SuppressWarnings("unchecked")
 			Map<String, Object> model = (Map<String, Object>) yaml.load(source);
             if (model == null) continue;
             Object metadata = yaml.load(model.get("metadata").toString());
             if (!(metadata instanceof Map))
-                continue;
+            	continue;
+
             model = (Map<String, Object>) metadata;
 
             traverse("Root", model, result);

@@ -1,11 +1,10 @@
 package com.wedlum.styleprofile.business.model;
 
-import com.wedlum.styleprofile.util.observer.Observer;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
-
 import java.io.File;
 import java.util.LinkedHashMap;
 import java.util.Map;
+
+import com.wedlum.styleprofile.util.observer.Observer;
 
 public class PhotoSourceMock implements PhotoSource {
     private Observer<String> observer;
@@ -13,7 +12,7 @@ public class PhotoSourceMock implements PhotoSource {
 
     @Override
     public void addPhoto(File photo) {
-        throw new NotImplementedException();
+        throw new RuntimeException("Not Implemented Yet!");
     }
 
     @Override
