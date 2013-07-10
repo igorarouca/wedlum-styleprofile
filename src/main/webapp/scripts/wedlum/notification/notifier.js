@@ -1,4 +1,4 @@
-var wedlum = wedlum||{};
+var wedlum = wedlum || {};
 wedlum.notifier = {
     success: function(text){
         var result = noty({text: text, type: 'success', layout: 'topRight'});

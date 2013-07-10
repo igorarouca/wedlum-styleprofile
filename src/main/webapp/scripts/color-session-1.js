@@ -16,7 +16,7 @@ wedlum.session.Session = Backbone.Model.extend({
         this.allPhotos.add(new wedlum.session.Photo({photo: photo, id: photo, status: 'default'}));
     },
 
-    like : function (photo){
+    like: function (photo){
         this.reset(photo);
         if (this.likes.length == this.limit){
             wedlum.notifier.warning("You have already liked " + this.limit + " photos");
@@ -25,7 +25,8 @@ wedlum.session.Session = Backbone.Model.extend({
         this.likes.add(photo);
         photo.set('status', 'like');
     },
-    dislike : function (photo){
+
+    dislike: function (photo){
         this.reset(photo);
         if (this.dislikes.length == this.limit){
             wedlum.notifier.warning("You have already disliked " + this.limit + " photos");
@@ -34,11 +35,13 @@ wedlum.session.Session = Backbone.Model.extend({
         this.dislikes.add(photo);
         photo.set('status', 'dislike');
     },
-    reset : function (photo){
+
+    reset: function (photo){
         this.likes.remove(photo);
         this.dislikes.remove(photo);
         photo.set('status', 'default');
     },
+
     statusChange: function(photo){
         this.trigger("statusChange", photo);
     }
@@ -106,6 +109,3 @@ $(function() {
     view.render();
 
 })
-
-
-
