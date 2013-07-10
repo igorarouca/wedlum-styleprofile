@@ -1,269 +1,170 @@
 <!DOCTYPE html>
 <html>
 
-<head>
-	<meta content="text/html;charset=utf-8" http-equiv="Content-Type">
-	<meta content="utf-8" http-equiv="encoding">
+  <head>
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+    <meta content="utf-8" http-equiv="encoding">
 
-	<title>Wedlum</title>
-	<link rel="stylesheet" href="styles/wedlum.css">
-	<style type="text/css">
-	#photo-div-2 .image-thumbs{
-opacity:1;
-}
-#photo-div-2 .image-thumbs .thumb-up{
-background-position:center center;
-Width:80%;
-height:80%;
-right:10%;
-opacity:1;
-}
+    <title>Wedlum</title>
+    <link rel="stylesheet" href="styles/wedlum.css">
+    <style type="text/css">
+      #photo-div-2 .image-thumbs{
+        opacity:1;
+      }
+      #photo-div-2 .image-thumbs .thumb-up{
+        background-position:center center;
+        Width:80%;
+        height:80%;
+        right:10%;
+        opacity:1;
+      }
 
-	#photo-div-3 .image-thumbs{
-opacity:1;
-}
-#photo-div-3 .image-thumbs .thumb-up{
-background-position:center center;
-Width:80%;
-height:80%;
-right:10%;
-opacity:.5;
-}
+      #photo-div-3 .image-thumbs{
+        opacity:1;
+      }
 
-.thumb-counter{
-position:absolute;
-top:50%;
-left:0px;
-width:100%;
-margin-top: 35px;
-display:block;}
+      #photo-div-3 .image-thumbs .thumb-up{
+        background-position:center center;
+        Width:80%;
+        height:80%;
+        right:10%;
+        opacity:.5;
+      }
 
-.thumb-counter p{
-display:inline-block;
-margin:auto;
-padding:0px;
-color: #00aeef;
-font-weight:bold;
-	background: white;
-		-moz-border-radius:10px;
-	-webkit-border-radius: 10px;
-	border-radius: 10px;
-	padding:10px 8px;
-		-moz-box-shadow: 0px 0px 4px -2px #000;
-	-webkit-box-shadow: 0px 0px 4px -2px #000;
-	box-shadow: 0px 0px 4px -2px #000;}
-	
-.thumb-counter span {
-font-weight:normal;
-color:#BBB;
-}
+      .thumb-counter{
+        position:absolute;
+        top:50%;
+        left:0px;
+        width:100%;
+        margin-top: 35px;
+        display:block;}
 
-#likestatus,#dislikestatus{
-    display: none;
-}
+      .thumb-counter p{
+        display:inline-block;
+        margin:auto;
+        padding:0px;
+        color: #00aeef;
+        font-weight:bold;
+        background: white;
+        -moz-border-radius:10px;
+        -webkit-border-radius: 10px;
+        border-radius: 10px;
+        padding:10px 8px;
+        -moz-box-shadow: 0px 0px 4px -2px #000;
+        -webkit-box-shadow: 0px 0px 4px -2px #000;
+        box-shadow: 0px 0px 4px -2px #000;}
 
-.like #likestatus{
-    display: block;
-}
+      .thumb-counter span {
+        font-weight:normal;
+        color:#BBB;
+      }
 
-.dislike #dislikestatus{
-    display: block;
-}
-</style>
-</head>
+      #likestatus,#dislikestatus{
+        display: none;
+      }
 
-<body>
-	<header>
-		<nav id="nav">
-			<h1 id="logo">Header</h1>
-			<ul id="dropdown-nav">
-				<li><a href="#Settings">Settings</a></li>
-				<li><a href="#About">About Wedlum</a></li>
-			</ul>
-			<div id="timeline-list">
-				<ul>
-				
-<!-- Changed id of each list item to a better convention -->
-					
-					<li id="timeline-dot-1">
-						<a href="http://www.what.com" id="timeline-list-completed">Color Section</a>
-					</li><!--
-				--><li id="timeline-dot-2">
-						<a href="http://www.what2w.com" id="timeline-list-completed">Color Swatches Part 2</a>
-					</li><!--
-				--><li id="timeline-dot-3">
-						<a href="">Color Swatches Part 3</a>
-					</li><!--
-				--><li id="timeline-dot-4">
-						<a href="">Color Contrasts</a>
-					</li><!--
-				--><li id="timeline-dot-5">
-						<a href="">Color Palettes</a>
-					</li><!--
-				--><li id="timeline-dot-6">
-						<a href="">Flower Section</a>
-					</li><!--
-				--><li id="timeline-dot-7">
-						<a href="">Paper Section</a>
-					</li><!--
-				--><li id="timeline-dot-8">
-						<a href="">Place Setting Section</a>
-					</li><!--
-				--><li id="timeline-dot-9">
-						<a href="">Photo Contrasts</a>
-					</li><!--
-				--><li id="timeline-dot-10">
-						<a href="">Photo Contrasts Part 2</a>
-					</li><!--
-				--><li id="timeline-dot-11">
-						<a href="">Photo Choice</a>
-					</li><!--
-				--><li id="timeline-dot-12">
-						<a href="">Photo Choice Part 2</a>
-					</li><!--
-				--><li id="timeline-dot-final">
-						<a href="">Results Section</a>
-					</li>
-				</ul>
-			</div>
-		</nav>
-	</header>
+      .like #likestatus{
+        display: block;
+      }
 
-	<div id="body-content">
-		<section id="central-photos" class="photo-list">
-		
-<!--Changed id of following list from PhotoGroup. Also changed id name of the enclosed div from 1stPhoto to photo-div-1. also added content into each of the li's when I deleted your jscript. -->
-			
-			<ul id="photo-group-list"><!--
-								--><li>
-					<div id="photo-div-4" class="color-swatch-bg">
-						<img src="images/1stSwatches/PurpleL.jpg">
-					<div class="image-thumbs"><a class="thumb-up" href=""><span>Thumb Up</span></a><a class="thumb-down" href=""><span>Thumb Down</span></a></div>
-					</div>
-				</li><!--
-				--><li>
-					<div id="photo-div-5" class="color-swatch-bg">
-						<img src="images/1stSwatches/PurpleD.jpg">
-					<div class="image-thumbs"><a class="thumb-up" href=""><span>Thumb Up</span></a><a class="thumb-down" href=""><span>Thumb Down</span></a></div>
-					</div>
-				</li><!--
-				--><li>
-					<div id="photo-div-6" class="color-swatch-bg">
-						<img src="images/1stSwatches/OrangeL.jpg">
-					<div class="image-thumbs"><a class="thumb-up" href=""><span>Thumb Up</span></a><a class="thumb-down" href=""><span>Thumb Down</span></a></div>
-					</div>
-				</li><!--
-				--><li>
-					<div id="photo-div-7" class="color-swatch-bg">
-						<img src="images/1stSwatches/GreyL.jpg">
-					<div class="image-thumbs"><a class="thumb-up" href=""><span>Thumb Up</span></a><a class="thumb-down" href=""><span>Thumb Down</span></a></div>
-					</div>
-				</li><!--
-				--><li>
-					<div id="photo-div-8" class="color-swatch-bg">
-						<img src="images/1stSwatches/YellowD.jpg">
-					<div class="image-thumbs"><a class="thumb-up" href=""><span>Thumb Up</span></a><a class="thumb-down" href=""><span>Thumb Down</span></a></div>
-					</div>
-				</li><!--
-				--><li>
-					<div id="photo-div-9" class="color-swatch-bg">
-						<img src="images/1stSwatches/YellowL.jpg">
-					<div class="image-thumbs"><a class="thumb-up" href=""><span>Thumb Up</span></a><a class="thumb-down" href=""><span>Thumb Down</span></a></div>
-					</div>
-				</li><!--
-				--><li>
-					<div id="photo-div-10" class="color-swatch-bg">
-						<img src="images/1stSwatches/PinkD.jpg">
-					<div class="image-thumbs"><a class="thumb-up" href=""><span>Thumb Up</span></a><a class="thumb-down" href=""><span>Thumb Down</span></a></div>
-					</div>
-				</li><!--
-				--><li>
-					<div id="photo-div-11" class="color-swatch-bg">
-						<img src="images/1stSwatches/PinkL.jpg">
-					<div class="image-thumbs"><a class="thumb-up" href=""><span>Thumb Up</span></a><a class="thumb-down" href=""><span>Thumb Down</span></a></div>
-					</div>
-				</li><!--
-				--><li>
-					<div id="photo-div-12" class="color-swatch-bg">
-						<img src="images/1stSwatches/OrangeD.jpg">
-					<div class="image-thumbs"><a class="thumb-up" href=""><span>Thumb Up</span></a><a class="thumb-down" href=""><span>Thumb Down</span></a></div>
-					</div>
-				</li><!--
-				--><li>
-					<div id="photo-div-13" class="color-swatch-bg">
-						<img src="images/1stSwatches/GreenD.jpg">
-					<div class="image-thumbs"><a class="thumb-up" href=""><span>Thumb Up</span></a><a class="thumb-down" href=""><span>Thumb Down</span></a></div>
-					</div>
-				</li><!--
-				--><li>
-					<div id="photo-div-14" class="color-swatch-bg">
-						<img src="images/1stSwatches/GreenL.jpg">
-					<div class="image-thumbs"><a class="thumb-up" href=""><span>Thumb Up</span></a><a class="thumb-down" href=""><span>Thumb Down</span></a></div>
-					</div>
-				</li><!--
-				--><li>
-					<div id="photo-div-15" class="color-swatch-bg">
-						<img src="images/1stSwatches/BlueD.jpg">
-					<div class="image-thumbs"><a class="thumb-up" href=""><span>Thumb Up</span></a><a class="thumb-down" href=""><span>Thumb Down</span></a></div>
-					</div>
-				</li><!--
-				--><li>
-					<div id="photo-div-16" class="color-swatch-bg">
-						<img src="images/1stSwatches/BlueL.jpg">
-					<div class="image-thumbs"><a class="thumb-up" href=""><span>Thumb Up</span></a><a class="thumb-down" href=""><span>Thumb Down</span></a></div>
-					</div>
-				</li><!--
-				--><li>
-					<div id="photo-div-17" class="color-swatch-bg">
-						<img src="images/1stSwatches/AquaD.jpg">
-					<div class="image-thumbs"><a class="thumb-up" href=""><span>Thumb Up</span></a><a class="thumb-down" href=""><span>Thumb Down</span></a></div>
-					</div>
-				</li><!--
-				--><li>
-					<div id="photo-div-18" class="color-swatch-bg">
-						<img src="images/1stSwatches/AquaL.jpg">
-					<div class="image-thumbs"><a class="thumb-up" href=""><span>Thumb Up</span></a><a class="thumb-down" href=""><span>Thumb Down</span></a></div>
-					</div>
-				</li>
-			</ul>
-		</section>
-		<div id="slider-nav">
-			<a id="prev-slider" href="#"><span>previous</span></a>
-			<a id="next-slider" href="#"><span>next</span></a>
-		</div>
+      .dislike #dislikestatus{
+        display: block;
+      }
+    </style>
+  </head>
 
-        <script type="text/template" id="photo-template">
-            <li>
-                <div id="><%- photo %>" class="color-swatch-bg <%- status %>">
-                    <img src="images/1stSwatches/<%- photo %>">
-                    <div class="image-thumbs"><a class="thumb-up" href=""><span>Thumb Up</span></a><a class="thumb-down" href=""><span>Thumb Down</span></a></div>
-                    <div id="likestatus">
-                       liked
-                    </div>
-                    <div id="dislikestatus">
-                       disliked
-                    </div>
-                </div>
+  <body>
+    <header>
+      <nav id="nav">
+      <h1 id="logo">Header</h1>
+      <ul id="dropdown-nav">
+        <li><a href="#Settings">Settings</a></li>
+        <li><a href="#About">About Wedlum</a></li>
+      </ul>
+      <div id="timeline-list">
+        <ul>
+          <li id="timeline-dot-1">
+            <a href="http://www.what.com" id="timeline-list-completed">Color Section</a>
+          </li>
+          <li id="timeline-dot-2">
+            <a href="http://www.what2w.com" id="timeline-list-completed">Color Swatches Part 2</a>
+          </li>
+          <li id="timeline-dot-3">
+            <a href="">Color Swatches Part 3</a>
+          </li>
+          <li id="timeline-dot-4">
+            <a href="">Color Contrasts</a>
+          </li>
+          <li id="timeline-dot-5">
+            <a href="">Color Palettes</a>
+          </li>
+          <li id="timeline-dot-6">
+            <a href="">Flower Section</a>
+          </li>
+          <li id="timeline-dot-7">
+            <a href="">Paper Section</a>
+          </li>
+          <li id="timeline-dot-8">
+            <a href="">Place Setting Section</a>
+          </li>
+          <li id="timeline-dot-9">
+            <a href="">Photo Contrasts</a>
+          </li>
+          <li id="timeline-dot-10">
+            <a href="">Photo Contrasts Part 2</a>
+          </li>
+          <li id="timeline-dot-11">
+            <a href="">Photo Choice</a>
+          </li>
+          <li id="timeline-dot-12">
+            <a href="">Photo Choice Part 2</a>
+          </li>
+          <li id="timeline-dot-final">
+            <a href="">Results Section</a>
+          </li>
+        </ul>
+      </div>
+      </nav>
+    </header>
 
-            </li>
-        </script>
-			
-<!--changed from PhotoThumbUps to feedback-thumb-ups and feedback-thumb-downs. also changed PreferenceBubble to feedback-bubble. Also added an anchor tag and a span inside.
- Moved the "feedback-bubble" to inside the span. Lastly, gave the spans names. -->
-	
-	</div>
-	<footer>
-        <!-- ======================================================================= -->
-        <script src="scripts/lib/jquery-1.9.1.js" type="text/javascript"></script>
-        <script src="scripts/lib/jquery.livequery-1.1.1.js" type="text/javascript"></script>
-        <script src="scripts/lib/underscore-1.4.4.js" type="text/javascript"></script>
-        <script src="scripts/lib/backbone-1.0.0.js" type="text/javascript"></script>
-        <script src="scripts/lib/noty.js"></script>
+    <div id="body-content">
+      <section id="central-photos" class="photo-list">
+        <ul id="photo-group-list">
+        </ul>
+      </section>
 
-        <script src="scripts/wedlum/notification/notifier.js" type="text/javascript"></script>
-        <script src="scripts/color-session-1.js" type="text/javascript"></script>
-        <!-- ======================================================================= -->
-        <div id="footer-information">Great Stuff about Wedlum</div>
-	</footer>
-</body>
+      <div id="slider-nav">
+        <a id="prev-slider" href="#"><span>previous</span></a>
+        <a id="next-slider" href="#"><span>next</span></a>
+      </div>
+
+      <script type="text/template" id="photo-template">
+        <li>
+        <div id="><%- photo %>" class="color-swatch-bg <%- status %>">
+          <img src="images/1stSwatches/<%- photo %>">
+          <div class="image-thumbs"><a class="thumb-up" href=""><span>Thumb Up</span></a><a class="thumb-down" href=""><span>Thumb Down</span></a></div>
+          <div id="likestatus">
+            liked
+          </div>
+          <div id="dislikestatus">
+            disliked
+          </div>
+        </div>
+        </li>
+      </script>
+    </div>
+    <footer>
+    <!-- ======================================================================= -->
+    <script src="scripts/lib/jquery-1.9.1.js" type="text/javascript"></script>
+    <script src="scripts/lib/jquery.livequery-1.1.1.js" type="text/javascript"></script>
+    <script src="scripts/lib/underscore-1.4.4.js" type="text/javascript"></script>
+    <script src="scripts/lib/backbone-1.0.0.js" type="text/javascript"></script>
+    <script src="scripts/lib/noty.js"></script>
+
+    <script src="scripts/wedlum/notification/notifier.js" type="text/javascript"></script>
+    <script src="scripts/color-session-1.js" type="text/javascript"></script>
+    <!-- ======================================================================= -->
+    <div id="footer-information">Great Stuff about Wedlum</div>
+    </footer>
+  </body>
 </html>
