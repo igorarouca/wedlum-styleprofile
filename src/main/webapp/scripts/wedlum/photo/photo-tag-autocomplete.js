@@ -1,5 +1,5 @@
-var wedlum = wedlum||{};
-wedlum.photo = wedlum.photo||{};
+var wedlum = wedlum || {};
+wedlum.photo = wedlum.photo || {};
 
 wedlum.photo.TagAutocomplete = Backbone.Model.extend({
     urlRoot: 'private/photoGallery/autocomplete',
