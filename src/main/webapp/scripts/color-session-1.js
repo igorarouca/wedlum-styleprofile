@@ -12,6 +12,12 @@ wedlum.session.Session = Backbone.Model.extend({
     likes: new Backbone.Collection(),
     dislikes: new Backbone.Collection(),
 
+    initialize: function(){
+        this.set('likesCount', 0);
+        this.set('dislikesCount', 0);
+        this.set('limit', this.limit);
+    },
+
     addPhoto: function(photo){
         this.allPhotos.add(new wedlum.session.Photo({photo: photo, id: photo, status: 'default'}));
     },
@@ -23,6 +29,7 @@ wedlum.session.Session = Backbone.Model.extend({
             return;
         }
         this.likes.add(photo);
+        this.set('likesCount', this.likes.length);
         photo.set('status', 'like');
     },
 
@@ -33,6 +40,7 @@ wedlum.session.Session = Backbone.Model.extend({
             return;
         }
         this.dislikes.add(photo);
+        this.set('dislikesCount', this.dislikes.length);
         photo.set('status', 'dislike');
     },
 
@@ -40,6 +48,8 @@ wedlum.session.Session = Backbone.Model.extend({
         this.likes.remove(photo);
         this.dislikes.remove(photo);
         photo.set('status', 'default');
+        this.set('likesCount', this.likes.length);
+        this.set('dislikesCount', this.dislikes.length);
     },
 
     statusChange: function(photo){
@@ -53,8 +63,7 @@ var PhotoListView = Backbone.View.extend({
         $(this.el).html("");
         var that = this;
         this.model.allPhotos.each(function (photo){
-            var view = new PhotoView({model: photo});
-            view.session = that.model;
+            var view = new PhotoView({model: photo, session: that.model});
            $(that.el).append(view.render().el);
         });
     }
@@ -62,14 +71,16 @@ var PhotoListView = Backbone.View.extend({
 
 var PhotoView = Backbone.View.extend({
 
-    initialize: function(){
-        var that = this;
+    initialize: function(args){
+        this.session = args.session;
         this.model.on("change", this.render, this);
+        this.session.on("change", this.render, this);
     },
 
 	events: {
 		"click .thumb-up" : "thumbUp",
-		"click .thumb-down" : "thumbDown"
+		"click .thumb-down" : "thumbDown",
+        "click img" : "reset"
 	},
 
     tagName:  "li",
@@ -91,9 +102,14 @@ var PhotoView = Backbone.View.extend({
         this.session.dislike(this.model);
 	},
 
+    reset: function(event) {
+        this.session.reset(this.model);
+    },
+
     render: function(){
         var input = this.model.attributes;
-        this.$el.html(this.template(input));
+        parameters = _(input).extend(this.session.attributes);
+        this.$el.html(this.template(parameters));
         return this;
     }
 });
@@ -103,6 +119,9 @@ $(function() {
     wedlum.session.session.addPhoto("PurpleL.jpg");
     wedlum.session.session.addPhoto("OrangeL.jpg");
     wedlum.session.session.addPhoto("PurpleD.jpg");
+    wedlum.session.session.addPhoto("RedD.jpg");
+    wedlum.session.session.addPhoto("RedL.jpg");
+    wedlum.session.session.addPhoto("YellowD.jpg");
 
     var view = new PhotoListView({model: wedlum.session.session});
     view.el = $("ul#photo-group-list")[0];
