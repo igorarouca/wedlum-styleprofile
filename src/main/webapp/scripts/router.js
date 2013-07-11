@@ -3,8 +3,9 @@ define([
   'underscore',
   'backbone',
   'views/header/show',
+  'views/footer/show',
   'views/home/show'
-], function($, _, Backbone, HeaderView, HomeView) {
+], function($, _, Backbone, HeaderView, FooterView, HomeView) {
 
   var ApplicationRouter = Backbone.Router.extend({
     routes: {
@@ -30,7 +31,7 @@ define([
     // loaded initially.
 
     var header = new HeaderView();
-    //var footer = new FooterView();
+    var footer = new FooterView();
 
     Backbone.history.start();
   };
