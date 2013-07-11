@@ -2,8 +2,9 @@ define([
   'jquery',
   'underscore',
   'backbone',
+  'views/header/show',
   'views/home/show'
-], function($, _, Backbone, HomeView) {
+], function($, _, Backbone, HeaderView, HomeView) {
 
   var ApplicationRouter = Backbone.Router.extend({
     routes: {
@@ -28,6 +29,7 @@ define([
     // outside of an on-route function to have it loaded no matter which page is
     // loaded initially.
 
+    var header = new HeaderView();
     //var footer = new FooterView();
 
     Backbone.history.start();
