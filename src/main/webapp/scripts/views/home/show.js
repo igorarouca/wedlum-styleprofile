@@ -3,14 +3,14 @@ define([
   'underscore',
   'backbone',
   'text!templates/home/show.html'
-], function($, _, Backbone, homeTemplate){
+], function($, _, Backbone, show){
 
   var HomeView = Backbone.View.extend({
     el: $("#container"),
 
     render: function(){
 
-      this.$el.html(homeTemplate);
+      this.$el.html(show);
     }
   });
 
