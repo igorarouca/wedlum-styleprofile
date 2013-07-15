@@ -3,12 +3,12 @@ package com.wedlum.styleprofile.util.observer;
 
 public interface Subject<T> {
 
-	public abstract void registerObserver(Observer<T> observer);
+	void registerObserver(Observer<T> observer);
 
-	public abstract void removeObserver(Observer<T> observer);
+	void removeObserver(Observer<T> observer);
 
-	public abstract void notifyObservers();
+	void notifyObservers();
 
-	public abstract void notifyObservers(T info);
+	void notifyObservers(T info);
 
 }

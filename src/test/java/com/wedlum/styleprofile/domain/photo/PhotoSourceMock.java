@@ -1,9 +1,10 @@
-package com.wedlum.styleprofile.business.model;
+package com.wedlum.styleprofile.domain.photo;
 
 import java.io.File;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+import com.wedlum.styleprofile.domain.photo.PhotoSource;
 import com.wedlum.styleprofile.util.observer.Observer;
 
 public class PhotoSourceMock implements PhotoSource {

@@ -1,4 +1,4 @@
-package com.wedlum.styleprofile.web.controller;
+package com.wedlum.styleprofile.controller;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -14,9 +14,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.wedlum.styleprofile.business.model.PhotoGallery;
-import com.wedlum.styleprofile.business.model.PhotoSummary;
-import com.wedlum.styleprofile.business.model.TagAutocomplete;
+import com.wedlum.styleprofile.domain.photo.TagAutocomplete;
+import com.wedlum.styleprofile.domain.photo.PhotoGallery;
+import com.wedlum.styleprofile.domain.photo.PhotoSummary;
 
 @Controller
 @RequestMapping(value = "photoGallery")

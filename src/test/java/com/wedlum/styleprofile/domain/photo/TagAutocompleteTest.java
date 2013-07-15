@@ -1,4 +1,4 @@
-package com.wedlum.styleprofile.business.model;
+package com.wedlum.styleprofile.domain.photo;
 
 import java.util.Arrays;
 import java.util.Map;
@@ -6,15 +6,26 @@ import java.util.Set;
 
 import junit.framework.Assert;
 
+import org.junit.Before;
 import org.junit.Test;
+
+import com.wedlum.styleprofile.domain.photo.PhotoSource;
+import com.wedlum.styleprofile.domain.photo.TagAutocomplete;
+import com.wedlum.styleprofile.domain.photo.TagAutocompleteImpl;
 
 public class TagAutocompleteTest {
 
+	private PhotoSource photoSourceMock;
+	private TagAutocomplete subject;
+
+	@Before
+	public void init() {
+		photoSourceMock = new PhotoSourceMock();
+		subject = new TagAutocompleteImpl(photoSourceMock);		
+	}
+
     @Test
     public void testAutocomplete(){
-        PhotoSourceMock photoSourceMock = new PhotoSourceMock();
-        TagAutocomplete subject = TagAutocomplete.on(photoSourceMock);
-
         photoSourceMock.setMetadata(
                 "42.png",
                 "metadata: \"Tag:\\n" +
@@ -23,6 +34,7 @@ public class TagAutocompleteTest {
                 "      - Tag Value 2\"");
 
         Map<String, Set<String>> suggestMap = subject.getSuggestions();
+
         Assert.assertEquals(
                 "Root/Tag/Sub-Tag [Tag Value 1, Tag Value 2]\n" +
                 "Root/Tag [Sub-Tag]\n" +
@@ -33,9 +45,6 @@ public class TagAutocompleteTest {
 
     @Test
     public void testEmptyInput(){
-        PhotoSourceMock photoSourceMock = new PhotoSourceMock();
-        TagAutocomplete subject = TagAutocomplete.on(photoSourceMock);
-
         photoSourceMock.setMetadata("42.png","");
 
         Map<String, Set<String>> suggestMap = subject.getSuggestions();
@@ -45,9 +54,6 @@ public class TagAutocompleteTest {
 
     @Test
     public void testDuplicateOutuputEntries() {
-    	 PhotoSourceMock photoSourceMock = new PhotoSourceMock();
-         TagAutocomplete subject = TagAutocomplete.on(photoSourceMock);
-
          photoSourceMock.setMetadata("42.png", "metadata: \"Tag:\"");
          photoSourceMock.setMetadata("43.png", "metadata: \"Tag:\"");
 

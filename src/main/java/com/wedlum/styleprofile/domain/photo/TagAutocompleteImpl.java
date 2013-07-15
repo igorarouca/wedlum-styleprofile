@@ -1,4 +1,4 @@
-package com.wedlum.styleprofile.business.model;
+package com.wedlum.styleprofile.domain.photo;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -10,19 +10,24 @@ import org.yaml.snakeyaml.Yaml;
 
 import com.wedlum.styleprofile.util.observer.Observer;
 
-public class TagAutocomplete {
+public class TagAutocompleteImpl implements TagAutocomplete {
 
     private LinkedHashMap<String,String> storage = new LinkedHashMap<String, String>();
 
-    private TagAutocomplete(final PhotoSource photoSource) {
-        photoSource.addObserver(new Observer<String>() {
+    public TagAutocompleteImpl(final PhotoSource photoSource) {
+        setPhotoSource(photoSource);
+    }
+
+	private void setPhotoSource(final PhotoSource photoSource) {
+		photoSource.addObserver(new Observer<String>() {
             public void update(String id) {
                 storage.put(id, photoSource.getMetadata(id));
             }
         });
-    }
+	}
 
-    @SuppressWarnings("unchecked")
+    @Override
+	@SuppressWarnings("unchecked")
 	public Map<String, Set<String>> getSuggestions() {
         LinkedHashMap<String, Set<String>> result = new LinkedHashMap<String, Set<String>>();
         Yaml yaml = new Yaml();
@@ -54,7 +59,6 @@ public class TagAutocomplete {
             Object value = model.get(key);
 
             if (value instanceof LinkedHashMap){
-                //noinspection unchecked
                 traverse(child, (Map<String, Object>) value,result);
             } else if (value instanceof String) {
                 addChild(result, child, value);
@@ -81,7 +85,4 @@ public class TagAutocomplete {
 		map.get(key).add((String) child);
 	}
 
-    public static TagAutocomplete on(PhotoSource photoSource) {
-        return new TagAutocomplete(photoSource);
-    }
 }

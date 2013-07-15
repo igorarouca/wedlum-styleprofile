@@ -1,4 +1,4 @@
-package com.wedlum.styleprofile.business.model;
+package com.wedlum.styleprofile.domain.photo;
 
 import java.io.File;
 import java.io.IOException;
@@ -22,28 +22,28 @@ public class PhotoSourceUsingFileSystem implements PhotoSource {
 
     public void addObserver(Observer<String> observer) {
         delegate.registerObserver(observer);
-        redo(observer);
+        updateObserverOnPastEvents(observer);
     }
 
-    public String getMetadata(String id) {
+    public String getMetadata(String photoId) {
         try {
-            File file = getMetadataFile(id);
+            File file = getMetadataFile(photoId);
             if (!file.exists()) return "";
             return FileUtils.readFileToString(file);
         } catch (IOException e) {
-            throw new IllegalStateException("Error reading metadata for " + id, e);
+            throw new IllegalStateException("Error reading metadata for " + photoId, e);
         }
     }
 
-    public void setMetadata(String id, String metadata) {
+    public void setMetadata(String photoId, String metadata) {
         try {
-            FileUtils.writeStringToFile(getMetadataFile(id), metadata);
+            FileUtils.writeStringToFile(getMetadataFile(photoId), metadata);
         } catch (IOException e) {
-            throw new IllegalStateException("Error storing metadata for " + id, e);
+            throw new IllegalStateException("Error storing metadata for " + photoId, e);
         }
 
         delegate.setChanged();
-        delegate.notifyObservers(id);
+        delegate.notifyObservers(photoId);
     }
 
     private File getMetadataFile(String id) {
@@ -60,14 +60,24 @@ public class PhotoSourceUsingFileSystem implements PhotoSource {
         return storedPhoto.getName();
     }
 
-    private void redo(Observer<String> observer) {
+    private void updateObserverOnPastEvents(Observer<String> observer) {
         if(!STORAGE.exists()) STORAGE.mkdir();
 
     	for(File file: STORAGE.listFiles()){
-            if (file.getName().toLowerCase().endsWith(".png") || file.getName().toLowerCase().endsWith(".jpg"))
+            if (isImageFile(file))
                 observer.update(file.getName());
         }
 
     }
+
+	private static boolean isImageFile(File file) {
+		String fileName = file.getName().toLowerCase();
+
+		for (String validImageFileFormat : VALID_IMAGE_FILE_FORMATS)
+			if (fileName.endsWith(validImageFileFormat))
+				return true;
+
+		return false;
+	}
 
 }

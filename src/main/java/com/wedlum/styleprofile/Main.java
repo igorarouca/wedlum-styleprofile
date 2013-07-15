@@ -1,6 +1,7 @@
 package com.wedlum.styleprofile;
 
-import com.wedlum.styleprofile.business.model.PhotoSourceUsingFileSystem;
+import com.wedlum.styleprofile.domain.photo.PhotoSourceUsingFileSystem;
+
 import winstone.Launcher;
 
 import java.io.File;

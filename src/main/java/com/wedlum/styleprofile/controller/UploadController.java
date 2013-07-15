@@ -1,4 +1,4 @@
-package com.wedlum.styleprofile.web.controller;
+package com.wedlum.styleprofile.controller;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -10,7 +10,8 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
-import com.wedlum.styleprofile.business.model.PhotoSource;
+import com.wedlum.styleprofile.domain.photo.PhotoSource;
+
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;

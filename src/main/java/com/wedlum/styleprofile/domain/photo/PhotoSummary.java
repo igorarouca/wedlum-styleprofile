@@ -1,4 +1,4 @@
-package com.wedlum.styleprofile.business.model;
+package com.wedlum.styleprofile.domain.photo;
 
 import java.io.Serializable;
 

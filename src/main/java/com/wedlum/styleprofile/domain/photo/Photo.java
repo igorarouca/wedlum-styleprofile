@@ -1,4 +1,4 @@
-package com.wedlum.styleprofile.business.model;
+package com.wedlum.styleprofile.domain.photo;
 
 import org.codehaus.jackson.map.ObjectMapper;
 
@@ -6,17 +6,17 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.io.StringWriter;
 
-public class PhotoDetail implements Serializable {
+public class Photo implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
 	private String id;
 	private String metadata;
 
-    public PhotoDetail(){
+    public Photo(){
     }
 
-	public PhotoDetail(String id, String metadata) {
+	public Photo(String id, String metadata) {
 		this.id = id;
 		this.metadata = metadata;
     }
@@ -77,7 +77,7 @@ public class PhotoDetail implements Serializable {
         }
     }
 
-    public static PhotoDetail fromJson(String body) {
-        return fromJson(body, PhotoDetail.class);
+    public static Photo fromJson(String body) {
+        return fromJson(body, Photo.class);
     }
 }
