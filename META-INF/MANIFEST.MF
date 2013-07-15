@@ -1,0 +1,9 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: wedlum-styleprofile
+Bundle-SymbolicName: wedlum-styleprofile
+Bundle-Version: 1.0.0.qualifier
+Export-Package: com.wedlum.styleprofile.controller,
+ com.wedlum.styleprofile.domain,
+ com.wedlum.styleprofile.util.observer,
+ com.wedlum.styleprofile.web.springconfig
