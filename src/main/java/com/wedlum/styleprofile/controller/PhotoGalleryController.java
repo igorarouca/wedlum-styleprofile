@@ -8,6 +8,7 @@ import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.wedlum.styleprofile.util.json.JsonUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,11 +28,11 @@ public class PhotoGalleryController {
 
     @RequestMapping(value = "untagged", method = RequestMethod.GET)
     @ResponseBody
-    public Set<PhotoSummary> untagged(HttpServletRequest request) throws FileNotFoundException, IOException {
+    public String untagged(HttpServletRequest request) throws FileNotFoundException, IOException {
         Set<PhotoSummary> result = new LinkedHashSet<PhotoSummary>();
         for(String photo: gallery.untagged())
             result.add(new PhotoSummary(photo));
-        return result;
+        return JsonUtils.toJson(result);
     }
 
     @RequestMapping(value = "autocomplete", method = RequestMethod.GET)

@@ -1,10 +1,10 @@
 package com.wedlum.styleprofile.domain.photo;
 
+import com.wedlum.styleprofile.util.json.JsonUtils;
 import org.codehaus.jackson.map.ObjectMapper;
 
 import java.io.IOException;
 import java.io.Serializable;
-import java.io.StringWriter;
 
 public class Photo implements Serializable {
 
@@ -58,14 +58,8 @@ public class Photo implements Serializable {
     }
 
     public String toJson() {
-        ObjectMapper mapper = new ObjectMapper();
-        try {
-            StringWriter result = new StringWriter();
-            mapper.writeValue(result, this);
-            return result.toString();
-        } catch (IOException e) {
-            throw new IllegalStateException(e);
-        }
+        Photo subject = this;
+        return JsonUtils.toJson(subject);
     }
 
     public static <T> T fromJson(String source, Class<T> c){
