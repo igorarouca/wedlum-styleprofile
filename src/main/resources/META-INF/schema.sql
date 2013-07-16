@@ -49,5 +49,3 @@ CREATE TABLE IF NOT EXISTS User (
 	INDEX email_index (email),
 	FOREIGN KEY (person_id) REFERENCES Person(id)
 ) ENGINE=INNODB;
-
-INSERT INTO User (first_name, last_name, email, birthdate, gender, zipcode) VALUES ('Igor', 'Arouca', 'igor.arouca@acm.org', '1982-03-01', 'male', '61801');

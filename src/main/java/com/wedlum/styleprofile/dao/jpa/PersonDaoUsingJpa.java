@@ -21,7 +21,7 @@ public class PersonDaoUsingJpa extends JpaDao<Person> implements PersonDao {
 	public List<Person> getByFullName(String firstName, String LastName) {
 		List<Person> result = null;
 
-		Query query = getEntityManager().createQuery("from Person as p where p.username = :username");
+		Query query = getEntityManager().createQuery("from Person as p where p.firstName = :firstName and p.lastName = :lastName");
 		query.setParameter("firstName", firstName);
 		query.setParameter("lastName", firstName);
 

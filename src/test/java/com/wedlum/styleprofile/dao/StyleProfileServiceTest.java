@@ -29,7 +29,7 @@ public class StyleProfileServiceTest {
 	private StyleProfileService subject;
 
 	@Test
-	public void testSave() {
+	public void testSaveUser() {
 		Person person =
 			new Person(
 				"Igor",

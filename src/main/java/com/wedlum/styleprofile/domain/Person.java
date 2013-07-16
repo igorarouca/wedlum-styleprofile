@@ -2,6 +2,7 @@ package com.wedlum.styleprofile.domain;
 
 import java.io.Serializable;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -13,6 +14,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Transient;
 import javax.persistence.Version;
 
+import org.hibernate.annotations.Type;
 import org.joda.time.DateTime;
 
 @Entity
@@ -27,18 +29,11 @@ public class Person implements Serializable, DomainObject {
 
 	private String firstName;
 	private String lastName;
-
-	@Column(columnDefinition = "enum('MALE','FEMALE')")
-	@Enumerated(EnumType.STRING)
 	private Gender gender;
-
 	private DateTime birthdate;
-
-	@ManyToOne
-	@JoinColumn(name = "address_id")
 	private Address address;
 
-	Person() {}
+	protected Person() {}
 
 	public Person(String firstName, String lastName) {
 		this.firstName = firstName;
@@ -87,7 +82,7 @@ public class Person implements Serializable, DomainObject {
 		this.lastName = lastName;
 	}
 
-	// @Type(type = "org.joda.time.contrib.hibernate.PersistentDateTime")
+	@Type(type = "org.jadira.usertype.dateandtime.joda.PersistentDateTime")
 	public DateTime getBirthdate() {
 		return birthdate;
 	}
@@ -105,6 +100,8 @@ public class Person implements Serializable, DomainObject {
 		this.birthdate = birthdate;
 	}
 
+	@Column(columnDefinition = "enum('MALE','FEMALE')")
+	@Enumerated(EnumType.STRING)
 	public Gender getGender() {
 		return gender;
 	}
@@ -113,6 +110,8 @@ public class Person implements Serializable, DomainObject {
 		this.gender = gender;
 	}
 
+	@ManyToOne(cascade = CascadeType.PERSIST)
+	@JoinColumn(name = "address_id")
 	public Address getAddress() {
 		return address;
 	}

@@ -21,7 +21,7 @@ public class UserDaoUsingJpa extends JpaDao<User> implements UserDao {
 	public User getByEmail(String email) {
 		List<User> result = null;
 
-		Query query = getEntityManager().createQuery("from Person as p where p.username = :username");
+		Query query = getEntityManager().createQuery("from User as p where p.email = :email");
 		query.setParameter("email", email);
 
 		result = getResultList(query);
@@ -33,5 +33,6 @@ public class UserDaoUsingJpa extends JpaDao<User> implements UserDao {
 		return result.get(0);
 
 	}
+
 
 }

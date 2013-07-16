@@ -3,7 +3,7 @@ package com.wedlum.styleprofile.domain;
 import java.io.Serializable;
 
 import javax.persistence.Basic;
-import javax.persistence.Column;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -26,16 +26,10 @@ public class User implements Serializable, DomainObject {
 
 	private String email;
 	private String password;
-
-	@Column(columnDefinition = "enum('MALE','FEMALE')")
-	@Enumerated(EnumType.STRING)
 	private Role role;
-
-	@OneToOne
-	@JoinColumn(name = "person_id")
 	private Person person;
 
-	User() {}
+	protected User() {}
 
 	public User(String email, String password, Role role) {
 		super();
@@ -84,6 +78,7 @@ public class User implements Serializable, DomainObject {
 		this.password = password;
 	}
 
+	@Enumerated(EnumType.STRING)
 	public Role getRole() {
 		return role;
 	}
@@ -92,6 +87,8 @@ public class User implements Serializable, DomainObject {
 		this.role = role;
 	}
 
+	@OneToOne(cascade = CascadeType.PERSIST)
+	@JoinColumn(name = "person_id")
 	@Basic(fetch = FetchType.LAZY)
 	public Person getPerson() {
 		return person;

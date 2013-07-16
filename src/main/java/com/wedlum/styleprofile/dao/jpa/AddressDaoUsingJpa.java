@@ -21,7 +21,7 @@ public class AddressDaoUsingJpa extends JpaDao<Address> implements AddressDao {
 	public List<Address> getByZipCode(String zipCode) {
 		List<Address> result = null;
 
-		Query query = getEntityManager().createQuery("from Person as p where p.username = :username");
+		Query query = getEntityManager().createQuery("from Address as p where p.zipCode = :zipCode");
 		query.setParameter("zipCode", zipCode);
 
 		result = getResultList(query);
