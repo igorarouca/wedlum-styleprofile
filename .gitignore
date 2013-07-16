@@ -2,6 +2,7 @@
 ####################
 target
 .settings
+.springBeans
 *.swp
 .idea
 build.properties
