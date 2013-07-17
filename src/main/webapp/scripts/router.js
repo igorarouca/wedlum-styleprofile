@@ -4,8 +4,10 @@ define([
   'backbone',
   'views/header/show',
   'views/footer/show',
-  'views/home/show'
-], function($, _, Backbone, HeaderView, FooterView, HomeView) {
+  'views/home/show',
+  'views/photos/list',
+  'collections/photos/photoscollection'
+], function($, _, Backbone, HeaderView, FooterView, HomeView, PhotosListView, PhotosCollection) {
 
   var ApplicationRouter = Backbone.Router.extend({
     routes: {
@@ -21,8 +23,11 @@ define([
     router.on('route:defaultAction', function (actions) {
 
        // We have no matching route, lets display the home page
-        var view = new HomeView();
-        view.render();
+        // var view = new HomeView;
+        // view.render();
+
+        view = new PhotosListView({ collection: new PhotosCollection() });
+        view.render().el;
     });
 
     // Unlike the above, we don't call render on this view as it will handle
