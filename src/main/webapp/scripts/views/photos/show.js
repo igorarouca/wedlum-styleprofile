@@ -10,7 +10,6 @@ define([
 
     initialize: function() {
       that = this;
-      this.render();
     },
 //     events: {
 //       "click .thumb-up" : "thumbUp",
