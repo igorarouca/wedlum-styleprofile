@@ -8,7 +8,7 @@ define([
 ], function($, _, Backbone, PhotoModel, PhotosCollection, PhotoView){
 
   var PhotosListView = Backbone.View.extend({
-    el: $('ul#photos-list'),
+    el: $('ul#photo-group-list'),
 
     initialize: function() {
       that = this;
