@@ -35,9 +35,8 @@ define([
 //     },
 
     template: _.template(template),
+
     render: function(){
-      var input = this.model.attributes;
-      var compiled = _.template(template, input);
       this.$el.html(this.template(this.model.toJSON()));
       return this;
     }

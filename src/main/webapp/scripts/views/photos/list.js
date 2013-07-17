@@ -16,21 +16,6 @@ define([
     },
 
     render: function(){
-
-      // var collection = new PhotosCollection();
-      // var data = {
-      //   photos: collection,
-      //   _: _
-      // };
-
-      // //perhaps need to render the photos individually before passing to collection template
-      // var compiled = _.template(template, data);
-      // this.$el.html(compiled);
-
-      // data.photos.each(function (photo) {
-      //   var view = new PhotoView(photo);
-      //   $(this.$el).append(view.render().el);
-      // });
       this.collection.each( function(photo) {
         var pv = new PhotoView({ model: photo });
         this.$el.append(pv.el);
