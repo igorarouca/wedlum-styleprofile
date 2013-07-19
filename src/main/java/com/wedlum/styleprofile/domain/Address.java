@@ -1,14 +1,12 @@
 package com.wedlum.styleprofile.domain;
 
-import java.io.Serializable;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Version;
 
 @Entity
-public class Address implements Serializable, DomainObject {
+public class Address implements DomainObject {
 
 	private static final long serialVersionUID = 1L;
 

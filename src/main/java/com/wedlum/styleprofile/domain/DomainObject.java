@@ -1,3 +1,5 @@
 package com.wedlum.styleprofile.domain;
 
-public interface DomainObject {}
+import java.io.Serializable;
+
+public interface DomainObject extends Serializable { }

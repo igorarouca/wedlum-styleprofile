@@ -1,7 +1,5 @@
 package com.wedlum.styleprofile.domain;
 
-import java.io.Serializable;
-
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -15,7 +13,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Version;
 
 @Entity
-public class User implements Serializable, DomainObject {
+public class User implements DomainObject {
 
 	public static enum Role { ADMIN, TEST_TAKER, VENDOR };
 

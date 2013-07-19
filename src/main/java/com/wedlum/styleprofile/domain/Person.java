@@ -1,7 +1,5 @@
 package com.wedlum.styleprofile.domain;
 
-import java.io.Serializable;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -18,7 +16,7 @@ import org.hibernate.annotations.Type;
 import org.joda.time.DateTime;
 
 @Entity
-public class Person implements Serializable, DomainObject {
+public class Person implements DomainObject {
 
 	public static enum Gender { FEMALE, MALE };
 
