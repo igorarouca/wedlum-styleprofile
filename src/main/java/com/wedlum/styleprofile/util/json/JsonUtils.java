@@ -18,4 +18,13 @@ public class JsonUtils {
             throw new IllegalStateException(e);
         }
     }
+
+    public static <T> T fromJson(String source, Class<T> c){
+        ObjectMapper mapper = new ObjectMapper();
+        try {
+            return mapper.readValue(source, c);
+        } catch (IOException e) {
+            throw new IllegalStateException(e);
+        }
+    }
 }
