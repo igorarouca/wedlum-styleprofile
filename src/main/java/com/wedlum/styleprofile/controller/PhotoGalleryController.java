@@ -6,25 +6,25 @@ import java.util.LinkedHashSet;
 import java.util.Map;
 import java.util.Set;
 
+import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 
-import com.wedlum.styleprofile.util.web.JsonUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.wedlum.styleprofile.domain.photo.TagAutocomplete;
 import com.wedlum.styleprofile.domain.photo.PhotoGallery;
 import com.wedlum.styleprofile.domain.photo.PhotoSummary;
+import com.wedlum.styleprofile.domain.photo.TagAutocomplete;
+import com.wedlum.styleprofile.util.web.JsonUtils;
 
 @Controller
 @RequestMapping(value = "photoGallery")
 public class PhotoGalleryController {
 
-    @Autowired private PhotoGallery gallery;
-    @Autowired private TagAutocomplete tagAutocomplete;
+    @Inject private PhotoGallery gallery;
+    @Inject private TagAutocomplete tagAutocomplete;
 
     @RequestMapping(value = "untagged", method = RequestMethod.GET)
     @ResponseBody

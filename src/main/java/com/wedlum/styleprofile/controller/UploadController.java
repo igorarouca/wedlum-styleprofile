@@ -8,20 +8,20 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
-
-import com.wedlum.styleprofile.domain.photo.PhotoSource;
 
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.commons.io.IOUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.wedlum.styleprofile.domain.photo.PhotoSource;
 
 @Controller
 public class UploadController {
@@ -31,8 +31,7 @@ public class UploadController {
 
 	private static final String UPLOAD_TMP_DIR = "/tmp";
 
-    @Autowired
-    private PhotoSource source;
+    @Inject private PhotoSource source;
 
 	@RequestMapping(value = "upload", method = RequestMethod.POST)
     @ResponseBody

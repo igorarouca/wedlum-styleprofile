@@ -8,7 +8,8 @@ import com.wedlum.styleprofile.domain.photo.PhotoSource;
 import com.wedlum.styleprofile.util.observer.Observer;
 
 public class PhotoSourceMock implements PhotoSource {
-    private Observer<String> observer;
+
+	private Observer<String> observer;
     private Map<String, String> storage = new LinkedHashMap<String, String>();
 
     @Override

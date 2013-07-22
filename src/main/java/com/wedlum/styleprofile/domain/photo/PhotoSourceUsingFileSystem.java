@@ -3,11 +3,14 @@ package com.wedlum.styleprofile.domain.photo;
 import java.io.File;
 import java.io.IOException;
 
+import javax.inject.Named;
+
 import org.apache.commons.io.FileUtils;
 
 import com.wedlum.styleprofile.util.observer.GenericSubject;
 import com.wedlum.styleprofile.util.observer.Observer;
 
+@Named(value = "photoSource")
 public class PhotoSourceUsingFileSystem implements PhotoSource {
 
     public static File STORAGE = new File("photo-storage");

@@ -1,15 +1,56 @@
 package com.wedlum.styleprofile.domain.photo;
 
+import java.util.LinkedHashSet;
 import java.util.Set;
 
-public interface PhotoGallery {
+import javax.inject.Inject;
+import javax.inject.Named;
 
-	Set<String> untagged();
+import com.wedlum.styleprofile.util.observer.Observer;
+import com.wedlum.styleprofile.util.web.JsonUtils;
 
-	Photo photo(String id);
+@Named(value = "photoGallery")
+public class PhotoGallery  {
 
-	String loadDetail(String id);
+	private Set<String> untagged = new LinkedHashSet<String>();
+	private PhotoSource source;
 
-	void storeDetail(String id, String metadata);
+	@Inject
+    public PhotoGallery(PhotoSource source) {
+        setPhotoSource(source);
+	}
+
+	private void setPhotoSource(PhotoSource source) {
+		this.source = source;
+        source.addObserver(new Observer<String>() {
+            public void update(String photoId) {
+                untagged.add(photoId);
+            }
+        });
+	}
+
+	public Set<String> untagged() {
+		return untagged;
+	}
+
+	public Photo photo(String id) {
+		for (String photoId : untagged)
+			if (photoId.equals(id))
+				return new Photo(id, "");
+		
+		throw new IllegalStateException("Photo not found: " + id);
+				
+	}
+
+	public String loadDetail(String id) {
+        String stored = source.getMetadata(id);
+        if (stored == "")
+            return JsonUtils.toJson(new Photo(id, ""));
+        return stored;
+    }
+
+	public void storeDetail(String id, String metadata) {
+        source.setMetadata(id, metadata);
+    }
 
 }

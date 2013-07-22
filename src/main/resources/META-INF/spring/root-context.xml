@@ -22,14 +22,4 @@
     <import resource="datasource.xml"/>
     <import resource="jpa.xml"/>
 
-	<bean id="photoSource" class="com.wedlum.styleprofile.domain.photo.PhotoSourceUsingFileSystem" />
-
-	<bean class="com.wedlum.styleprofile.domain.photo.PhotoGalleryImpl">
-		<constructor-arg index="0" ref="photoSource" />
-	</bean>
-
-	<bean class="com.wedlum.styleprofile.domain.photo.TagAutocompleteImpl">
-		<constructor-arg index="0" ref="photoSource" />
-	</bean>
-
 </beans>

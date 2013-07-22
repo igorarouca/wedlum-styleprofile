@@ -6,14 +6,19 @@ import java.util.LinkedHashSet;
 import java.util.Map;
 import java.util.Set;
 
+import javax.inject.Inject;
+import javax.inject.Named;
+
 import org.yaml.snakeyaml.Yaml;
 
 import com.wedlum.styleprofile.util.observer.Observer;
 
+@Named(value = "tagAutocomplete")
 public class TagAutocompleteImpl implements TagAutocomplete {
 
     private LinkedHashMap<String,String> storage = new LinkedHashMap<String, String>();
 
+    @Inject
     public TagAutocompleteImpl(final PhotoSource photoSource) {
         setPhotoSource(photoSource);
     }
