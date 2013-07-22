@@ -1,15 +1,19 @@
 package com.wedlum.styleprofile.controller;
 
-import com.wedlum.styleprofile.domain.profile.Step;
-import com.wedlum.styleprofile.domain.profile.TestScript;
-import com.wedlum.styleprofile.util.json.JsonUtils;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import javax.servlet.http.HttpServletRequest;
-import java.util.*;
+import com.wedlum.styleprofile.domain.profile.TestScript;
+import com.wedlum.styleprofile.util.web.JsonUtils;
 
 @Controller
 @RequestMapping(value = "style-profile")

@@ -1,13 +1,14 @@
 package com.wedlum.styleprofile.domain.profile;
 
-import com.wedlum.styleprofile.controller.StyleProfileController;
-import com.wedlum.styleprofile.util.json.JsonUtils;
+import java.io.InputStreamReader;
+import java.util.List;
 
 import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
 import javax.script.ScriptException;
-import java.io.InputStreamReader;
-import java.util.List;
+
+import com.wedlum.styleprofile.controller.StyleProfileController;
+import com.wedlum.styleprofile.util.web.JsonUtils;
 
 public class TestScript {
 
