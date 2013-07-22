@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.wedlum.styleprofile.domain.photo.Photo;
 import com.wedlum.styleprofile.domain.photo.PhotoGallery;
+import com.wedlum.styleprofile.util.web.JsonUtils;
 
 @Controller
 @RequestMapping(value = "photoDetail")
@@ -30,7 +31,7 @@ public class PhotoDetailController {
     @RequestMapping(value="{id:.+}", method = RequestMethod.PUT, consumes="application/json")
     @ResponseBody
     public void put(@RequestBody String body) throws FileNotFoundException, IOException {
-        Photo detail = Photo.fromJson(body);
+        Photo detail = JsonUtils.fromJson(body, Photo.class);
         gallery.storeDetail(detail.getId(), body);
     }
 

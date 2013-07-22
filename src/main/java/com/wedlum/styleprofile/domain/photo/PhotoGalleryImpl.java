@@ -4,6 +4,7 @@ import java.util.LinkedHashSet;
 import java.util.Set;
 
 import com.wedlum.styleprofile.util.observer.Observer;
+import com.wedlum.styleprofile.util.web.JsonUtils;
 
 public class PhotoGalleryImpl implements PhotoGallery {
 
@@ -42,7 +43,7 @@ public class PhotoGalleryImpl implements PhotoGallery {
 	public String loadDetail(String id) {
         String stored = source.getMetadata(id);
         if (stored == "")
-            return new Photo(id, "").toJson();
+            return JsonUtils.toJson(new Photo(id, ""));
         return stored;
     }
 

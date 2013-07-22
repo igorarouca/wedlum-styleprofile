@@ -1,12 +1,8 @@
 package com.wedlum.styleprofile.domain.photo;
 
-import com.wedlum.styleprofile.util.json.JsonUtils;
-import org.codehaus.jackson.map.ObjectMapper;
+import com.wedlum.styleprofile.domain.DomainObject;
 
-import java.io.IOException;
-import java.io.Serializable;
-
-public class Photo implements Serializable {
+public class Photo implements DomainObject {
 
     private static final long serialVersionUID = 1L;
 
@@ -57,21 +53,4 @@ public class Photo implements Serializable {
         return super.hashCode();
     }
 
-    public String toJson() {
-        Photo subject = this;
-        return JsonUtils.toJson(subject);
-    }
-
-    public static <T> T fromJson(String source, Class<T> c){
-        ObjectMapper mapper = new ObjectMapper();
-        try {
-            return mapper.readValue(source, c);
-        } catch (IOException e) {
-            throw new IllegalStateException(e);
-        }
-    }
-
-    public static Photo fromJson(String body) {
-        return fromJson(body, Photo.class);
-    }
 }
