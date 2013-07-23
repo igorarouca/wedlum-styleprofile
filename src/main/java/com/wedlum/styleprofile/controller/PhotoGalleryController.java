@@ -35,7 +35,7 @@ public class PhotoGalleryController {
         return JsonUtils.toJson(result);
     }
 
-    @RequestMapping(value = "autocomplete", method = RequestMethod.GET)
+    @RequestMapping(value = "autocomplete", method = RequestMethod.GET, produces = "application/json")
     @ResponseBody
     public Map<String, Set<String>> autocomplete(HttpServletRequest request) throws FileNotFoundException, IOException {
         return tagAutocomplete.getSuggestions();

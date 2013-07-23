@@ -127,9 +127,15 @@
 		</dependency>
 
 		<dependency>
-			<groupId>org.codehaus.jackson</groupId>
-			<artifactId>jackson-mapper-asl</artifactId>
-			<version>1.9.12</version>
+		    <groupId>com.fasterxml.jackson.core</groupId>
+		    <artifactId>jackson-core</artifactId>
+		    <version>2.0.4</version>
+		</dependency>
+
+		<dependency>
+		    <groupId>com.fasterxml.jackson.core</groupId>
+		    <artifactId>jackson-databind</artifactId>
+		    <version>2.0.4</version>
 		</dependency>
 
 		<dependency>
@@ -148,6 +154,7 @@
 			<groupId>net.sourceforge.winstone</groupId>
 			<artifactId>winstone</artifactId>
 			<version>0.9.10</version>
+			<scope>provided</scope>
 		</dependency>
 
 		<dependency>
@@ -269,6 +276,12 @@
 	<build>
 		<finalName>wedlum-styleprofile</finalName>
 		<plugins>
+			<plugin>
+				 <groupId>org.apache.tomcat.maven</groupId>
+	    	    <artifactId>tomcat7-maven-plugin</artifactId>
+    	    	<version>2.1</version>
+			</plugin>
+
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-shade-plugin</artifactId>

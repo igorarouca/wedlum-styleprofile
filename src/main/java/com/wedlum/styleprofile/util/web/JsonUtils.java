@@ -3,7 +3,7 @@ package com.wedlum.styleprofile.util.web;
 import java.io.IOException;
 import java.io.StringWriter;
 
-import org.codehaus.jackson.map.ObjectMapper;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class JsonUtils {
 
