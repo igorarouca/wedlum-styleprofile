@@ -154,7 +154,6 @@
 			<groupId>net.sourceforge.winstone</groupId>
 			<artifactId>winstone</artifactId>
 			<version>0.9.10</version>
-			<scope>provided</scope>
 		</dependency>
 
 		<dependency>
