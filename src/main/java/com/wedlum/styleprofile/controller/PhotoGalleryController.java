@@ -24,8 +24,6 @@ import com.wedlum.styleprofile.util.web.JsonUtils;
 public class PhotoGalleryController {
 
     @Inject private PhotoGallery gallery;
-    @Inject private TagAutocomplete tagAutocomplete;
-
     @RequestMapping(value = "untagged", method = RequestMethod.GET)
     @ResponseBody
     public String untagged(HttpServletRequest request) throws FileNotFoundException, IOException {
@@ -35,6 +33,7 @@ public class PhotoGalleryController {
         return JsonUtils.toJson(result);
     }
 
+    @Inject private TagAutocomplete tagAutocomplete;
     @RequestMapping(value = "autocomplete", method = RequestMethod.GET, produces = "application/json")
     @ResponseBody
     public String autocomplete(HttpServletRequest request) throws FileNotFoundException, IOException {
