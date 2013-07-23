@@ -13,7 +13,7 @@ wedlum.photo.template =
                - Blue";
 
 var PhotoDetail = Backbone.Model.extend({
-    urlRoot: "private/photoDetail"
+    urlRoot: "api/photoDetail"
 });
 
 var PhotoDetailView = Backbone.View.extend({

@@ -35,7 +35,7 @@ var PhotoListView = Backbone.View.extend({
 });
 
 untaggedPhotos = new PhotoList();
-untaggedPhotos.url = '/private/photoGallery/untagged';
+untaggedPhotos.url = '/api/photoGallery/untagged';
 untaggedPhotosView = new PhotoListView({el: 'ul#untagged', model: untaggedPhotos});
 
 untaggedPhotos.fetch();

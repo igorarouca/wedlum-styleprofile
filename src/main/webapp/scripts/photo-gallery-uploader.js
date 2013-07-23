@@ -21,7 +21,7 @@ YUI().use('uploader', function(Y) {
         _(event.fileList).each(function(file) {
             var filename = file.get('name');
             uploader.notifications[filename] = noty({text: '<b>Uploading</b> [<i>' + filename + '</i>]', type: 'information', layout: 'topRight'});
-            uploader.uploadAll('private/upload');
+            uploader.uploadAll('api/upload');
         });
     });
 

@@ -2,7 +2,7 @@ var wedlum = wedlum || {};
 wedlum.photo = wedlum.photo || {};
 
 wedlum.photo.TagAutocomplete = Backbone.Model.extend({
-    urlRoot: 'private/photoGallery/autocomplete',
+    urlRoot: 'api/photoGallery/autocomplete',
 
     isBranch: function(scope) {
         var validScopes = _(this.attributes).keys();

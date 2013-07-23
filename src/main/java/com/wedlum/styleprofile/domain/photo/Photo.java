@@ -52,5 +52,4 @@ public class Photo implements DomainObject {
     public int hashCode() {
         return super.hashCode();
     }
-
 }
