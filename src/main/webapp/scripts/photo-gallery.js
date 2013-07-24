@@ -26,11 +26,16 @@ var PhotoListView = Backbone.View.extend({
 
     initialize: function() {
         this.listenTo(this.model, "add", this.add);
+        this.listenTo(this.model, "remove", this.remove);
         this.$el.empty();
     },
 
     add: function(photoSummary) {
         this.$el.append(new PhotoSummaryView({  model: photoSummary }).render());
+    },
+
+    remove: function(photoSummary) {
+        $($(this.$el.find("[data-photo-id='" + photoSummary.id + "']")).parent()).remove();
     }
 });
 
@@ -49,9 +54,9 @@ photoDetail.listenTo(untaggedPhotos.current, "change", function() {
 });
 photoDetailView = new PhotoDetailView({ model: photoDetail, el: "#photo-modal" });
 
-//setInterval(function() {
-//    untaggedPhotos.fetch();
-//}, 1000);
+setInterval(function() {
+    untaggedPhotos.fetch();
+}, 1000);
 
 $("#photo-modal #close").click(function() {
     $("#photo-modal").modal('hide');

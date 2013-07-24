@@ -28,6 +28,9 @@ public class TagAutocompleteImpl implements TagAutocomplete {
             public void update(String id) {
                 storage.put(id, photoSource.getMetadata(id));
             }
+
+            @Override
+            public void remove(String info) {}
         });
 	}
 

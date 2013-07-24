@@ -15,4 +15,5 @@ public interface PhotoSource {
     String getMetadata(String photoId);
     void setMetadata(String photoId, String metadata);
 
+    void delete(String id);
 }

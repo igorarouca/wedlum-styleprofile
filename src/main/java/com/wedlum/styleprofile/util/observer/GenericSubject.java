@@ -33,6 +33,12 @@ public class GenericSubject<T> implements Subject<T> {
 			observer.update(info);
 	}
 
+    public void notifyObserversRemove(T info) {
+        for (Observer<T> observer : observers)
+            observer.remove(info);
+    }
+
+
 	public void setChanged() {
         changed = true;
     }
@@ -48,5 +54,4 @@ public class GenericSubject<T> implements Subject<T> {
     public int countObservers() {
         return observers.size();
     }
-
 }

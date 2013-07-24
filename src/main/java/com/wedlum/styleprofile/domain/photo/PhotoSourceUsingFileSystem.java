@@ -49,6 +49,13 @@ public class PhotoSourceUsingFileSystem implements PhotoSource {
         delegate.notifyObservers(photoId);
     }
 
+    @Override
+    public void delete(String id) {
+        getMetadataFile(id).delete();
+        new File(STORAGE, id).delete();
+        delegate.notifyObserversRemove(id);
+    }
+
     private File getMetadataFile(String id) {
         return new File(STORAGE, id + ".metadata");
     }

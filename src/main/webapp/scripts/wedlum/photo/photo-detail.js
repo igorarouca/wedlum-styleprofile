@@ -51,7 +51,8 @@ var PhotoDetailView = Backbone.View.extend({
 
     events: {
         "click #savePhotoDetail" : "save",
-        "click #cancelPhotoDetail" : "hide"
+        "click #cancelPhotoDetail" : "hide",
+        "click #deletePhotoDetail" : "delete"
     },
 
     update: function() {
@@ -63,6 +64,17 @@ var PhotoDetailView = Backbone.View.extend({
         var img = $("#big-photo");
         img.attr('src', src);
 
+    },
+
+    delete: function(){
+        var confirmation = window.prompt("Are you sure you want to delete this picture? (type yes to confirm)","no");
+        if (confirmation == 'yes'){
+            this.model.destroy();
+            var that = this;
+            afterOneSecond(function() {
+                that.hide();
+            });
+        }
     },
 
     save: function() {

@@ -32,4 +32,9 @@ public class PhotoSourceMock implements PhotoSource {
         storage.put(id, metadata);
         observer.update(id);
     }
+
+    @Override
+    public void delete(String id) {
+
+    }
 }

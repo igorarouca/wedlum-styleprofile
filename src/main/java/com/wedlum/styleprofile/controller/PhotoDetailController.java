@@ -35,4 +35,9 @@ public class PhotoDetailController {
         gallery.storeDetail(detail.getId(), body);
     }
 
+    @RequestMapping(value = "{id:.+}", method = RequestMethod.DELETE)
+    @ResponseBody
+    public void delete(@PathVariable String id) throws FileNotFoundException, IOException {
+        gallery.delete(id);
+    }
 }

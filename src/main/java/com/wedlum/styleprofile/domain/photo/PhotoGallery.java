@@ -26,6 +26,11 @@ public class PhotoGallery  {
             public void update(String photoId) {
                 untagged.add(photoId);
             }
+
+            @Override
+            public void remove(String photoId) {
+                untagged.remove(photoId);
+            }
         });
 	}
 
@@ -53,4 +58,7 @@ public class PhotoGallery  {
         source.setMetadata(id, metadata);
     }
 
+    public void delete(String id) {
+        source.delete(id);
+    }
 }
