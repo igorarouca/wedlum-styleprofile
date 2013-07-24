@@ -1,5 +1,8 @@
 package com.wedlum.styleprofile.domain.profile;
 
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 public class StyleProfiler {
@@ -22,7 +25,42 @@ public class StyleProfiler {
 	}
 
 	private String getValue(String itemName) {
-		return "ToDo";
+
+        Map<String, String> all = resolveAll();
+        if (!all.containsKey(itemName)) return itemName + " not found!";
+        return all.get(itemName);
 	}
 
+    public Map<String, String> resolveAll() {
+        LinkedHashMap<String, String> result = new LinkedHashMap<String, String>();
+
+        addMiniPalettes(result);
+
+        return result;
+    }
+
+    private void addMiniPalettes(LinkedHashMap<String, String> result) {
+        int miniPaletteIndex = 0;
+
+        List<String> allMiniPalettes = new ArrayList<String>();
+        allMiniPalettes.addAll(miniPalettesFor("singlecolorsession1"));
+        allMiniPalettes.addAll(miniPalettesFor("singlecolorsession2"));
+        allMiniPalettes.addAll(miniPalettesFor("singlecolorsession3"));
+        for (String miniPalette : allMiniPalettes)
+            result.put("minipalette" + ++miniPaletteIndex, miniPalette);
+    }
+
+    private List<String> miniPalettesFor(String session) {
+        if (!profile.containsKey(session))
+            return new ArrayList<String>();
+        List<String> result = new ArrayList<String>();
+        for (String item : getSession(session)){
+            result.add(item.replace(".png", "_bold.png"));
+        }
+        return result;
+    }
+
+    private List<String> getSession(String sessionName) {
+        return (List<String>)profile.get(sessionName);
+    }
 }

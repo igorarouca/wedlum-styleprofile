@@ -42,13 +42,9 @@ asyncTest( "On profile with favorite colors return 1st mini-palette session", fu
     profile[thirdSession.name] = ["1c.png", "2c.png", "3c.png", "4c.png"];
 
     var expected = JSON.parse(JSON.stringify(firstMiniPaletteSession));
-//    expected.data = [ "1a_bold.png", "2a_bold.png", "3a_bold.png", "4a_bold.png",
-//                      "1b_bold.png", "2b_bold.png", "3b_bold.png", "4b_bold.png",
-//                      "1c_bold.png", "2c_bold.png", "3c_bold.png", "4c_bold.png"];
-
-    expected.data = [ "ToDo", "ToDo", "ToDo", "ToDo",
-                      "ToDo", "ToDo", "ToDo", "ToDo",
-                      "ToDo", "ToDo", "ToDo", "ToDo"];
+    expected.data = [ "1a_bold.png", "2a_bold.png", "3a_bold.png", "4a_bold.png",
+                      "1b_bold.png", "2b_bold.png", "3b_bold.png", "4b_bold.png",
+                      "1c_bold.png", "2c_bold.png", "3c_bold.png", "4c_bold.png"];
 
     subject.nextStep(profile, function(nextStep) {
         equal(JSON.stringify(nextStep), JSON.stringify(expected));
