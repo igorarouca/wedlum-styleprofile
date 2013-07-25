@@ -30,7 +30,9 @@ public class Survey {
 	}
 
 	private String getValue(String itemName) {
-		return "ToDo";
+        Map<String, String> all = new StyleProfiler(profile).resolveAll();
+        if (!all.containsKey(itemName)) return itemName + " NOT FOUND";
+        return all.get(itemName);
 	}
 
     public static List<?> script() throws ScriptException {

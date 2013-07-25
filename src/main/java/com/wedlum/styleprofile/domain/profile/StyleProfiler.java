@@ -41,11 +41,11 @@ public class StyleProfiler {
         int miniPaletteIndex = 0;
 
         List<String> allMiniPalettes = new ArrayList<String>();
-        allMiniPalettes.addAll(miniPalettesFor("singlecolorsession1"));
-        allMiniPalettes.addAll(miniPalettesFor("singlecolorsession2"));
-        allMiniPalettes.addAll(miniPalettesFor("singlecolorsession3"));
+        allMiniPalettes.addAll(miniPalettesFor("singleColorSession1"));
+        allMiniPalettes.addAll(miniPalettesFor("singleColorSession2"));
+        allMiniPalettes.addAll(miniPalettesFor("singleColorSession3"));
         for (String miniPalette : allMiniPalettes)
-            result.put("minipalette" + ++miniPaletteIndex, miniPalette);
+            result.put("miniPalette" + ++miniPaletteIndex, miniPalette);
     }
 
     private List<String> miniPalettesFor(String session) {
