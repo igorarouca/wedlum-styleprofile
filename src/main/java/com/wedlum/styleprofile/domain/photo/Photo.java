@@ -29,11 +29,8 @@ public class Photo implements DomainObject {
                     "   Photographer:\n"+
                     "       Drue Carr\n"+
                     "   Tags:\n"+
-                    "       Color:\n"+
-                    "           Hue:\n"+
-                    "           Saturation:\n"+
-                    "           Value:\n" +
-                    "       Palette:\n";
+                    "       Colors:\n"+
+                    "           - code";
         }
 		return metadata;
 	}
