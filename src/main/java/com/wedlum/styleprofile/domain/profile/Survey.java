@@ -37,7 +37,7 @@ public class Survey {
 		ScriptEngineManager factory = new ScriptEngineManager();
 		ScriptEngine engine = factory.getEngineByName("JavaScript");
 
-		engine.eval(new InputStreamReader(Survey.class.getResourceAsStream("/survey-script.js")));
+		engine.eval(new InputStreamReader(Survey.class.getResourceAsStream("/wedlum/styleprofile/survey/survey-script.js")));
 		String surveyScriptJson = engine.eval("JSON.stringify(wedlum.styleprofile.survey.script)").toString();
 
 		return JsonUtils.fromJson(surveyScriptJson, List.class);

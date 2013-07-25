@@ -33,9 +33,7 @@ public class StyleProfiler {
 
     public Map<String, String> resolveAll() {
         LinkedHashMap<String, String> result = new LinkedHashMap<String, String>();
-
         addMiniPalettes(result);
-
         return result;
     }
 
