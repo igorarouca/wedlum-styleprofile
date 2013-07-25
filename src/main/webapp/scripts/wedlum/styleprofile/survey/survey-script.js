@@ -7,27 +7,27 @@ wedlum.styleprofile.survey.script = [
         name : "singleColorSession1",
         type: "session",
         data: [
-            "color1.png",  "color2.png",  "color3.png",  "color4.png",  "color5.png",  "color6.png",
-            "color7.png",  "color8.png",  "color9.png",  "color10.png", "color11.png", "color12.png",
-            "color13.png", "color14.png", "color15.png", "color16.png", "color17.png", "color18.png"
+            "000M.png",  "015M.png",  "035M.png",  "045M.png",  "060M.png",  "075M.png",
+            "100M.png",  "135M.png",  "170M.png",  "200M.png", "220M.png", "250M.png",
+            "280M.png", "300M.png", "330M.png", "345M.png", "BL00.png", "WH00.png"
         ]
     },
     {
         name : "singleColorSession2",
         type: "session",
         data: [
-               "color19.png", "color20.png", "color21.png", "color22.png", "color23.png", "color24.png",
-               "color25.png", "color26.png", "color27.png", "color28.png", "color29.png", "color30.png",
-               "color31.png", "color32.png", "color33.png", "color34.png", "color35.png", "color36.png"
+             "000S.png",  "000N.png",  "035S.png",  "035N.png",  "060S.png",  "060N.png",
+            "100S.png",  "100N.png",  "170S.png",  "170N.png", "220S.png", "220N.png",
+            "280S.png", "280N.png", "330S.png", "330N.png", "LG00.png", "DG00.png"
         ]
     },
     {
         name : "singleColorSession3",
         type: "session",
         data: [
-               "color37.png", "color38.png", "color39.png", "color40.png", "color41.png", "color42.png",
-               "color43.png", "color44.png", "color45.png", "color46.png", "color47.png", "color48.png",
-               "color49.png", "color50.png", "color51.png", "color52.png", "color53.png", "color54.png"
+                 "000L.png",  "000D.png",  "035L.png",  "035D.png",  "060L.png",  "060D.png",
+            "100L.png",  "100D.png",  "170L.png",  "170D.png", "220L.png", "220D.png",
+            "280L.png", "280D.png", "330L.png", "330D.png", "WG00.png", "CG00.png"
         ]
     },
     {
