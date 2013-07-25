@@ -16,12 +16,12 @@ public class StyleProfilerTest {
     @Test
     public void testResolve() throws Exception {
         Map<String, List<String>> profile = new LinkedHashMap<String, List<String>>();
-        profile.put("singlecolorsession1", Arrays.asList("1a.png","2a.png"));
-        profile.put("singlecolorsession2", Arrays.asList("1b.png"));
+        profile.put("singleColorSession1", Arrays.asList("1a.png","2a.png"));
+        profile.put("singleColorSession2", Arrays.asList("1b.png"));
 
         StyleProfiler subject = new StyleProfiler(profile);
         Map<String, String> resolved  = subject.resolveAll();
 
-        Assert.assertEquals("{\"minipalette1\":\"1a_bold.png\",\"minipalette2\":\"2a_bold.png\",\"minipalette3\":\"1b_bold.png\"}", JsonUtils.toJson(resolved));
+        Assert.assertEquals("{\"miniPalette1\":\"1a_bold.png\",\"miniPalette2\":\"2a_bold.png\",\"miniPalette3\":\"1b_bold.png\"}", JsonUtils.toJson(resolved));
     }
 }
