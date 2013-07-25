@@ -24,18 +24,18 @@ public class StyleProfiler {
 		return item;
 	}
 
+    public Map<String, String> resolveAll() {
+        LinkedHashMap<String, String> result = new LinkedHashMap<String, String>();
+        addMiniPalettes(result);
+        return result;
+    }
+
 	private String getValue(String itemName) {
 
         Map<String, String> all = resolveAll();
         if (!all.containsKey(itemName)) return itemName + " not found!";
         return all.get(itemName);
 	}
-
-    public Map<String, String> resolveAll() {
-        LinkedHashMap<String, String> result = new LinkedHashMap<String, String>();
-        addMiniPalettes(result);
-        return result;
-    }
 
     private void addMiniPalettes(LinkedHashMap<String, String> result) {
         int miniPaletteIndex = 0;
