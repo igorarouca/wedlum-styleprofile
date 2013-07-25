@@ -1,418 +1,329 @@
 html,body {
-  height: 100%;
-  width: 100%;
-  min-width: 800px;
-  margin: 0;
-  padding: 0;
-  background: url("../images/PageBG.png") repeat;
-  font-family: arial;
+	height: 100%;
+	width: 100%;
+	min-width: 800px;
+	margin: 0;
+	padding: 0;
+	background: url("../images/PageBG.png") repeat;
+	font-family: arial;
 }
 
 header {
-  margin: 0px;
-  width: 100%;
-  background: url("../images/NavBG.png") repeat-x;
-  height: 48px;
-  display: block;
+	margin: 0px;
+	width: 100%;
+	background: url("../images/NavBG.png") repeat-x;
+	height: 48px;
+	display: block;
 }
 
 nav {
-  width: 100%;
-  max-width: 1400px;
-  margin: auto;
+	width: 100%;
+	max-width: 1400px;
+	margin: auto;
 }
 
 #logo {
-  font-size: 14px;
-  padding: 0px;
-  margin: 0 0 0 20px;
-  float: left;
-  width: 83px;
-  background: url("../images/Logo.png") no-repeat;
-  height: 48px;
-  overflow: hidden;
-  text-indent: 100%;
+	font-size: 14px;
+	padding: 0px;
+	margin: 0 0 0 20px;
+	float: left;
+	width: 83px;
+	background: url("../images/Logo.png") no-repeat;
+	height: 48px;
+	overflow: hidden;
+	text-indent: 100%;
 }
 
 #dropdown-nav {
-  display: none;
-  height: 0px;
+	display: none;
+	height: 0px;
 }
 
 #timeline-list {
-  background: url("../images/dottedLine.png") 0 15px repeat-x;
-  margin: 0px 20px 0 140px;
-  padding: 0px;
-  height: 30px;
+	background: url("../images/dottedLine.png") 0 15px repeat-x;
+	margin: 0px 20px 0 140px;
+	padding: 0px;
+	height: 30px;
 }
 
 #timeline-list ul {
-  margin: 0px;
-  padding: 0px;
-  background: url("../images/timeline.png") 0 15px no-repeat;
-  /*animate this width for timeline */
-  background-size: 8.33% 3px;
+	margin: 0px;
+	padding: 0px;
+	background: url("../images/timeline.png") 0 15px no-repeat;
+	/*animate this width for timeline */
+	background-size: 8.33% 3px;
 }
 
 #timeline-list li {
-  display: inline-block;
-  margin: 8px 0 0 0;
-  padding: 0px;
-  height: 30px;
-  width: 8.33%;
-  margin-right: -7px;
-  padding-left: 7px;
-  overflow: hidden;
+	display: inline-block;
+	margin: 8px 0 0 0;
+	padding: 0px;
+	height: 30px;
+	width: 8.33%;
+	margin-right: -7px;
+	padding-left: 7px;
+	overflow: hidden;
 }
 
 li#timeline-dot-1 {
-  width: 7px;
-  padding-left: 0px;
+	width: 7px;
+	padding-left: 0px;
 }
 
 #timeline-list a {
-  display: block;
-  float: right;
-  width: 100%;
-  height: 13px;
-  text-indent: 100%;
-  overflow: hidden;
-  background: url("../images/timelineDots.png") 100% -17px no-repeat;
-  /*animate this width for timeline */
+	display: block;
+	float: right;
+	width: 100%;
+	height: 13px;
+	text-indent: 100%;
+	overflow: hidden;
+	background: url("../images/timelineDots.png") 100% -17px no-repeat;
+	/*animate this width for timeline */
 }
 
 a#timeline-list-completed {
-  background: url("../images/timelineDots.png") 100% 0px no-repeat;
+	background: url("../images/timelineDots.png") 100% 0px no-repeat;
 
-  /*after completion */
+	/*after completion */
 }
 
 #timeline-dot-final {
-  margin-left: 30px;
+	margin-left: 30px;
 }
 
 #body-content {
-  display: block;
-  width: 100%;
-  margin: auto;
-  max-width: 1400px;
+	display: block;
+	width: 100%;
+	margin: auto;
+	max-width: 1400px;
 }
 
 #central-photos {
-  padding: 10px 10px 32px 10px;
-  /*top and bottom padding needs to be set in Javascript= .0614 x box size for topa nd sides.  and .1228 x box + 12px for preference bubble at bottom */
-  display: block;
+	padding: 10px 10px 32px 10px;
+	/*top and bottom padding needs to be set in Javascript= .0614 x box size for topa nd sides.  and .1228 x box + 12px for preference bubble at bottom */
+	display: block;
 }
 
 #photo-group-list {
-  display: inline-block;
-  margin: -14px 0 0 0;
-  padding: 0px;
-  text-align: center;
-  line-height: 0px;
+	display: inline-block;
+	margin: -14px 0 0 0;
+	padding: 0px;
+	text-align: center;
+	line-height: 0px;
 }
 
 #photo-group-list li {
-  display: inline-block;
-  padding: 0px;
-  margin: 0px;
+	display: inline-block;
+	padding: 0px;
+	margin: 0px;
 }
 
 .color-swatch-bg {
-  position: relative;
-  /*dimensions need to be set in Javascript*/
-  width: 180px;
-  height: 180px;
-  background: url("../images/Shadow2.png") no-repeat;
-  /*Shadow Image should be randomly generated Shadow1, Shadow2, or Shadow3 */
-  background-size: 100%;
+	position: relative;
+	/*dimensions need to be set in Javascript*/
+	width: 180px;
+	height: 180px;
+	/*Shadow Image should be randomly generated Shadow1, Shadow2, or Shadow3 */
+	background-size: 100%;
 }
 
 .color-swatch-bg-selected {
-  position: relative;
-  /*dimensions need to be set in Javascript*/
-  width: 180px;
-  height: 180px;
-  background-size: 100%;
+	position: relative;
+	/*dimensions need to be set in Javascript*/
+	width: 180px;
+	height: 180px;
+	background-size: 100%;
 }
 
 .color-swatch-bg-selected div {
-  display: none;
+	display: none;
 }
 
 #photo-group-list img {
-  display: inline-block;
-  padding: 6.14%;
-  width: 87.7%;
-  height: 87.7%;
+	display: inline-block;
+	padding: 6.14%;
+	width: 87.7%;
+	height: 87.7%;
 }
 
 .image-thumbs {
-  position: absolute;
-  top: 0px;
-  left: 0px;
-  display: block;
-  width: 100%;
-  height: 100%;
-  opacity: 0;
-  transition: opacity .25s ease-in-out;
-  -moz-transition: opacity .25s ease-in-out;
-  -webkit-transition: opacity .25s ease-in-out;
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	display: block;
+	width: 100%;
+	height: 100%;
+	opacity: 0;
+	transition: opacity .25s ease-in-out;
+	-moz-transition: opacity .25s ease-in-out;
+	-webkit-transition: opacity .25s ease-in-out;
 }
 
 .image-thumbs:hover {
-  opacity: 1;
+	opacity: 1;
 }
 
 .thumb-up {
-  background: url("../images/ImageThumbUp.png") bottom center no-repeat;
-  right: 12%;
+	background: url("../images/ImageThumbUp.png") bottom center no-repeat;
+	center: 12%;
 }
 
-.thumb-down {
-  background: url("../images/ImageThumbDown.png") center bottom no-repeat;
-  left: 12%;
+.thumb-up {
+	display: block;
+	position: absolute;
+	Width: 36%;
+	height: 80%;
+	top: 10%;
+	overflow: hidden;
+	opacity: .5;
+	-webkit-transition: opacity .5s ease;
+	-moz-transition: opacity .5s ease;
+	transition: opacity .5s ease;
 }
 
-.thumb-up,.thumb-down {
-  display: block;
-  position: absolute;
-  Width: 36%;
-  height: 80%;
-  top: 10%;
-  overflow: hidden;
-  opacity: .5;
-  -webkit-transition: opacity .5s ease;
-  -moz-transition: opacity .5s ease;
-  transition: opacity .5s ease;
+.thumb-up:hover {
+	opacity: 1;
 }
 
-.thumb-up:hover,.thumb-down:hover {
-  opacity: 1;
-}
-
-.thumb-up span,.thumb-down span {
-  display: block;
-  padding-left: 120%;
-  overflow: hidden;
+.thumb-up span {
+	display: block;
+	padding-left: 120%;
+	overflow: hidden;
 }
 
 .selected-photo {
-    opacity: 1;
-    z-index:1051;
-    line-height:1em;
-    position:absolute;
-    bottom:2.5em;
-    left:0;
-    width:100%;
-    vertical-align: middle;
+	opacity: 1;
+	z-index: 1051;
+	line-height: 1em;
+	position: absolute;
+	bottom: 2.5em;
+	left: 0;
+	width: 100%;
+	vertical-align: middle;
 }
 
 #next-slider,#prev-slider {
-  position: absolute;
-  display: block;
-  height: 50%;
-  top: 25%;
-  width: 43px;
-  overflow: hidden;
+	position: absolute;
+	display: block;
+	height: 50%;
+	top: 25%;
+	width: 43px;
+	overflow: hidden;
 }
 
 #prev-slider {
-  left: 0px;
+	left: 0px;
 }
 
 #next-slider {
-  right: 0px;
+	right: 0px;
 }
 
 #prev-slider span,#next-slider span {
-  height: 100%;
-  width: 100%;
-  display: block;
-  transition: all .25s ease-in-out;
-  -moz-transition: all .25s ease-in-out;
-  -webkit-transition: all .25s ease-in-out;
+	height: 100%;
+	width: 100%;
+	display: block;
+	transition: all .25s ease-in-out;
+	-moz-transition: all .25s ease-in-out;
+	-webkit-transition: all .25s ease-in-out;
 }
 
 #prev-slider span {
-  margin-left: -18px;
-  padding-left: 100px;
-  background: url("../images/ScrollBack.png") 0% 50% no-repeat;
+	margin-left: -18px;
+	padding-left: 100px;
+	background: url("../images/ScrollBack.png") 0% 50% no-repeat;
 }
 
 #prev-slider span:hover {
-  margin-left: 0px;
-  background-position: 6px 50%;
+	margin-left: 0px;
+	background-position: 6px 50%;
 }
 
 #next-slider span {
-  float: right;
-  padding-left: 18px;
-  padding-right: 100px;
-  margin-right: -18px;
-  background: url("../images/ScrollForward.png") 100% 50% no-repeat;
+	float: right;
+	padding-left: 18px;
+	padding-right: 100px;
+	margin-right: -18px;
+	background: url("../images/ScrollForward.png") 100% 50% no-repeat;
 }
 
 #next-slider span:hover {
-  margin-right: 0px;
-  background-position: 118px 50%;
-}
-
-#feedback-thumb-ups,#feedback-thumb-downs {
-  position: relative;
-  display: block;
-  min-width: 800px;
-  max-width: 1400px;
-  margin: auto;
-  background: #222;
-}
-
-#feedback-thumb-downs ul,#feedback-thumb-ups ul {
-  position: absolute;
-  bottom: 0px;
-  margin: 0px 0px 4px 0px;
-  padding: 0px;
-  display: block;
-  line-height: 0px;
-}
-
-#feedback-thumb-ups ul {
-  right: 20px;
-}
-
-#feedback-thumb-downs ul {
-  left: 20px;
-}
-
-#feedback-thumb-downs li,#feedback-thumb-ups li {
-  margin: 0px 2px 1px 2px;
-  display: inline-block;
-  padding: 0px;
-}
-
-.feedback-bubble a {
-  display: block;
-  margin: 0px;
-  width: 15px;
-  height: 15px;
-  transition: all .25s ease-in-out;
-  -moz-transition: all .25s ease-in-out;
-  -webkit-transition: all .25s ease-in-out;
-}
-
-.feedback-bubble a:hover {
-  width: 57px;
-  height: 57px;
-}
-
-.feedback-complete {
-  display: block;
-  width: 100%;
-  height: 100%;
-  -moz-border-radius: 50%;
-  -webkit-border-radius: 50%;
-  border-radius: 50%;
-  overflow: hidden;
-}
-
-.feedback-bubble  img {
-  display: block;
-  margin-left: -5%;
-  margin-top: -5%;
-  width: 110%;
-  height: 110%;
-}
-
-.empty-bubble-down,.empty-bubble-up {
-  border: 2px solid white;
-  display: block;
-  width: 11px;
-  height: 11px;
-  -moz-border-radius: 50%;
-  -webkit-border-radius: 50%;
-  border-radius: 50%;
-  overflow: hidden;
-}
-
-.empty-bubble-down {
-  background: url("../images/thumbsDownFill.png") no-repeat;
-}
-
-.empty-bubble-up {
-  background: url("../images/thumbsUpFill.png") no-repeat;
+	margin-right: 0px;
+	background-position: 118px 50%;
 }
 
 footer {
-  background: white;
-  width: 100%;
-  -moz-box-shadow: 0px 0px 5px -3px #000;
-  -webkit-box-shadow: 0px 0px 5px -3px #000;
-  box-shadow: 0px 0px 5px -3px #000;
+	background: white;
+	width: 100%;
+	-moz-box-shadow: 0px 0px 5px -3px #000;
+	-webkit-box-shadow: 0px 0px 5px -3px #000;
+	box-shadow: 0px 0px 5px -3px #000;
 }
 
 #footer-information {
-  max-width: 800px;
-  padding: 3px 20px 3px 20px;
-  margin: auto;
+	max-width: 800px;
+	padding: 3px 20px 3px 20px;
+	margin: auto;
 }
 
-#photo-div-2 .image-thumbs{
-  opacity:1;
-  }
-  #photo-div-2 .image-thumbs .thumb-up{
-    background-position:center center;
-    Width:80%;
-    height:80%;
-    right:10%;
-    opacity:1;
-  }
-
-#photo-div-3 .image-thumbs{
-  opacity:1;
+#photo-div-2 .image-thumbs {
+	opacity: 1;
 }
 
-#photo-div-3 .image-thumbs .thumb-up{
-  background-position:center center;
-  Width:80%;
-  height:80%;
-  right:10%;
-  opacity:.5;
+#photo-div-2 .image-thumbs .thumb-up {
+	background-position: center center;
+	Width: 80%;
+	height: 80%;
+	right: 10%;
+	opacity: 1;
 }
 
-.thumb-counter{
-  position:absolute;
-  top:50%;
-  left:0px;
-  width:100%;
-  margin-top: 35px;
-  display:block;}
+#photo-div-3 .image-thumbs {
+	opacity: 1;
+}
 
-.thumb-counter p{
-  display:inline-block;
-  margin:auto;
-  padding:0px;
-  color: #00aeef;
-  font-weight:bold;
-  background: white;
-  -moz-border-radius:10px;
-  -webkit-border-radius: 10px;
-  border-radius: 10px;
-  padding:10px 8px;
-  -moz-box-shadow: 0px 0px 4px -2px #000;
-  -webkit-box-shadow: 0px 0px 4px -2px #000;
-  box-shadow: 0px 0px 4px -2px #000;
+#photo-div-3 .image-thumbs .thumb-up {
+	background-position: center center;
+	Width: 80%;
+	height: 80%;
+	right: 10%;
+	opacity: .5;
+}
+
+.thumb-counter {
+	position: absolute;
+	top: 50%;
+	left: 0px;
+	width: 100%;
+	margin-top: 35px;
+	display: block;
+}
+
+.thumb-counter p {
+	display: inline-block;
+	margin: auto;
+	padding: 0px;
+	color: #00aeef;
+	font-weight: bold;
+	background: white;
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+	border-radius: 10px;
+	padding: 10px 8px;
+	-moz-box-shadow: 0px 0px 4px -2px #000;
+	-webkit-box-shadow: 0px 0px 4px -2px #000;
+	box-shadow: 0px 0px 4px -2px #000;
 }
 
 .thumb-counter span {
-  font-weight:normal;
-  color:#BBB;
+	font-weight: normal;
+	color: #BBB;
 }
 
-#likestatus{
-  display: none;
+#likestatus {
+	display: none;
 }
 
-.like #likestatus{
-  display: block;
+.like #likestatus {
+	display: block;
 }
-
