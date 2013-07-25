@@ -8,11 +8,9 @@ wedlum.styleprofile.survey.Session = Backbone.Model.extend({
     limit: 4,
     allPhotos: new Backbone.Collection(),
     likes: new Backbone.Collection(),
-    dislikes: new Backbone.Collection(),
 
     initialize: function(){
         this.set('likesCount', 0);
-        this.set('dislikesCount', 0);
         this.set('limit', this.limit);
     },
 
@@ -31,23 +29,10 @@ wedlum.styleprofile.survey.Session = Backbone.Model.extend({
         photo.set('status', 'like');
     },
 
-    dislike: function (photo){
-        this.reset(photo);
-        if (this.dislikes.length == this.limit){
-            wedlum.notifier.warning("You have already disliked " + this.limit + " photos");
-            return;
-        }
-        this.dislikes.add(photo);
-        this.set('dislikesCount', this.dislikes.length);
-        photo.set('status', 'dislike');
-    },
-
     reset: function (photo){
         this.likes.remove(photo);
-        this.dislikes.remove(photo);
         photo.set('status', 'default');
         this.set('likesCount', this.likes.length);
-        this.set('dislikesCount', this.dislikes.length);
     },
 
     statusChange: function(photo){
@@ -77,7 +62,6 @@ var PhotoView = Backbone.View.extend({
 
 	events: {
 		"click .thumb-up" : "thumbUp",
-		"click .thumb-down" : "thumbDown",
         "click img" : "reset"
 	},
 
@@ -95,11 +79,6 @@ var PhotoView = Backbone.View.extend({
         this.session.like(this.model);
 	},
 
-	thumbDown: function(event) {
-		event.preventDefault();
-        this.session.dislike(this.model);
-	},
-
     reset: function(event) {
         this.session.reset(this.model);
     },
@@ -113,7 +92,6 @@ var PhotoView = Backbone.View.extend({
 });
 
 $(function() {
-
     var survey = new wedlum.styleprofile.survey.Survey();
     wedlum.styleprofile.survey.session = new wedlum.styleprofile.survey.Session();
     survey.nextStep({},function (nextStep) {
@@ -124,7 +102,4 @@ $(function() {
         view.el = $("ul#photo-group-list")[0];
         view.render();
     });
-
-
-
 })

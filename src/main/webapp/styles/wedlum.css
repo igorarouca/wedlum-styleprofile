@@ -408,15 +408,11 @@ footer {
   color:#BBB;
 }
 
-#likestatus,#dislikestatus{
+#likestatus{
   display: none;
 }
 
 .like #likestatus{
-  display: block;
-}
-
-.dislike #dislikestatus{
   display: block;
 }
 
