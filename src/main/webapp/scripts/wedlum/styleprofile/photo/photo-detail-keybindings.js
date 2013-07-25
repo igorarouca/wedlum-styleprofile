@@ -1,5 +1,6 @@
 var wedlum = wedlum || {};
-wedlum.photo = wedlum.photo || {};
+wedlum.styleprofile = wedlum.styleprofile || {};
+wedlum.styleprofile.photo = wedlum.styleprofile.photo || {};
 
 $.ctrl = function(key, callback, args) {
     $(document)
@@ -15,10 +16,10 @@ $.ctrl = function(key, callback, args) {
 };
 
 $(function() {
-    wedlum.photo.keybindings.init();
+    wedlum.styleprofile.photo.keybindings.init();
 });
 
-wedlum.photo.keybindings = {
+wedlum.styleprofile.photo.keybindings = {
     init: function() {
         var space = '32';
         var that = this;

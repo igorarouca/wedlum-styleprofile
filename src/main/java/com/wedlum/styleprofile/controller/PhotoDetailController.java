@@ -16,7 +16,7 @@ import com.wedlum.styleprofile.domain.photo.PhotoGallery;
 import com.wedlum.styleprofile.util.web.JsonUtils;
 
 @Controller
-@RequestMapping(value = "photoDetail")
+@RequestMapping(value = "photo/detail")
 public class PhotoDetailController {
 
     @Autowired

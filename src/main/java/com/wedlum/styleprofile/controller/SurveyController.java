@@ -14,22 +14,21 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.wedlum.styleprofile.domain.profile.Step;
-import com.wedlum.styleprofile.domain.profile.StyleProfiler;
-import com.wedlum.styleprofile.domain.profile.TestScript;
+import com.wedlum.styleprofile.domain.profile.Survey;
 import com.wedlum.styleprofile.util.web.JsonUtils;
 
 @Controller
-@RequestMapping(value = "style-profile")
-public class StyleProfileController {
+@RequestMapping(value = "survey")
+public class SurveyController {
 
-	@RequestMapping(value = "color/next-step", method = RequestMethod.GET)
+	@RequestMapping(value = "nextstep", method = RequestMethod.GET)
 	@ResponseBody
 	public String nextStep(HttpServletRequest request) throws Exception{
 
-        List<?> testScript = TestScript.TestScript();
+        List<?> surveyScript = Survey.script();
 
         Map<?, ?> profile = getProfile(request);
-        for (Object $step : testScript) {
+        for (Object $step : surveyScript) {
         	LinkedHashMap<?, ?> stepAttributes = (LinkedHashMap<?, ?>) $step;
 
         	Step step = parse(stepAttributes);
@@ -54,7 +53,7 @@ public class StyleProfileController {
 
 	private void populate(String[] data, Map<?, ?> profile) {
 		for (int i = 0; i < data.length; ++i) {
-			String resolved = StyleProfiler.resolve(data[i], profile);
+			String resolved = Survey.resolve(data[i], profile);
 			data[i] = resolved;
 		}
 	}

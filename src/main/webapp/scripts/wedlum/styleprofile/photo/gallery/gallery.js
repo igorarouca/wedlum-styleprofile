@@ -1,3 +1,8 @@
+var wedlum = wedlum || {};
+wedlum.styleprofile = wedlum.styleprofile || {};
+wedlum.styleprofile.photo = wedlum.styleprofile.photo || {};
+wedlum.styleprofile.photo.gallery = wedlum.styleprofile.photo.gallery || {};
+
 var PhotoSummary = Backbone.Model.extend({
     path: ''
 });
@@ -40,7 +45,7 @@ var PhotoListView = Backbone.View.extend({
 });
 
 untaggedPhotos = new PhotoList();
-untaggedPhotos.url = '/api/photoGallery/untagged';
+untaggedPhotos.url = '/styleprofile/photo/gallery/untagged';
 untaggedPhotosView = new PhotoListView({el: 'ul#untagged', model: untaggedPhotos});
 
 untaggedPhotos.fetch();

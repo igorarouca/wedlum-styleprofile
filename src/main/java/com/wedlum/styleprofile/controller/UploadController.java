@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.wedlum.styleprofile.domain.photo.PhotoSource;
 
 @Controller
+@RequestMapping(value = "upload")
 public class UploadController {
 
 	@SuppressWarnings("unused")
@@ -33,7 +34,7 @@ public class UploadController {
 
     @Inject private PhotoSource source;
 
-	@RequestMapping(value = "upload", method = RequestMethod.POST)
+	@RequestMapping(method = RequestMethod.POST)
     @ResponseBody
     public String upload(HttpServletRequest request) throws FileNotFoundException, IOException {
 		List<File> receivedFiles = receiveFiles(request);
@@ -75,6 +76,5 @@ public class UploadController {
 		}
 		return receivedFiles;
 	}
-
 
 }

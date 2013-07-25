@@ -1,7 +1,8 @@
 var wedlum = wedlum || {};
-wedlum.photo = wedlum.photo || {};
+wedlum.styleprofile = wedlum.styleprofile || {};
+wedlum.styleprofile.photo = wedlum.styleprofile.photo || {};
 
-wedlum.photo.template =
+wedlum.styleprofile.photo.template =
     "Photo:\n\
        Description:\n\
           Photographer:\n\
@@ -13,7 +14,7 @@ wedlum.photo.template =
                - Blue";
 
 var PhotoDetail = Backbone.Model.extend({
-    urlRoot: "api/photoDetail"
+    urlRoot: "styleprofile/photo/detail"
 });
 
 var PhotoDetailView = Backbone.View.extend({
@@ -31,12 +32,12 @@ var PhotoDetailView = Backbone.View.extend({
         codiad.autocomplete.getSuggestions = function(){
             var result = {};
             _(wedlum.photo.tagAutocomplete.get(that.scope)).each(function(suggestion) {
-                result[suggestion + (wedlum.photo.tagAutocomplete.isBranch(that.scope + "/" + suggestion) ?":":"") + " "] = 0;
+                result[suggestion + (wedlum.styleprofile.photo.tagAutocomplete.isBranch(that.scope + "/" + suggestion) ?":":"") + " "] = 0;
             });
             return result;
         }
 
-        wedlum.photo.keybindings.Autocomplete = function() {
+        wedlum.styleprofile.photo.keybindings.Autocomplete = function() {
             $(function(){
                 codiad.autocomplete.suggest();
             });
@@ -44,7 +45,7 @@ var PhotoDetailView = Backbone.View.extend({
 
         this.detailsEditor.on("changeSelection", function() {
             var line = that.detailsEditor.getCursorPosition().row;
-            that.scope = "Root" + new wedlum.photo.TagModelParser().pathGivenLine(that.detailsEditor.getValue(), line);
+            that.scope = "Root" + new wedlum.styleprofile.photo.TagModelParser().pathGivenLine(that.detailsEditor.getValue(), line);
             that.$el.find("#scopePhotoDetail").html(that.scope);
         });
     },
@@ -59,7 +60,7 @@ var PhotoDetailView = Backbone.View.extend({
         console.debug("Update " + this.model.id);
         this.detailsEditor.getSession().setValue(this.model.get("metadata"));
         $("#photo-modal").bigmodal();
-        wedlum.photo.tagAutocomplete.fetch();
+        wedlum.styleprofile.photo.tagAutocomplete.fetch();
         var src = "photo-storage/" + this.model.id;
         var img = $("#big-photo");
         img.attr('src', src);

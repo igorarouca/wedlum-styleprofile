@@ -3,7 +3,6 @@ package com.wedlum.styleprofile.controller;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.LinkedHashSet;
-import java.util.Map;
 import java.util.Set;
 
 import javax.inject.Inject;
@@ -16,11 +15,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.wedlum.styleprofile.domain.photo.PhotoGallery;
 import com.wedlum.styleprofile.domain.photo.PhotoSummary;
-import com.wedlum.styleprofile.domain.photo.TagAutocomplete;
 import com.wedlum.styleprofile.util.web.JsonUtils;
 
 @Controller
-@RequestMapping(value = "photoGallery")
+@RequestMapping(value = "photo/gallery")
 public class PhotoGalleryController {
 
     @Inject private PhotoGallery gallery;
@@ -33,10 +31,4 @@ public class PhotoGalleryController {
         return JsonUtils.toJson(result);
     }
 
-    @Inject private TagAutocomplete tagAutocomplete;
-    @RequestMapping(value = "autocomplete", method = RequestMethod.GET, produces = "application/json")
-    @ResponseBody
-    public String autocomplete(HttpServletRequest request) throws FileNotFoundException, IOException {
-        return JsonUtils.toJson(tagAutocomplete.getSuggestions());
-    }
 }

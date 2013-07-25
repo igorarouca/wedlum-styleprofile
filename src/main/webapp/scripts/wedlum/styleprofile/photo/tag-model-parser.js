@@ -1,8 +1,9 @@
 var wedlum = wedlum || {};
-wedlum.photo = wedlum.photo || {};
+wedlum.styleprofile = wedlum.styleprofile || {};
+wedlum.styleprofile.photo = wedlum.styleprofile.photo || {};
 
-wedlum.photo.TagModelParser = function() {};
-wedlum.photo.TagModelParser.prototype = {
+wedlum.styleprofile.photo.TagModelParser = function() {};
+wedlum.styleprofile.photo.TagModelParser.prototype = {
     parse: function(source){
         return jsyaml.load(source);
     },

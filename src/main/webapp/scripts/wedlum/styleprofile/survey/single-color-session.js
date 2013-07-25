@@ -1,12 +1,10 @@
-var thumbUpAction = "api/colors/thumbUp/";
-var thumbDownAction = "api/colors/thumbDown/";
-
 var wedlum  = wedlum || {};
-wedlum.session  = wedlum.session || {};
+wedlum.styleprofile = wedlum.styleprofile || {};
+wedlum.styleprofile.survey = wedlum.styleprofile.survey || {};
 
-wedlum.session.Photo = Backbone.Model.extend();
+wedlum..styleprofile.survey.Photo = Backbone.Model.extend();
 
-wedlum.session.Session = Backbone.Model.extend({
+wedlum.styleprofile.survey.Session = Backbone.Model.extend({
     limit: 4,
     allPhotos: new Backbone.Collection(),
     likes: new Backbone.Collection(),
@@ -115,13 +113,13 @@ var PhotoView = Backbone.View.extend({
 });
 
 $(function() {
-    wedlum.session.session= new wedlum.session.Session();
-    wedlum.session.session.addPhoto("PurpleL.jpg");
-    wedlum.session.session.addPhoto("OrangeL.jpg");
-    wedlum.session.session.addPhoto("PurpleD.jpg");
-    wedlum.session.session.addPhoto("RedD.jpg");
-    wedlum.session.session.addPhoto("RedL.jpg");
-    wedlum.session.session.addPhoto("YellowD.jpg");
+    wedlum.styleprofile.survey.session = new wedlum.styleprofile.survey.Session();
+    wedlum.styleprofile.survey.session.addPhoto("PurpleL.jpg");
+    wedlum.styleprofile.survey.session.addPhoto("OrangeL.jpg");
+    wedlum.styleprofile.survey.session.addPhoto("PurpleD.jpg");
+    wedlum.styleprofile.survey.session.addPhoto("RedD.jpg");
+    wedlum.styleprofile.survey.session.addPhoto("RedL.jpg");
+    wedlum.styleprofile.survey.session.addPhoto("YellowD.jpg");
 
     var view = new PhotoListView({model: wedlum.session.session});
     view.el = $("ul#photo-group-list")[0];
