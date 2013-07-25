@@ -1,4 +1,4 @@
-package com.wedlum.styleprofile.domain.profile;
+package com.wedlum.styleprofile.domain.survey;
 
 import java.io.InputStreamReader;
 import java.util.List;
@@ -12,7 +12,6 @@ import com.wedlum.styleprofile.util.web.JsonUtils;
 
 public class Survey {
 
-	@SuppressWarnings("unused")
 	private final Map<?, ?> profile;
 
 	public Survey(Map<?, ?> profile) {

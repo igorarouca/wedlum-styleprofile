@@ -51,6 +51,6 @@
     </servlet-mapping>
 
 	<welcome-file-list>
-		<welcome-file>color-session1.html</welcome-file>
+		<welcome-file>color-survey.html</welcome-file>
 	</welcome-file-list>
 </web-app>

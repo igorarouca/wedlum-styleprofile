@@ -1,4 +1,4 @@
-package com.wedlum.styleprofile.domain.profile;
+package com.wedlum.styleprofile.domain.survey;
 
 
 public class Step {

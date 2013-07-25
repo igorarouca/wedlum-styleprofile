@@ -1,4 +1,4 @@
-package com.wedlum.styleprofile.domain.profile;
+package com.wedlum.styleprofile.domain.survey;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -7,7 +7,6 @@ import java.util.Map;
 
 public class StyleProfiler {
 
-	@SuppressWarnings("unused")
 	private final Map<?, ?> profile;
 
 	public StyleProfiler(Map<?, ?> profile) {
@@ -58,7 +57,8 @@ public class StyleProfiler {
         return result;
     }
 
-    private List<String> getSession(String sessionName) {
+    @SuppressWarnings("unchecked")
+	private List<String> getSession(String sessionName) {
         return (List<String>)profile.get(sessionName);
     }
 }

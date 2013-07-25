@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.wedlum.styleprofile.domain.profile.Step;
-import com.wedlum.styleprofile.domain.profile.Survey;
+import com.wedlum.styleprofile.domain.survey.Step;
+import com.wedlum.styleprofile.domain.survey.Survey;
 import com.wedlum.styleprofile.util.web.JsonUtils;
 
 @Controller

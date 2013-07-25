@@ -1,5 +1,6 @@
 package com.wedlum.styleprofile.domain.profile;
 
+import com.wedlum.styleprofile.domain.survey.StyleProfiler;
 import com.wedlum.styleprofile.util.web.JsonUtils;
 import junit.framework.Assert;
 import org.junit.Test;
