@@ -98,7 +98,7 @@ $(function() {
        _(nextStep.data).each(function(photo){
            wedlum.styleprofile.survey.session.addPhoto(photo);
        });
-        var view = new PhotoListView({model: wedlum.styleprofile.survey.session});
+        var view = new PhotoListView({ model: wedlum.styleprofile.survey.session });
         view.el = $("ul#photo-group-list")[0];
         view.render();
     });

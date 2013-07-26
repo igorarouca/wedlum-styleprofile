@@ -7,20 +7,10 @@ import java.util.Map;
 
 public class StyleProfiler {
 
-	private final Map<?, ?> profile;
+	private final Profile profile;
 
-	public StyleProfiler(Map<?, ?> profile) {
+	public StyleProfiler(Profile profile) {
 		this.profile = profile;
-	}
-
-	public static String resolve(String item, Map<?, ?> profile) {
-		StyleProfiler profiler = new StyleProfiler(profile);
-
-		if (item.startsWith("{")) {
-			return profiler.getValue(item.replace("{", "").replace("}", ""));
-		}
-
-		return item;
 	}
 
     public Map<String, String> resolveAll() {
@@ -28,13 +18,6 @@ public class StyleProfiler {
         addMiniPalettes(result);
         return result;
     }
-
-	private String getValue(String itemName) {
-
-        Map<String, String> all = resolveAll();
-        if (!all.containsKey(itemName)) return itemName + " not found!";
-        return all.get(itemName);
-	}
 
     private void addMiniPalettes(LinkedHashMap<String, String> result) {
         int miniPaletteIndex = 0;
@@ -48,7 +31,7 @@ public class StyleProfiler {
     }
 
     private List<String> miniPalettesFor(String session) {
-        if (!profile.containsKey(session))
+        if (!profile.hasSession(session))
             return new ArrayList<String>();
         List<String> result = new ArrayList<String>();
         for (String item : getSession(session)){
@@ -57,8 +40,7 @@ public class StyleProfiler {
         return result;
     }
 
-    @SuppressWarnings("unchecked")
 	private List<String> getSession(String sessionName) {
-        return (List<String>)profile.get(sessionName);
+        return profile.getSession(sessionName);
     }
 }
