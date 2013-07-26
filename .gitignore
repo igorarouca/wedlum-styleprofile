@@ -28,7 +28,6 @@ src/main/webapp/equiv.js
 *.dmg
 *.gz
 *.iso
-*.jar
 *.rar
 *.tar
 *.zip
