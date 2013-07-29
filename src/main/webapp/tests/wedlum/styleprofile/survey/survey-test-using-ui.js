@@ -19,6 +19,22 @@ asyncTest( "On welcome page, 1st single-color session", function() {
     });
 });
 
+asyncTest( "1st session completed, waiting for the 2nd", function() {
+    expect(1);
+
+    SurveyUser.openWelcomePage();
+    SurveyUser.waitForSession(firstSingleColorSession, function() {
+        SurveyUser.like("000M.png");
+        SurveyUser.like("015M.png");
+        SurveyUser.like("035M.png");
+        SurveyUser.like("045M.png");
+        SurveyUser.waitForSession(secondSingleColorSession, function() {
+            equal(true, true);
+            start();
+        });
+    });
+});
+
 var SurveyUser = {
     openWelcomePage: function(){
         $("#fixture-frame").attr("src", "/");
@@ -27,6 +43,10 @@ var SurveyUser = {
 
         var interval = setInterval(function(){
            var html = $("#fixture-frame").contents().find("html").html();
+           if (!html) return;
+
+            if (session.data.length != $("#fixture-frame").contents().find("#photo-group-list li").length) return;
+
            if (_(session.data).every(function(e) {
                return html.indexOf(e) >= 0;
            })){
@@ -34,6 +54,8 @@ var SurveyUser = {
                callback();
            }
         }, 1000);
-        console.log($("#fixture-frame").html());
+    },
+    like: function(swatch){
+        $("#fixture-frame").contents().find("img[src*='" + swatch + "']").parent().find("a")[0].click()
     }
 };

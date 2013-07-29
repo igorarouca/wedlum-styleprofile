@@ -27,6 +27,9 @@ wedlum.styleprofile.survey.Session = Backbone.Model.extend({
         this.likes.add(photo);
         this.set('likesCount', this.likes.length);
         photo.set('status', 'like');
+        if (this.likes.length == this.limit){
+            this.trigger("complete");
+        }
     },
 
     reset: function (photo){
@@ -94,12 +97,25 @@ var PhotoView = Backbone.View.extend({
 $(function() {
     var survey = new wedlum.styleprofile.survey.Survey();
     wedlum.styleprofile.survey.session = new wedlum.styleprofile.survey.Session();
-    survey.nextStep({},function (nextStep) {
-       _(nextStep.data).each(function(photo){
-           wedlum.styleprofile.survey.session.addPhoto(photo);
-       });
-        var view = new PhotoListView({ model: wedlum.styleprofile.survey.session });
-        view.el = $("ul#photo-group-list")[0];
-        view.render();
-    });
+
+    var profile = {};
+
+    var next = function() {
+        survey.nextStep(profile,function (nextStep) {
+            wedlum.styleprofile.survey.session.allPhotos.reset();
+           _(nextStep.data).each(function(photo){
+               wedlum.styleprofile.survey.session.addPhoto(photo);
+           });
+            var view = new PhotoListView({ model: wedlum.styleprofile.survey.session });
+            view.el = $("ul#photo-group-list")[0];
+            $(view.el).html("");
+            view.render();
+            wedlum.styleprofile.survey.session.on("complete", function(){
+                profile[nextStep.name] = wedlum.styleprofile.survey.session.likes;
+                next();
+            });
+        });
+    };
+
+    next();
 })
