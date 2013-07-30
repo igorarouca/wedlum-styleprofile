@@ -38,6 +38,11 @@ wedlum.styleprofile.survey.Session = Backbone.Model.extend({
         this.set('likesCount', this.likes.length);
     },
 
+    resetAll: function (){
+        this.likes.reset();
+        this.allPhotos.reset();
+    },
+
     statusChange: function(photo){
         this.trigger("statusChange", photo);
     }
@@ -102,7 +107,7 @@ $(function() {
 
     var next = function() {
         survey.nextStep(profile,function (nextStep) {
-            wedlum.styleprofile.survey.session.allPhotos.reset();
+            wedlum.styleprofile.survey.session.resetAll();
            _(nextStep.data).each(function(photo){
                wedlum.styleprofile.survey.session.addPhoto(photo);
            });
@@ -111,7 +116,8 @@ $(function() {
             $(view.el).html("");
             view.render();
             wedlum.styleprofile.survey.session.on("complete", function(){
-                profile[nextStep.name] = wedlum.styleprofile.survey.session.likes;
+                if (profile[nextStep.name]) return;
+                profile[nextStep.name] = _(wedlum.styleprofile.survey.session.likes.models).map(function(each){return each.id;});
                 next();
             });
         });

@@ -35,7 +35,7 @@ public class StyleProfiler {
             return new ArrayList<String>();
         List<String> result = new ArrayList<String>();
         for (String item : getSession(session)){
-            result.add(item.replace(".png", "_bold.png"));
+            result.add(item.replace(".png", "_A.png"));
         }
         return result;
     }
