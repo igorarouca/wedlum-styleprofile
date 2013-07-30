@@ -21,6 +21,6 @@ public class StyleProfilerTest {
         StyleProfiler subject = new StyleProfiler(profile);
         Map<String, String> resolved  = subject.resolveAll();
 
-        Assert.assertEquals("{\"miniPalette1\":\"1a_bold.png\",\"miniPalette2\":\"2a_bold.png\",\"miniPalette3\":\"1b_bold.png\"}", JsonUtils.toJson(resolved));
+        Assert.assertEquals("{\"miniPalette1\":\"1a_A.png\",\"miniPalette2\":\"2a_A.png\",\"miniPalette3\":\"1b_A.png\"}", JsonUtils.toJson(resolved));
     }
 }
