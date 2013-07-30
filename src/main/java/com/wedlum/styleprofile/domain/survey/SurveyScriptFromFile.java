@@ -8,8 +8,11 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import org.apache.commons.collections4.Transformer;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 
-@Named(value = "surveyScript")
+@Component(value = "surveyScript")
+@Scope(value = "request")
 public class SurveyScriptFromFile extends SurveyScript {
 
 	private static final String PATH = "/wedlum/styleprofile/survey/survey-script.js";

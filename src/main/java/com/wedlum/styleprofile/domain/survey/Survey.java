@@ -1,11 +1,15 @@
 package com.wedlum.styleprofile.domain.survey;
 
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
+
 import java.util.Map;
 
 import javax.inject.Inject;
 import javax.inject.Named;
 
-@Named(value="survey")
+@Component(value="survey")
+@Scope(value = "request")
 public class Survey {
 
 	private final SurveyScript script;

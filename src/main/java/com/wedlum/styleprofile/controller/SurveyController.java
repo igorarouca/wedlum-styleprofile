@@ -5,6 +5,7 @@ import java.util.HashMap;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -17,6 +18,7 @@ import com.wedlum.styleprofile.util.web.JsonUtils;
 
 @Controller
 @RequestMapping(value = "survey")
+@Scope(value = "request")
 public class SurveyController {
 
 	@Inject Survey survey;
