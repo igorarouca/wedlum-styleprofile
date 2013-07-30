@@ -21,7 +21,7 @@ public class SurveyController {
 
 	@Inject Survey survey;
 
-	@RequestMapping(value = "nextstep", method = RequestMethod.GET)
+	@RequestMapping(value = "nextstep", method = RequestMethod.POST)
 	@ResponseBody
 	public String nextStep(HttpServletRequest request) throws Exception{
 		Step nextStep = survey.nextStepFor(readProfileFrom(request));
