@@ -23,20 +23,26 @@ public class StyleProfiler {
         int miniPaletteIndex = 0;
 
         List<String> allMiniPalettes = new ArrayList<String>();
-        allMiniPalettes.addAll(miniPalettesFor("singleColorSession1"));
-        allMiniPalettes.addAll(miniPalettesFor("singleColorSession2"));
-        allMiniPalettes.addAll(miniPalettesFor("singleColorSession3"));
+        allMiniPalettes.addAll(miniPalettesFor("singleColorSession1", "_A"));
+        allMiniPalettes.addAll(miniPalettesFor("singleColorSession2", "_A"));
+        allMiniPalettes.addAll(miniPalettesFor("singleColorSession3", "_A"));
+
+        allMiniPalettes.addAll(miniPalettesFor("singleColorSession1", "_C"));
+        allMiniPalettes.addAll(miniPalettesFor("singleColorSession2", "_C"));
+        allMiniPalettes.addAll(miniPalettesFor("singleColorSession3", "_C"));
+
         for (String miniPalette : allMiniPalettes)
             result.put("miniPalette" + ++miniPaletteIndex, miniPalette);
     }
 
-    private List<String> miniPalettesFor(String session) {
-        if (!profile.hasSession(session))
+    private List<String> miniPalettesFor(String sessionName, String suffix) {
+        if (!profile.hasSession(sessionName))
             return new ArrayList<String>();
+
         List<String> result = new ArrayList<String>();
-        for (String item : getSession(session)){
-            result.add(item.replace(".png", "_A.png"));
-        }
+        for (String item : getSession(sessionName))
+            result.add(item.replace(".png", suffix + ".png"));
+
         return result;
     }
 
