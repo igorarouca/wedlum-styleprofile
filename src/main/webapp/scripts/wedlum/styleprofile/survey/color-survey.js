@@ -116,6 +116,7 @@ $(function() {
 	            view.el = $("ul#photo-group-list")[0];
 	            $(view.el).html("");
 	            view.render();
+	            $("#central-photos").attr("class", "photo-list " + nextStep.name);
 	            $("#central-photos").toggle("slide", { direction: "right" }, 800);
 	            wedlum.styleprofile.survey.session.on("complete", function() {
 	                if (profile[nextStep.name]) return;

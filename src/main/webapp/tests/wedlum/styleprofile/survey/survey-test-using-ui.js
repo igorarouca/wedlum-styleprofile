@@ -39,22 +39,23 @@ var SurveyUser = {
     openWelcomePage: function(){
         $("#fixture-frame").attr("src", "/");
     },
-    waitForSession: function(session, callback){
 
-        var interval = setInterval(function(){
+    waitForSession: function(session, callback) {
+        var interval = setInterval(function() {
            var html = $("#fixture-frame").contents().find("html").html();
            if (!html) return;
 
-            if (session.data.length != $("#fixture-frame").contents().find("#photo-group-list li").length) return;
+           if (session.data.length != $("#fixture-frame").contents().find("#photo-group-list li").length) return;
 
-           if (_(session.data).every(function(e) {
+           if (($("#fixture-frame").contents().find("[id*='central-photos']").attr("class") == 'photo-list ' + session.name) && _(session.data).every(function(e) {
                return html.indexOf(e) >= 0;
-           })){
+           })) {
                clearInterval(interval);
                callback();
            }
         }, 1000);
     },
+
     like: function(swatch){
         $("#fixture-frame").contents().find("img[src*='" + swatch + "']").parent().find("a")[0].click()
     }
