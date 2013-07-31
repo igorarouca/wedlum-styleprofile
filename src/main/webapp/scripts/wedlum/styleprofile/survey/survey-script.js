@@ -45,5 +45,11 @@ wedlum.styleprofile.survey.script = [
 			"{miniPalette13}", "{miniPalette14}", "{miniPalette15}", "{miniPalette16}",
 			"{miniPalette17}", "{miniPalette18}", "{miniPalette19}", "{miniPalette20}",
 			"{miniPalette21}", "{miniPalette22}", "{miniPalette23}", "{miniPalette24}"]
+    },
+    {
+        name : "paletteSession1",
+        type: "session",
+        data: [
+            "{palette1}", "{palette2}"]
     }
 ];
