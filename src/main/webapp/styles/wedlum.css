@@ -241,6 +241,10 @@ height:100%;
 	display: none;
 }
 
+.like #likestatus {
+	display: block;
+}
+
 .selected-photo {
 	opacity: 1;
 	z-index: 1051;
