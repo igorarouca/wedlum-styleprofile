@@ -7,6 +7,7 @@ import java.util.Map;
 public class Profile {
 
 	private Map<String, List<String>> sessionsByName;
+	public List<String> collors;
 
 	public Profile() {
 		this.sessionsByName = new LinkedHashMap<String, List<String>>();

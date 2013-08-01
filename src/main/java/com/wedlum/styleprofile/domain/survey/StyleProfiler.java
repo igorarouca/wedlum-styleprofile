@@ -16,6 +16,7 @@ public class StyleProfiler {
     public Map<String, String> resolveAll() {
         LinkedHashMap<String, String> result = new LinkedHashMap<String, String>();
         addMiniPalettes(result);
+        addPalettes(result);
         return result;
     }
 
@@ -33,6 +34,11 @@ public class StyleProfiler {
 
         for (String miniPalette : allMiniPalettes)
             result.put("miniPalette" + ++miniPaletteIndex, miniPalette);
+    }
+
+    private void addPalettes(LinkedHashMap<String, String> result) {
+    	result.put("palette1", "palette_red.png");
+    	result.put("palette2", "palette_blue.png");
     }
 
     private List<String> miniPalettesFor(String sessionName, String suffix) {

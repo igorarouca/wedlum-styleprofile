@@ -30,7 +30,7 @@ public class PhotoSourceMock implements PhotoSource {
     @Override
     public void setMetadata(String id, String metadata) {
         storage.put(id, metadata);
-        observer.update(id);
+        if (observer != null) observer.update(id);
     }
 
     @Override
