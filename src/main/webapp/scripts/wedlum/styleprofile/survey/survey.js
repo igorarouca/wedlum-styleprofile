@@ -2,16 +2,24 @@ var wedlum = wedlum || {};
 wedlum.styleprofile = wedlum.styleprofile || {};
 wedlum.styleprofile.survey = wedlum.styleprofile.survey || {};
 
-wedlum.styleprofile.survey.Survey = function() {};
+wedlum.styleprofile.survey.Survey = function(profile) {
+    if (!profile) throw "profile is required";
+    this.profile = profile;
+};
 
 wedlum.styleprofile.survey.Survey.prototype = {
-	nextStep: function(profile, success) {
+	nextStep: function(success) {
+        var that = this;
 		$.ajax({
 			type: "POST",
 			url: "/styleprofile/survey/nextstep",
-			data: { profile: JSON.stringify(profile) },
+			data: { profile: JSON.stringify(this.profile) },
 			dataType: 'json',
-			success: success
+			success: function(step) {
+                that.profile.photos = that.profile.photos||new Array();
+                _(step.data).each(function(e){that.profile.photos.push(e)});
+                success(step);
+            }
 		});
 	}
 }

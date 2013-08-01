@@ -100,13 +100,13 @@ var PhotoView = Backbone.View.extend({
 });
 
 $(function() {
-    var survey = new wedlum.styleprofile.survey.Survey();
+    var profile = {};
+    var survey = new wedlum.styleprofile.survey.Survey(profile);
+
     wedlum.styleprofile.survey.session = new wedlum.styleprofile.survey.Session();
 
-    var profile = {};
-
     var next = function() {
-        survey.nextStep(profile,function (nextStep) {
+        survey.nextStep(function (nextStep) {
         	$("#central-photos").toggle("slide", { direction: "left" }, 800, function() {
 	            wedlum.styleprofile.survey.session.resetAll();
 	           _(nextStep.data).each(function(photo){
