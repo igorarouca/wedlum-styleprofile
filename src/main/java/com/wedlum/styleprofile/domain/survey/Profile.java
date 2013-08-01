@@ -7,9 +7,10 @@ import java.util.Map;
 public class Profile {
 
 	private Map<String, List<String>> sessionsByName;
-	public List<String> collors;
+	public List<String> photos;
+    private List<String> likedPhotos;
 
-	public Profile() {
+    public Profile() {
 		this.sessionsByName = new LinkedHashMap<String, List<String>>();
 	}
 
@@ -34,4 +35,11 @@ public class Profile {
 		return sessionsByName.isEmpty();
 	}
 
+    public Iterable<String> allSessions() {
+        return sessionsByName.keySet();
+    }
+
+    public List<String> getLikedPhotos() {
+        return null;
+    }
 }

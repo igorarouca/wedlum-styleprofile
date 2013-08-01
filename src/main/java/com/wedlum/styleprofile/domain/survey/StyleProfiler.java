@@ -37,8 +37,24 @@ public class StyleProfiler {
     }
 
     private void addPalettes(LinkedHashMap<String, String> result) {
-    	result.put("palette1", "palette_red.png");
-    	result.put("palette2", "palette_blue.png");
+
+        List<String> allColors = getColors(profile.photos);
+        List<String> likes = getColors(profile.getLikedPhotos());
+        List<String> ranked = ColorRank.rankColors(likes, allColors);
+
+        int i = 1;
+        for (String color : ranked)
+            result.put("palette" + i++, getPhotoFeaturing(color));
+    }
+
+
+    //ColorPhotoResolver
+    private String getPhotoFeaturing(String color) {
+        return null;
+    }
+
+    private List<String> getColors(List<String> photos) {
+        return null;
     }
 
     private List<String> miniPalettesFor(String sessionName, String suffix) {
