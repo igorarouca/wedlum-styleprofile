@@ -10,9 +10,8 @@ import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
 import javax.script.ScriptException;
 
+import com.wedlum.styleprofile.util.web.ParseUtils;
 import org.apache.commons.collections4.Transformer;
-
-import com.wedlum.styleprofile.util.web.JsonUtils;
 
 @Named(value = "surveyScriptParser")
 public class SurveyScriptJsParser implements Transformer<Reader, List<Step>> {
@@ -28,7 +27,7 @@ public class SurveyScriptJsParser implements Transformer<Reader, List<Step>> {
 			engine.eval(scriptReader);
 			String jsonScript = engine.eval("JSON.stringify(wedlum.styleprofile.survey.script)").toString();
 
-			List<?> $steps = JsonUtils.fromJson(jsonScript, List.class);				
+			List<?> $steps = ParseUtils.fromJson(jsonScript, List.class);
 			for (Object $step : $steps)
 				steps.add(new Step((LinkedHashMap<?, ?>) $step));
 

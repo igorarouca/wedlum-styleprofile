@@ -8,6 +8,7 @@ import java.util.Set;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 
+import com.wedlum.styleprofile.util.web.ParseUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -15,7 +16,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.wedlum.styleprofile.domain.photo.PhotoGallery;
 import com.wedlum.styleprofile.domain.photo.PhotoSummary;
-import com.wedlum.styleprofile.util.web.JsonUtils;
 
 @Controller
 @RequestMapping(value = "photo/gallery")
@@ -28,7 +28,7 @@ public class PhotoGalleryController {
         Set<PhotoSummary> result = new LinkedHashSet<PhotoSummary>();
         for(String photo: gallery.untagged())
             result.add(new PhotoSummary(photo));
-        return JsonUtils.toJson(result);
+        return ParseUtils.toJson(result);
     }
 
 }

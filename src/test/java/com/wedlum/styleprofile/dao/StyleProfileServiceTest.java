@@ -4,6 +4,7 @@ import static junit.framework.Assert.assertEquals;
 
 import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +29,7 @@ public class StyleProfileServiceTest {
 	@Autowired
 	private StyleProfileService subject;
 
+    @Ignore
 	@Test
 	public void testSaveUser() {
 		Person person =

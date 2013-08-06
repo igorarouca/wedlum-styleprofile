@@ -24,6 +24,7 @@ public class Profile {
 	@SuppressWarnings("unchecked")
 	public Profile(Map<?, ?> $sessionsByName) {
         this.photos = new ArrayList<String>();
+        this.likedPhotos = new ArrayList<String>();
         this.sessionsByName = (Map<String, List<String>>) $sessionsByName;
 	}
 
@@ -48,14 +49,18 @@ public class Profile {
     }
 
     public List<Photo> getLikedPhotos() {
-        return null;
+        return asPhotos(likedPhotos);
     }
 
 	public List<Photo> getPhotos() {
-		List<Photo> result = new ArrayList<Photo>();
-		for (String $photo : photos)
+        return asPhotos(photos);
+	}
+
+    private List<Photo> asPhotos(List<String> listofIds) {
+        List<Photo> result = new ArrayList<Photo>();
+        for (String $photo : listofIds)
 			result.add(new Photo($photo, photoSource.getMetadata($photo)));
 
-		return result;
-	}
+        return result;
+    }
 }

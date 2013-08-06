@@ -9,7 +9,7 @@ import java.util.Set;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import org.yaml.snakeyaml.Yaml;
+import com.wedlum.styleprofile.util.web.ParseUtils;
 
 import com.wedlum.styleprofile.util.observer.Observer;
 
@@ -38,12 +38,11 @@ public class TagAutocompleteImpl implements TagAutocomplete {
 	@SuppressWarnings("unchecked")
 	public Map<String, Set<String>> getSuggestions() {
         LinkedHashMap<String, Set<String>> result = new LinkedHashMap<String, Set<String>>();
-        Yaml yaml = new Yaml();
 
         for(String source : storage.values()) {
-			Map<String, Object> model = (Map<String, Object>) yaml.load(source);
+            Map<String, Object> model = ParseUtils.fromYaml(source);
             if (model == null) continue;
-            Object metadata = yaml.load(model.get("metadata").toString());
+            Object metadata = ParseUtils.fromYaml(model.get("metadata").toString());
             if (!(metadata instanceof Map))
             	continue;
 

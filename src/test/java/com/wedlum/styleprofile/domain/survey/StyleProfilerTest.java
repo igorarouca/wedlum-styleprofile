@@ -3,13 +3,13 @@ package com.wedlum.styleprofile.domain.survey;
 import java.util.Arrays;
 import java.util.Map;
 
+import com.wedlum.styleprofile.util.web.ParseUtils;
 import junit.framework.Assert;
 
 import org.junit.Ignore;
 import org.junit.Test;
 
 import com.wedlum.styleprofile.domain.photo.PhotoSourceMock;
-import com.wedlum.styleprofile.util.web.JsonUtils;
 
 
 public class StyleProfilerTest {
@@ -26,22 +26,22 @@ public class StyleProfilerTest {
         Assert.assertEquals(
         	"{\"miniPalette1\":\"1a_A.png\",\"miniPalette2\":\"2a_A.png\",\"miniPalette3\":\"1b_A.png\"," +
         	 "\"miniPalette4\":\"1a_C.png\",\"miniPalette5\":\"2a_C.png\",\"miniPalette6\":\"1b_C.png\"}",
-        	JsonUtils.toJson(resolved)
+        	ParseUtils.toJson(resolved)
         );
     }
 
-    @Test
     @Ignore
+    @Test
     public void testResolvePalettes() {
     	Profile profile = new Profile();
         profile.addSession("session1", Arrays.asList("1a.png","2b.png"));
         profile.addSession("session2", Arrays.asList("1a.png"));
         profile.photos = Arrays.asList("1a.png", "1a.png", "1a.png", "2b.png", "2b.png");
 
-        StyleProfiler subject = new StyleProfiler(profile, null);
+        PhotoSourceMock photoSourceMock = new PhotoSourceMock();
+        StyleProfiler subject = new StyleProfiler(profile, photoSourceMock);
         Map<String, String> resolved  = subject.resolveAll();
 
-        PhotoSourceMock photoSourceMock = new PhotoSourceMock();
         photoSourceMock.setMetadata(
         		"1a.png",
         		"Photo:\n" + 
@@ -118,7 +118,7 @@ public class StyleProfilerTest {
 
         Assert.assertEquals(
             	"{\"palette1\":\"palette_red.png\",\"palette2\":\"palette_blue.png\"}" ,
-            	JsonUtils.toJson(resolved)
+            	ParseUtils.toJson(resolved)
         );
     }
 

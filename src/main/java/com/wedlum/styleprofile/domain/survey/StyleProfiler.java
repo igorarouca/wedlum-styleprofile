@@ -58,8 +58,11 @@ public class StyleProfiler {
     }
 
     private List<String> getColors(List<Photo> photos) {
-        
-    	return null;
+        List<String> colors = new ArrayList<String>();
+        for(Photo photo : photos){
+            colors.addAll(photo.getColors());
+        }
+    	return colors;
     }
 
     private List<String> miniPalettesFor(String sessionName, String suffix) {

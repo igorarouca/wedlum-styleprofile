@@ -7,7 +7,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import com.wedlum.styleprofile.util.observer.Observer;
-import com.wedlum.styleprofile.util.web.JsonUtils;
+import com.wedlum.styleprofile.util.web.ParseUtils;
 
 @Named(value = "photoGallery")
 public class PhotoGallery  {
@@ -50,7 +50,7 @@ public class PhotoGallery  {
 	public String loadDetail(String id) {
         String stored = source.getMetadata(id);
         if (stored == "")
-            return JsonUtils.toJson(new Photo(id, ""));
+            return ParseUtils.toJson(new Photo(id, ""));
         return stored;
     }
 

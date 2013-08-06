@@ -2,10 +2,12 @@ package com.wedlum.styleprofile.util.web;
 
 import java.io.IOException;
 import java.io.StringWriter;
+import java.util.Map;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.yaml.snakeyaml.Yaml;
 
-public class JsonUtils {
+public class ParseUtils {
 
 	public static String toJson(Object object) {
 		ObjectMapper mapper = new ObjectMapper();
@@ -30,4 +32,7 @@ public class JsonUtils {
 		}
 	}
 
+    public static Map<String, Object> fromYaml(String yamlString) {
+        return (Map<String, Object>) new Yaml().load(yamlString);
+    }
 }
