@@ -3,13 +3,13 @@ package com.wedlum.styleprofile.domain.survey;
 import java.util.Arrays;
 import java.util.Map;
 
-import com.wedlum.styleprofile.util.web.ParseUtils;
 import junit.framework.Assert;
 
 import org.junit.Ignore;
 import org.junit.Test;
 
 import com.wedlum.styleprofile.domain.photo.PhotoSourceMock;
+import com.wedlum.styleprofile.util.web.ParseUtils;
 
 
 public class StyleProfilerTest {
@@ -30,8 +30,8 @@ public class StyleProfilerTest {
         );
     }
 
-    @Ignore
     @Test
+    @Ignore
     public void testResolvePalettes() {
     	Profile profile = new Profile();
         profile.addSession("session1", Arrays.asList("1a.png","2b.png"));
@@ -40,7 +40,6 @@ public class StyleProfilerTest {
 
         PhotoSourceMock photoSourceMock = new PhotoSourceMock();
         StyleProfiler subject = new StyleProfiler(profile, photoSourceMock);
-        Map<String, String> resolved  = subject.resolveAll();
 
         photoSourceMock.setMetadata(
         		"1a.png",
@@ -115,6 +114,8 @@ public class StyleProfilerTest {
         		"         - Low\n" + 
         		"      Foundation:\n" + 
         		"         - Mid");
+
+        Map<String, String> resolved  = subject.resolveAll();
 
         Assert.assertEquals(
             	"{\"palette1\":\"palette_red.png\",\"palette2\":\"palette_blue.png\"}" ,

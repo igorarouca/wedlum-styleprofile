@@ -11,7 +11,6 @@ import com.wedlum.styleprofile.domain.photo.PhotoSource;
 public class Profile {
 
 	public List<String> photos;
-	private List<String> likedPhotos;
 
 	PhotoSource photoSource;
 
@@ -24,7 +23,6 @@ public class Profile {
 	@SuppressWarnings("unchecked")
 	public Profile(Map<?, ?> $sessionsByName) {
         this.photos = new ArrayList<String>();
-        this.likedPhotos = new ArrayList<String>();
         this.sessionsByName = (Map<String, List<String>>) $sessionsByName;
 	}
 
@@ -49,16 +47,20 @@ public class Profile {
     }
 
     public List<Photo> getLikedPhotos() {
-        return asPhotos(likedPhotos);
+    	List<String> allLikes = new ArrayList<String>();
+        for (List<String> likes : sessionsByName.values())
+			allLikes.addAll(likes);
+
+        return asPhotos(allLikes);
     }
 
 	public List<Photo> getPhotos() {
         return asPhotos(photos);
 	}
 
-    private List<Photo> asPhotos(List<String> listofIds) {
+    private List<Photo> asPhotos(List<String> ids) {
         List<Photo> result = new ArrayList<Photo>();
-        for (String $photo : listofIds)
+        for (String $photo : ids)
 			result.add(new Photo($photo, photoSource.getMetadata($photo)));
 
         return result;

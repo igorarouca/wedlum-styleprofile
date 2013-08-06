@@ -1,9 +1,10 @@
 package com.wedlum.styleprofile.domain.photo;
 
+import java.util.List;
+import java.util.Map;
+
 import com.wedlum.styleprofile.domain.DomainObject;
 import com.wedlum.styleprofile.util.web.ParseUtils;
-
-import java.util.*;
 
 public class Photo implements DomainObject {
 
@@ -12,8 +13,7 @@ public class Photo implements DomainObject {
 	private String id;
 	private String metadata;
 
-    public Photo(){
-    }
+    public Photo() {}
 
 	public Photo(String id, String metadata) {
 		this.id = id;
@@ -38,15 +38,15 @@ public class Photo implements DomainObject {
 		return metadata;
 	}
 
-
-    public List<String> getColors() {
+    @SuppressWarnings("unchecked")
+	public List<String> getColors() {
         Map<String, Map<String, Map<String, Object>>> model =
-                (Map<String, Map<String, Map<String, Object>>>)ParseUtils.fromYaml(getMetadata()).get("Photo");
-        Object colors = model
+                (Map<String, Map<String, Map<String, Object>>>) ParseUtils.fromYaml(getMetadata()).get("Photo");
+
+        return (List<String>) model
                     .get("Tags")
                         .get("Colors");
         
-        return new ArrayList<String>();
     }
 
 	@Override

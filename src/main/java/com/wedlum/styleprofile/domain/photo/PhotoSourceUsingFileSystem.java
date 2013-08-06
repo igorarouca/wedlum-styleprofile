@@ -23,6 +23,11 @@ public class PhotoSourceUsingFileSystem implements PhotoSource {
 		delegate.notifyObservers(photoId);
 	}
 
+    @Override
+    public String[] getPhotos() {
+    	return null;
+    }
+
     public void addObserver(Observer<String> observer) {
         delegate.registerObserver(observer);
         updateObserverOnPastEvents(observer);

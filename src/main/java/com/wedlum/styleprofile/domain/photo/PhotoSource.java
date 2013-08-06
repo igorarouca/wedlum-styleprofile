@@ -9,6 +9,7 @@ public interface PhotoSource {
 	String[] VALID_IMAGE_FILE_FORMATS = { ".png", ".jpg" };
 
 	void addPhoto(File photo);
+	String[] getPhotos();
 
 	void addObserver(Observer<String> observer);
 
@@ -16,4 +17,5 @@ public interface PhotoSource {
     void setMetadata(String photoId, String metadata);
 
     void delete(String id);
+
 }

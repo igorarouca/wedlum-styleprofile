@@ -17,6 +17,13 @@ public class StyleProfiler {
 		profile.photoSource = photoSource;
 	}
 
+    private static String selectPhotoFeaturingColor(PhotoSource photoSource, String color) {
+    	for (String photo : photoSource.getPhotos()) {
+    		
+    	}
+    	return null;
+    }
+
     public Map<String, String> resolveAll() {
         LinkedHashMap<String, String> result = new LinkedHashMap<String, String>();
         addMiniPalettes(result);
@@ -48,21 +55,15 @@ public class StyleProfiler {
 
         int i = 1;
         for (String color : ranked)
-            result.put("palette" + i++, getPhotoFeaturing(color));
-    }
-
-
-    //ColorPhotoResolver
-    private String getPhotoFeaturing(String color) {
-        return null;
+            result.put("palette" + i++, selectPhotoFeaturingColor(profile.photoSource, color));
     }
 
     private List<String> getColors(List<Photo> photos) {
         List<String> colors = new ArrayList<String>();
-        for(Photo photo : photos){
+        for(Photo photo : photos)
             colors.addAll(photo.getColors());
-        }
-    	return colors;
+
+        return colors;
     }
 
     private List<String> miniPalettesFor(String sessionName, String suffix) {

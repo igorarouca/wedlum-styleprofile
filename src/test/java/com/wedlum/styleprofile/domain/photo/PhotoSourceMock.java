@@ -17,6 +17,12 @@ public class PhotoSourceMock implements PhotoSource {
         throw new RuntimeException("Not Implemented Yet!");
     }
 
+	@Override
+	public String[] getPhotos() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
     @Override
     public void addObserver(Observer<String> observer) {
         this.observer = observer;
@@ -37,4 +43,5 @@ public class PhotoSourceMock implements PhotoSource {
     public void delete(String id) {
 
     }
+
 }
