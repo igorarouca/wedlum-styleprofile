@@ -18,7 +18,8 @@ public class Profile {
 	private Map<String, List<String>> sessionsByName;
 
     public Profile() {
-		this.sessionsByName = new LinkedHashMap<String, List<String>>();
+        this.photos = new ArrayList<String>();
+        this.sessionsByName = new LinkedHashMap<String, List<String>>();
 	}
 
 	@SuppressWarnings("unchecked")

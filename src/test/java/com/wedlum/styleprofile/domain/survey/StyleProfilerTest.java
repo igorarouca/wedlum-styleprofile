@@ -15,7 +15,6 @@ import com.wedlum.styleprofile.util.web.JsonUtils;
 public class StyleProfilerTest {
 
     @Test
-    @Ignore
     public void testResolveMiniPalettes() throws Exception {
         Profile profile = new Profile();
         profile.addSession("singleColorSession1", Arrays.asList("1a.png","2a.png"));
