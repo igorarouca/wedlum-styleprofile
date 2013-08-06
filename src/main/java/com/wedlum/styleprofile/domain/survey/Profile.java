@@ -1,16 +1,21 @@
 package com.wedlum.styleprofile.domain.survey;
 
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
 import com.wedlum.styleprofile.domain.photo.Photo;
+import com.wedlum.styleprofile.domain.photo.PhotoSource;
 
 public class Profile {
 
-	private Map<String, List<String>> sessionsByName;
 	public List<String> photos;
-    private List<String> likedPhotos;
+	private List<String> likedPhotos;
+
+	PhotoSource photoSource;
+
+	private Map<String, List<String>> sessionsByName;
 
     public Profile() {
 		this.sessionsByName = new LinkedHashMap<String, List<String>>();
@@ -46,6 +51,10 @@ public class Profile {
     }
 
 	public List<Photo> getPhotos() {
-		return null;
+		List<Photo> result = new ArrayList<Photo>();
+		for (String $photo : photos)
+			result.add(new Photo($photo, photoSource.getMetadata($photo)));
+
+		return result;
 	}
 }

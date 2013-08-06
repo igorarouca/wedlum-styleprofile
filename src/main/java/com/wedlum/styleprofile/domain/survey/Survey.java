@@ -1,18 +1,22 @@
 package com.wedlum.styleprofile.domain.survey;
 
-import org.springframework.context.annotation.Scope;
-import org.springframework.stereotype.Component;
-
 import java.util.Map;
 
 import javax.inject.Inject;
-import javax.inject.Named;
+
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
+
+import com.wedlum.styleprofile.domain.photo.PhotoSource;
 
 @Component(value="survey")
 @Scope(value = "request")
 public class Survey {
 
 	private final SurveyScript script;
+
+	@Inject
+	private PhotoSource photoSource;
 
 	@Inject
 	public Survey(SurveyScript script) {
@@ -45,7 +49,7 @@ public class Survey {
 	}
 		 
 	private String getValue(String itemName, Profile profile) {
-		Map<String, String> all = new StyleProfiler(profile).resolveAll();
+		Map<String, String> all = new StyleProfiler(profile, photoSource).resolveAll();
 		if (!all.containsKey(itemName)) return itemName + " NOT FOUND";
 		return all.get(itemName);
 	}
