@@ -18,13 +18,13 @@ public class Profile {
 	private Map<String, List<String>> sessionsByName;
 
     public Profile() {
-        this.photos = new ArrayList<String>();
-        this.sessionsByName = new LinkedHashMap<String, List<String>>();
+        this(new LinkedHashMap());
 	}
 
 	@SuppressWarnings("unchecked")
 	public Profile(Map<?, ?> $sessionsByName) {
-		this.sessionsByName = (Map<String, List<String>>) $sessionsByName;
+        this.photos = new ArrayList<String>();
+        this.sessionsByName = (Map<String, List<String>>) $sessionsByName;
 	}
 
 	public void addSession(String name, List<String> session) {
