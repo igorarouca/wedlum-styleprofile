@@ -19,8 +19,7 @@ public class PhotoSourceMock implements PhotoSource {
 
 	@Override
 	public String[] getPhotos() {
-		// TODO Auto-generated method stub
-		return null;
+		return storage.keySet().toArray(new String[0]);
 	}
 
     @Override

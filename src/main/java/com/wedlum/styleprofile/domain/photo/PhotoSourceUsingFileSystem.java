@@ -2,6 +2,8 @@ package com.wedlum.styleprofile.domain.photo;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 import javax.inject.Named;
 
@@ -14,18 +16,17 @@ import com.wedlum.styleprofile.util.observer.Observer;
 public class PhotoSourceUsingFileSystem implements PhotoSource {
 
     public static File STORAGE = new File("photo-storage");
-
     private GenericSubject<String> delegate = new GenericSubject<String>();
+    private Map<String, String> metadataByPhotoId = new LinkedHashMap();
 
     public void addPhoto(File photo) {
         String photoId = store(photo);
-    	delegate.setChanged();
-		delegate.notifyObservers(photoId);
-	}
+        updated(photoId);
+    }
 
     @Override
     public String[] getPhotos() {
-    	return null;
+    	return metadataByPhotoId.keySet().toArray(new String[0]);
     }
 
     public void addObserver(Observer<String> observer) {
@@ -50,8 +51,7 @@ public class PhotoSourceUsingFileSystem implements PhotoSource {
             throw new IllegalStateException("Error storing metadata for " + photoId, e);
         }
 
-        delegate.setChanged();
-        delegate.notifyObservers(photoId);
+        updated(photoId, metadata);
     }
 
     @Override
@@ -59,6 +59,7 @@ public class PhotoSourceUsingFileSystem implements PhotoSource {
         getMetadataFile(id).delete();
         new File(STORAGE, id).delete();
         delegate.notifyObserversRemove(id);
+        metadataByPhotoId.remove(id);
     }
 
     private File getMetadataFile(String id) {
@@ -80,7 +81,7 @@ public class PhotoSourceUsingFileSystem implements PhotoSource {
 
     	for(File file: STORAGE.listFiles()){
             if (isImageFile(file))
-                observer.update(file.getName());
+                updated(file.getName());
         }
 
     }
@@ -94,5 +95,16 @@ public class PhotoSourceUsingFileSystem implements PhotoSource {
 
 		return false;
 	}
+
+    private void updated(String photoId) {
+        updated(photoId, null);
+    }
+
+    private void updated(String photoId,String metadata){
+        delegate.setChanged();
+        delegate.notifyObservers(photoId);
+        if (metadata != null)
+            metadataByPhotoId.put(photoId, metadata);
+    }
 
 }
