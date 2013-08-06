@@ -5,6 +5,8 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.wedlum.styleprofile.domain.photo.Photo;
+
 public class StyleProfiler {
 
 	private final Profile profile;
@@ -38,7 +40,7 @@ public class StyleProfiler {
 
     private void addPalettes(LinkedHashMap<String, String> result) {
 
-        List<String> allColors = getColors(profile.photos);
+        List<String> allColors = getColors(profile.getPhotos());
         List<String> likes = getColors(profile.getLikedPhotos());
         List<String> ranked = ColorRank.rankColors(likes, allColors);
 
@@ -53,8 +55,9 @@ public class StyleProfiler {
         return null;
     }
 
-    private List<String> getColors(List<String> photos) {
-        return null;
+    private List<String> getColors(List<Photo> photos) {
+        
+    	return null;
     }
 
     private List<String> miniPalettesFor(String sessionName, String suffix) {

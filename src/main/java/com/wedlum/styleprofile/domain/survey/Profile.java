@@ -4,6 +4,8 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.wedlum.styleprofile.domain.photo.Photo;
+
 public class Profile {
 
 	private Map<String, List<String>> sessionsByName;
@@ -39,7 +41,11 @@ public class Profile {
         return sessionsByName.keySet();
     }
 
-    public List<String> getLikedPhotos() {
+    public List<Photo> getLikedPhotos() {
         return null;
     }
+
+	public List<Photo> getPhotos() {
+		return null;
+	}
 }
