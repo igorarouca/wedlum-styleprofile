@@ -2,6 +2,7 @@ package com.wedlum.styleprofile.util.web;
 
 import java.io.IOException;
 import java.io.StringWriter;
+import java.util.Collections;
 import java.util.Map;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -34,6 +35,10 @@ public class ParseUtils {
 
     @SuppressWarnings("unchecked")
 	public static Map<String, Object> fromYaml(String yamlString) {
-        return (Map<String, Object>) new Yaml().load(yamlString);
+        try {
+            return (Map<String, Object>) new Yaml().load(yamlString);
+        } catch (Throwable ignored){
+            return Collections.emptyMap();
+        }
     }
 }
