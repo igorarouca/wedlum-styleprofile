@@ -39,28 +39,26 @@ public class Photo implements DomainObject {
 		return metadata;
 	}
 
-    @SuppressWarnings("unchecked")
-         public List<String> getColors() {
-        Map<String, Map<String, Map<String, Object>>> model =
-                (Map<String, Map<String, Map<String, Object>>>) ParseUtils.fromYaml(getMetadata()).get("Photo");
+    public List<String> getColors() {
+    	return getValue("Colors");
+    }
 
-        return (List<String>) model
-                .get("Tags")
-                .get("Colors");
-
+    public List<String> getFeaturedColors() {
+    	return getValue("FeaturedColor");
     }
 
     @SuppressWarnings("unchecked")
-    public List<String> getFeaturedColors() {
-        Map<String, Map<String, Map<String, Object>>> model =
+	private List<String> getValue(String tag) {
+		Map<String, Map<String, Map<String, Object>>> model =
                 (Map<String, Map<String, Map<String, Object>>>) ParseUtils.fromYaml(getMetadata()).get("Photo");
 
-        List<String> featuredColors = (List<String>) model.get("Tags").get("FeaturedColor");
-        if (featuredColors == null)
+		List<String> values = (List<String>) model.get("Tags").get(tag);
+
+		if (values == null)
         	return Collections.emptyList();
         
-        return featuredColors;
-    }
+        return values;
+	}
 
 	@Override
 	public String toString() {
