@@ -52,6 +52,8 @@ public class Photo implements DomainObject {
 		Map<String, Map<String, Map<String, Object>>> model =
                 (Map<String, Map<String, Map<String, Object>>>) ParseUtils.fromYaml(getMetadata()).get("Photo");
 
+		if (model == null)
+			throw new IllegalStateException("Invalid metadata for: " + this.id);
 		
 		Map<String, Map<String, Object>> tags = model.get("Tags");
 		if (tags == null)
