@@ -11,7 +11,7 @@ public class ColorSwatchMetadataTest {
             new ColorSwatchMetadata(null);
             Assert.fail();
         } catch (IllegalStateException ex){
-            Assert.assertEquals("Invalid Metadata: Root tag 'Photo:' not found.", ex.getMessage());
+            Assert.assertEquals("Invalid metadata: Root tag 'Photo:' not found.", ex.getMessage());
         }
     }
 
@@ -21,7 +21,30 @@ public class ColorSwatchMetadataTest {
             new ColorSwatchMetadata("");
             Assert.fail();
         } catch (IllegalStateException ex){
-            Assert.assertEquals("Invalid Metadata: Root tag 'Photo:' not found.", ex.getMessage());
+            Assert.assertEquals("Invalid metadata: Root tag 'Photo:' not found.", ex.getMessage());
+        }
+    }
+
+    @Test
+    public void withoutPhoto(){
+        try {
+            new ColorSwatchMetadata("Custom: one");
+            Assert.fail();
+        } catch (IllegalStateException ex){
+            Assert.assertEquals("Invalid metadata: Root tag 'Photo:' not found.", ex.getMessage());
+        }
+    }
+
+
+    @Test
+    public void withoutTags(){
+        try {
+            new ColorSwatchMetadata(
+                    "Photo:\n" +
+                    "   name: 'foobar'");
+            Assert.fail();
+        } catch (IllegalStateException ex){
+            Assert.assertEquals("Invalid metadata: 'Tags:' not found.", ex.getMessage());
         }
     }
 }

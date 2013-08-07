@@ -12,7 +12,7 @@ public class PhotoTest {
             subject.getColors();
             Assert.fail();
         } catch (IllegalStateException ex){
-            Assert.assertEquals("Invalid metadata for: id", ex.getMessage());
+            Assert.assertEquals("Invalid metadata: Root tag 'Photo:' not found.", ex.getMessage());
         }
 
     }
