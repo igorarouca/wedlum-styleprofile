@@ -40,31 +40,14 @@ public class Photo implements DomainObject {
 	}
 
     public List<String> getColors() {
-    	return getValue("Colors");
+    	return new ColorSwatchMetadata(getMetadata()).getValue("Colors");
     }
 
     public List<String> getFeaturedColors() {
-    	return getValue("FeaturedColor");
+    	return new ColorSwatchMetadata(getMetadata()).getValue("FeaturedColor");
     }
 
-    @SuppressWarnings("unchecked")
-	private List<String> getValue(String tag) {
-		Map<String, Map<String, Map<String, Object>>> model =
-                (Map<String, Map<String, Map<String, Object>>>) ParseUtils.fromYaml(getMetadata()).get("Photo");
 
-		if (model == null)
-			throw new IllegalStateException("Invalid metadata for: " + this.id);
-		
-		Map<String, Map<String, Object>> tags = model.get("Tags");
-		if (tags == null)
-			throw new IllegalStateException("Invalid metadata for: " + this.id);
-			
-		List<String> values = (List<String>) tags.get(tag);
-		if (values == null)
-        	return Collections.emptyList();
-        
-        return values;
-	}
 
 	@Override
 	public String toString() {

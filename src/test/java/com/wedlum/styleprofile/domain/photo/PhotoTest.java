@@ -10,6 +10,7 @@ public class PhotoTest {
         Photo subject = new Photo("id", "garbage");
         try {
             subject.getColors();
+            Assert.fail();
         } catch (IllegalStateException ex){
             Assert.assertEquals("Invalid metadata for: id", ex.getMessage());
         }
