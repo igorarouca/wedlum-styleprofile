@@ -80,7 +80,7 @@ public class StyleProfilerTest {
         		"         - 000L\n" + 
         		"         - 035N\n" + 
         		"      FeaturedColor:\n" + 
-        		"         - 000S\n" + 
+        		"         - 000S\n" +
         		"      Contrast:\n" + 
         		"         - Mid\n" + 
         		"      Boldness:\n" + 
@@ -107,7 +107,7 @@ public class StyleProfilerTest {
         		"         - 000L\n" + 
         		"         - 035N\n" + 
         		"      FeaturedColor:\n" + 
-        		"         - 220S\n" + 
+        		"         - 220S\n" +
         		"      Contrast:\n" + 
         		"         - Mid\n" + 
         		"      Boldness:\n" + 

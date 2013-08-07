@@ -8,15 +8,19 @@ import java.util.List;
 
 class ColorRank {
 
-	static List<String> rankColors(final List<String> likes, List<String> allColors) {
-		// (Liked / Times Shown) * (Magic_Factorö(Likedö2)) * 10
+	static List<String> rankColors(final List<String> likes, final List<String> allColors) {
 		List<String> result = unique(likes);
 
 		Collections.sort(result, new Comparator<String>() {
 
 			int score(String color) {
-				count(color, likes);
-				return 0;
+				int likesCount = count(color, likes);
+                int timesShown = count(color, allColors);
+                float magicFactor = 1.05f;
+
+				return (int)
+                        ((likesCount / timesShown)
+                                * (Math.pow(magicFactor, (likesCount * likesCount))) * 10);
 			}
 			
 			private int count(String item, List<String> list) {
