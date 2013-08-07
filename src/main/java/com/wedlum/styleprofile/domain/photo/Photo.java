@@ -1,9 +1,9 @@
 package com.wedlum.styleprofile.domain.photo;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
-import com.fasterxml.jackson.databind.util.LinkedNode;
 import com.wedlum.styleprofile.domain.DomainObject;
 import com.wedlum.styleprofile.util.web.ParseUtils;
 
@@ -55,10 +55,11 @@ public class Photo implements DomainObject {
         Map<String, Map<String, Map<String, Object>>> model =
                 (Map<String, Map<String, Map<String, Object>>>) ParseUtils.fromYaml(getMetadata()).get("Photo");
 
-        return (List<String>) model
-                .get("Tags")
-                .get("FeaturedColor");
-
+        List<String> featuredColors = (List<String>) model.get("Tags").get("FeaturedColor");
+        if (featuredColors == null)
+        	return Collections.emptyList();
+        
+        return featuredColors;
     }
 
 	@Override

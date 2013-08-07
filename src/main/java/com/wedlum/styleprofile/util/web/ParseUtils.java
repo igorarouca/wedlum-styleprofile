@@ -32,7 +32,8 @@ public class ParseUtils {
 		}
 	}
 
-    public static Map<String, Object> fromYaml(String yamlString) {
+    @SuppressWarnings("unchecked")
+	public static Map<String, Object> fromYaml(String yamlString) {
         return (Map<String, Object>) new Yaml().load(yamlString);
     }
 }

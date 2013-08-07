@@ -5,7 +5,6 @@ import java.util.Map;
 
 import junit.framework.Assert;
 
-import org.junit.Ignore;
 import org.junit.Test;
 
 import com.wedlum.styleprofile.domain.photo.PhotoSourceMock;
@@ -33,7 +32,6 @@ public class StyleProfilerTest {
     }
 
     @Test
-    @Ignore
     public void testResolvePalettes() {
     	Profile profile = new Profile();
         profile.addSession("session1", Arrays.asList("1a.png","2b.png"));
@@ -64,7 +62,7 @@ public class StyleProfilerTest {
         		"           - 220S");
 
         photoSourceMock.setMetadata(
-        		"palette_red",
+        		"palette_red.png",
         		"Photo:\n" + 
         		"   Description:\n" + 
         		"   Photographer:\n" + 
@@ -91,7 +89,7 @@ public class StyleProfilerTest {
         		"         - Mid");
 
         photoSourceMock.setMetadata(
-        		"palette_red",
+        		"palette_blue.png",
         		"Photo:\n" + 
         		"   Description:\n" + 
         		"   Photographer:\n" + 

@@ -17,7 +17,7 @@ public class PhotoSourceUsingFileSystem implements PhotoSource {
 
     public static File STORAGE = new File("photo-storage");
     private GenericSubject<String> delegate = new GenericSubject<String>();
-    private Map<String, String> metadataByPhotoId = new LinkedHashMap();
+    private Map<String, String> metadataByPhotoId = new LinkedHashMap<String, String>();
 
     public void addPhoto(File photo) {
         String photoId = store(photo);

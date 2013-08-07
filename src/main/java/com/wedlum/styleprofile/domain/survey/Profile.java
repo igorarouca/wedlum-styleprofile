@@ -17,7 +17,7 @@ public class Profile {
 	private Map<String, List<String>> sessionsByName;
 
     public Profile() {
-        this(new LinkedHashMap());
+        this(new LinkedHashMap<Object, Object>());
 	}
 
 	@SuppressWarnings("unchecked")
