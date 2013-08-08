@@ -22,12 +22,12 @@ public class TagAutocompleteTest {
 
     @Test
     public void testAutocomplete(){
-        photoSourceMock.setMetadata(
+        photoSourceMock.setMetadataWithoutValidation(
                 "42.png",
                 "metadata: \"Tag:\\n" +
-                "   Sub-Tag: \\n" +
-                "      - Tag Value 1\\n" +
-                "      - Tag Value 2\"");
+                        "   Sub-Tag: \\n" +
+                        "      - Tag Value 1\\n" +
+                        "      - Tag Value 2\"");
 
         Map<String, Set<String>> suggestMap = subject.getSuggestions();
 
@@ -41,7 +41,7 @@ public class TagAutocompleteTest {
 
     @Test
     public void testEmptyInput(){
-        photoSourceMock.setMetadata("42.png","");
+        photoSourceMock.setMetadataWithoutValidation("42.png", "");
 
         Map<String, Set<String>> suggestMap = subject.getSuggestions();
         Assert.assertEquals("", toString(suggestMap)
@@ -50,8 +50,8 @@ public class TagAutocompleteTest {
 
     @Test
     public void testDuplicateOutuputEntries() {
-         photoSourceMock.setMetadata("42.png", "metadata: \"Tag:\"");
-         photoSourceMock.setMetadata("43.png", "metadata: \"Tag:\"");
+         photoSourceMock.setMetadataWithoutValidation("42.png", "metadata: \"Tag:\"");
+         photoSourceMock.setMetadataWithoutValidation("43.png", "metadata: \"Tag:\"");
 
          Map<String, Set<String>> suggestMap = subject.getSuggestions();
          Assert.assertEquals("Root [Tag]", toString(suggestMap));

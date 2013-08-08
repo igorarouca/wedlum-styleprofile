@@ -31,14 +31,14 @@ public class PhotoSourceMock implements PhotoSource {
         return storage.get(id);
     }
 
-    public void setMetadata(String photoId, String metadata) {
-    	setMetadata(photoId, new ColorSwatchMetadata(metadata));
+    public void setMetadataWithoutValidation(String photoId, String metadata) {
+        storage.put(photoId, metadata);
+        if (observer != null) observer.update(photoId);
     }
 
     @Override
     public void setMetadata(String photoId, ColorSwatchMetadata metadata) {
-    	storage.put(photoId, metadata.toString());
-    	if (observer != null) observer.update(photoId);    	
+    	setMetadataWithoutValidation(photoId, metadata.toString());
     }
 
     @Override

@@ -41,79 +41,79 @@ public class StyleProfilerTest {
         PhotoSourceMock photoSourceMock = new PhotoSourceMock();
         StyleProfiler subject = new StyleProfiler(profile, photoSourceMock);
 
-        photoSourceMock.setMetadata(
-        		"1a.png",
-        		"Photo:\n" + 
-        		"   Description:\n" + 
-        		"   Photographer:\n" + 
-        		"       Drue Carr\n" + 
-        		"   Tags:\n" + 
-        		"       Colors:\n" + 
-        		"           - 000S");
+        photoSourceMock.setMetadataWithoutValidation(
+                "1a.png",
+                "Photo:\n" +
+                        "   Description:\n" +
+                        "   Photographer:\n" +
+                        "       Drue Carr\n" +
+                        "   Tags:\n" +
+                        "       Colors:\n" +
+                        "           - 000S");
 
-        photoSourceMock.setMetadata(
-        		"2b.png",
-        		"Photo:\n" + 
-        		"   Description:\n" + 
-        		"   Photographer:\n" + 
-        		"       Drue Carr\n" + 
-        		"   Tags:\n" + 
-        		"       Colors:\n" + 
-        		"           - 220S");
+        photoSourceMock.setMetadataWithoutValidation(
+                "2b.png",
+                "Photo:\n" +
+                        "   Description:\n" +
+                        "   Photographer:\n" +
+                        "       Drue Carr\n" +
+                        "   Tags:\n" +
+                        "       Colors:\n" +
+                        "           - 220S");
 
-        photoSourceMock.setMetadata(
-        		"palette_red.png",
-        		"Photo:\n" + 
-        		"   Description:\n" + 
-        		"   Photographer:\n" + 
-        		"       Drue Carr\n" + 
-        		"   Tags:\n" + 
-        		"      PaletteID:\n" + 
-        		"         1001   \n" + 
-        		"      PaletteType:\n" + 
-        		"         Mono\n" + 
-        		"      Texture:\n" + 
-        		"         Soft\n" + 
-        		"      Colors:\n" + 
-        		"         - 000D\n" + 
-        		"         - 000M\n" + 
-        		"         - 000L\n" + 
-        		"         - 035N\n" + 
-        		"      FeaturedColor:\n" + 
-        		"         - 000S\n" +
-        		"      Contrast:\n" + 
-        		"         - Mid\n" + 
-        		"      Boldness:\n" + 
-        		"         - Low\n" + 
-        		"      Foundation:\n" + 
-        		"         - Mid");
+        photoSourceMock.setMetadataWithoutValidation(
+                "palette_red.png",
+                "Photo:\n" +
+                        "   Description:\n" +
+                        "   Photographer:\n" +
+                        "       Drue Carr\n" +
+                        "   Tags:\n" +
+                        "      PaletteID:\n" +
+                        "         1001   \n" +
+                        "      PaletteType:\n" +
+                        "         Mono\n" +
+                        "      Texture:\n" +
+                        "         Soft\n" +
+                        "      Colors:\n" +
+                        "         - 000D\n" +
+                        "         - 000M\n" +
+                        "         - 000L\n" +
+                        "         - 035N\n" +
+                        "      FeaturedColor:\n" +
+                        "         - 000S\n" +
+                        "      Contrast:\n" +
+                        "         - Mid\n" +
+                        "      Boldness:\n" +
+                        "         - Low\n" +
+                        "      Foundation:\n" +
+                        "         - Mid");
 
-        photoSourceMock.setMetadata(
-        		"palette_blue.png",
-        		"Photo:\n" + 
-        		"   Description:\n" + 
-        		"   Photographer:\n" + 
-        		"       Drue Carr\n" + 
-        		"   Tags:\n" + 
-        		"      PaletteID:\n" + 
-        		"         1001   \n" + 
-        		"      PaletteType:\n" + 
-        		"         Mono\n" + 
-        		"      Texture:\n" + 
-        		"         Soft\n" + 
-        		"      Colors:\n" + 
-        		"         - 000D\n" + 
-        		"         - 000M\n" + 
-        		"         - 000L\n" + 
-        		"         - 035N\n" + 
-        		"      FeaturedColor:\n" + 
-        		"         - 220S\n" +
-        		"      Contrast:\n" + 
-        		"         - Mid\n" + 
-        		"      Boldness:\n" + 
-        		"         - Low\n" + 
-        		"      Foundation:\n" + 
-        		"         - Mid");
+        photoSourceMock.setMetadataWithoutValidation(
+                "palette_blue.png",
+                "Photo:\n" +
+                        "   Description:\n" +
+                        "   Photographer:\n" +
+                        "       Drue Carr\n" +
+                        "   Tags:\n" +
+                        "      PaletteID:\n" +
+                        "         1001   \n" +
+                        "      PaletteType:\n" +
+                        "         Mono\n" +
+                        "      Texture:\n" +
+                        "         Soft\n" +
+                        "      Colors:\n" +
+                        "         - 000D\n" +
+                        "         - 000M\n" +
+                        "         - 000L\n" +
+                        "         - 035N\n" +
+                        "      FeaturedColor:\n" +
+                        "         - 220S\n" +
+                        "      Contrast:\n" +
+                        "         - Mid\n" +
+                        "      Boldness:\n" +
+                        "         - Low\n" +
+                        "      Foundation:\n" +
+                        "         - Mid");
 
         Map<String, String> resolved  = subject.resolveAll();
 
