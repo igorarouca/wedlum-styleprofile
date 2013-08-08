@@ -7,40 +7,45 @@ import java.util.List;
 import java.util.Map;
 
 public class ColorSwatchMetadata {
-    private String yaml;
 
-    public ColorSwatchMetadata(String yaml) {
-        this.yaml = "" + yaml;
-        getTags();
-    }
+	private String yaml;
 
-    @SuppressWarnings("unchecked")
-    List<String> getValue(String tag) {
-        Map<String, Map<String, Object>> tags = getTags();
+	public ColorSwatchMetadata(String yaml) {
+		this.yaml = "" + yaml;
+		getTags();
+	}
 
-        List<String> values = (List<String>) tags.get(tag);
-        if (values == null)
-            return Collections.emptyList();
+	@SuppressWarnings("unchecked")
+	List<String> getValue(String tag) {
+		Map<String, Map<String, Object>> tags = getTags();
 
-        return values;
-    }
+		List<String> values = (List<String>) tags.get(tag);
+		if (values == null)
+			return Collections.emptyList();
 
-    private Map<String, Map<String, Object>> getTags() {
-        Map<String, Map<String, Map<String, Object>>> model = parseModel();
+		return values;
+	}
 
-        Map<String, Map<String, Object>> tags = model.get("Tags");
-        if (tags == null)
-            throw new IllegalStateException("Invalid metadata: 'Tags:' not found.");
-        return tags;
-    }
+	private Map<String, Map<String, Object>> getTags() {
+		Map<String, Map<String, Map<String, Object>>> model = parseModel();
 
-    private Map<String, Map<String, Map<String, Object>>> parseModel() {
-        Map<String, Object> modelOrNull = ParseUtils.fromYaml(yaml);
-        if (modelOrNull == null)
-            throw new IllegalStateException("Invalid metadata: Root tag 'Photo:' not found.");
-        Object photo = modelOrNull.get("Photo");
-        if (photo == null)
-            throw new IllegalStateException("Invalid metadata: Root tag 'Photo:' not found.");
-        return (Map<String, Map<String, Map<String, Object>>>) photo;
-    }
+		Map<String, Map<String, Object>> tags = model.get("Tags");
+		if (tags == null)
+			throw new IllegalStateException("Invalid metadata: 'Tags:' not found.");
+
+		return tags;
+	}
+
+	@SuppressWarnings("unchecked")
+	private Map<String, Map<String, Map<String, Object>>> parseModel() {
+		Map<String, Object> modelOrNull = ParseUtils.fromYaml(yaml);
+		if (modelOrNull == null)
+			throw new IllegalStateException("Invalid metadata: Root tag 'Photo:' not found.");
+
+		Object photo = modelOrNull.get("Photo");
+		if (photo == null)
+			throw new IllegalStateException("Invalid metadata: Root tag 'Photo:' not found.");
+
+		return (Map<String, Map<String, Map<String, Object>>>) photo;
+	}
 }

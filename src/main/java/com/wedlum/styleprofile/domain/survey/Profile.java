@@ -8,12 +8,15 @@ import java.util.Map;
 import com.wedlum.styleprofile.domain.photo.Photo;
 import com.wedlum.styleprofile.domain.photo.PhotoSource;
 
+// Profile is a DTO used to store the interaction of the user with the survey.
 public class Profile {
 
-	public List<String> photos;
+	// List of photos the user has been exposed
+	public List<String> photoIds;
 
 	PhotoSource photoSource;
 
+	// List of photos the user liked
 	private Map<String, List<String>> sessionsByName;
 
     public Profile() {
@@ -22,7 +25,7 @@ public class Profile {
 
 	@SuppressWarnings("unchecked")
 	public Profile(Map<?, ?> $sessionsByName) {
-        this.photos = new ArrayList<String>();
+        this.photoIds = new ArrayList<String>();
         this.sessionsByName = (Map<String, List<String>>) $sessionsByName;
 	}
 
@@ -47,21 +50,21 @@ public class Profile {
     }
 
     public List<Photo> getLikedPhotos() {
-    	List<String> allLikes = new ArrayList<String>();
+    	List<String> likedPhotoIds = new ArrayList<String>();
         for (List<String> likes : sessionsByName.values())
-			allLikes.addAll(likes);
+			likedPhotoIds.addAll(likes);
 
-        return asPhotos(allLikes);
+        return asPhotos(likedPhotoIds);
     }
 
 	public List<Photo> getPhotos() {
-        return asPhotos(photos);
+		return asPhotos(photoIds);
 	}
 
     private List<Photo> asPhotos(List<String> ids) {
         List<Photo> result = new ArrayList<Photo>();
-        for (String $photo : ids)
-			result.add(new Photo($photo, photoSource.getMetadata($photo)));
+        for (String id : ids)
+			result.add(new Photo(id, photoSource.getMetadata(id)));
 
         return result;
     }
