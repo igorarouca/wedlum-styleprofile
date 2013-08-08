@@ -8,12 +8,13 @@ import java.util.Map;
 
 public class ColorSwatchMetadata {
 
-	private final String yaml;
+	private String yaml;
 	private final String photoId;
 
 	public ColorSwatchMetadata(String photoId, String yaml) {
 		this.photoId = photoId;
 		this.yaml = "" + yaml;
+		this.yaml = this.yaml.replaceAll("\\t", "   ");
 		getTags();
 	}
 

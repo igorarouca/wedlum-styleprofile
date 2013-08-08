@@ -38,17 +38,29 @@ public class ColorSwatchMetadataTest {
         }
     }
 
-
     @Test
     public void withoutTags(){
         try {
             new ColorSwatchMetadata(
-            		photoId,
-                    "Photo:\n" +
-                    "   name: 'foobar'");
+        		photoId,
+                "Photo:\n" +
+                "   Anything:"
+            );
             Assert.fail();
         } catch (IllegalStateException ex){
             Assert.assertEquals("myPhoto.png: invalid metadata: 'Tags:' not found.", ex.getMessage());
         }
     }
+
+    @Test
+    public void withTabs() {
+    	new ColorSwatchMetadata(
+    		photoId,
+            "Photo:\n" + 
+            "   \t  Tags:\n" +
+            "			Colors:\n" +
+            "				- MyFavoriteColor"
+    	);
+    }
+
 }
