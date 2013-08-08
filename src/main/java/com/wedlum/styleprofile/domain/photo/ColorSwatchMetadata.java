@@ -8,9 +8,11 @@ import java.util.Map;
 
 public class ColorSwatchMetadata {
 
-	private String yaml;
+	private final String yaml;
+	private final String photoId;
 
-	public ColorSwatchMetadata(String yaml) {
+	public ColorSwatchMetadata(String photoId, String yaml) {
+		this.photoId = photoId;
 		this.yaml = "" + yaml;
 		getTags();
 	}
@@ -31,7 +33,7 @@ public class ColorSwatchMetadata {
 
 		Map<String, Map<String, Object>> tags = model.get("Tags");
 		if (tags == null)
-			throw new IllegalStateException("Invalid metadata: 'Tags:' not found.");
+			throw new IllegalStateException(photoId + ": invalid metadata: 'Tags:' not found.");
 
 		return tags;
 	}
@@ -40,11 +42,11 @@ public class ColorSwatchMetadata {
 	private Map<String, Map<String, Map<String, Object>>> parseModel() {
 		Map<String, Object> modelOrNull = ParseUtils.fromYaml(yaml);
 		if (modelOrNull == null)
-			throw new IllegalStateException("Invalid metadata: Root tag 'Photo:' not found.");
+			throw new IllegalStateException(photoId + ": invalid metadata: Root tag 'Photo:' not found.");
 
 		Object photo = modelOrNull.get("Photo");
 		if (photo == null)
-			throw new IllegalStateException("Invalid metadata: Root tag 'Photo:' not found.");
+			throw new IllegalStateException(photoId + ": invalid metadata: Root tag 'Photo:' not found.");
 
 		return (Map<String, Map<String, Map<String, Object>>>) photo;
 	}

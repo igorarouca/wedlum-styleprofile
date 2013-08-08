@@ -38,11 +38,11 @@ public class Photo implements DomainObject {
 	}
 
 	public List<String> getColors() {
-		return new ColorSwatchMetadata(getMetadata()).getValue("Colors");
+		return new ColorSwatchMetadata(this.id, getMetadata()).getValue("Colors");
 	}
 
 	public List<String> getFeaturedColors() {
-		return new ColorSwatchMetadata(getMetadata()).getValue("FeaturedColor");
+		return new ColorSwatchMetadata(this.id, getMetadata()).getValue("FeaturedColor");
 	}
 
 	@Override
