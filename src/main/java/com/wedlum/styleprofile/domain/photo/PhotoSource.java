@@ -14,8 +14,8 @@ public interface PhotoSource {
 	void addObserver(Observer<String> observer);
 
     String getMetadata(String photoId);
-    void setMetadata(String photoId, String metadata);
+    void setMetadata(String photoId, ColorSwatchMetadata metadata);
 
-    void delete(String id);
+    void delete(String photoId);
 
 }

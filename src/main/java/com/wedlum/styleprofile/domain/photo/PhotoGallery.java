@@ -54,8 +54,9 @@ public class PhotoGallery  {
         return stored;
     }
 
-	public void storeDetail(String id, String metadata) {
-        source.setMetadata(id, metadata);
+	public void storeDetail(String id, String $metadata) {
+        ColorSwatchMetadata metadata = new ColorSwatchMetadata($metadata);
+		source.setMetadata(id, metadata);
     }
 
     public void delete(String id) {

@@ -48,4 +48,10 @@ public class ColorSwatchMetadata {
 
 		return (Map<String, Map<String, Map<String, Object>>>) photo;
 	}
+
+	@Override
+	public String toString() {
+		return yaml;
+	}
+
 }

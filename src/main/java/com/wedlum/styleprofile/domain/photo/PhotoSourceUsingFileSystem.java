@@ -44,14 +44,14 @@ public class PhotoSourceUsingFileSystem implements PhotoSource {
         }
     }
 
-    public void setMetadata(String photoId, String metadata) {
+    public void setMetadata(String photoId, ColorSwatchMetadata metadata) {
         try {
-            FileUtils.writeStringToFile(getMetadataFile(photoId), metadata);
+            FileUtils.writeStringToFile(getMetadataFile(photoId), metadata.toString());
         } catch (IOException e) {
             throw new IllegalStateException("Error storing metadata for " + photoId, e);
         }
 
-        updated(photoId, metadata);
+        updated(photoId, metadata.toString());
     }
 
     @Override
@@ -83,7 +83,6 @@ public class PhotoSourceUsingFileSystem implements PhotoSource {
             if (isImageFile(file))
                 updated(file.getName());
         }
-
     }
 
 	private static boolean isImageFile(File file) {

@@ -4,7 +4,6 @@ import java.io.File;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-import com.wedlum.styleprofile.domain.photo.PhotoSource;
 import com.wedlum.styleprofile.util.observer.Observer;
 
 public class PhotoSourceMock implements PhotoSource {
@@ -32,15 +31,17 @@ public class PhotoSourceMock implements PhotoSource {
         return storage.get(id);
     }
 
-    @Override
-    public void setMetadata(String id, String metadata) {
-        storage.put(id, metadata);
-        if (observer != null) observer.update(id);
+    public void setMetadata(String photoId, String metadata) {
+    	setMetadata(photoId, new ColorSwatchMetadata(metadata));
     }
 
     @Override
-    public void delete(String id) {
-
+    public void setMetadata(String photoId, ColorSwatchMetadata metadata) {
+    	storage.put(photoId, metadata.toString());
+    	if (observer != null) observer.update(photoId);    	
     }
+
+    @Override
+    public void delete(String id) {}
 
 }

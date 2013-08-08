@@ -9,13 +9,9 @@ import junit.framework.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.wedlum.styleprofile.domain.photo.PhotoSource;
-import com.wedlum.styleprofile.domain.photo.TagAutocomplete;
-import com.wedlum.styleprofile.domain.photo.TagAutocompleteImpl;
-
 public class TagAutocompleteTest {
 
-	private PhotoSource photoSourceMock;
+	private PhotoSourceMock photoSourceMock;
 	private TagAutocomplete subject;
 
 	@Before
