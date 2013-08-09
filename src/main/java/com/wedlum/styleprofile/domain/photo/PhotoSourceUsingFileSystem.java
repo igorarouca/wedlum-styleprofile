@@ -80,8 +80,11 @@ public class PhotoSourceUsingFileSystem implements PhotoSource {
         if(!STORAGE.exists()) STORAGE.mkdir();
 
     	for(File file: STORAGE.listFiles()){
-            if (isImageFile(file))
-                updated(file.getName());
+            if (isImageFile(file)) {
+                String photoId = file.getName();
+				updated(photoId);
+                setMetadata(photoId, ColorSwatchMetadata.fromJson(getMetadata(photoId)));
+            }
         }
     }
 

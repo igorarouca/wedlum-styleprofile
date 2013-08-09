@@ -29,7 +29,7 @@ public class ParseUtils {
 			return mapper.readValue(jsonString, clazz);
 
 		} catch (IOException e) {
-			throw new IllegalStateException(e);
+			throw new ParseException(e);
 		}
 	}
 
@@ -41,4 +41,9 @@ public class ParseUtils {
             return Collections.emptyMap();
         }
     }
+
+	@SuppressWarnings("unchecked")
+	public static Map<String, Object> fromJson(String json) {
+		return fromJson(json, Map.class);
+	}
 }

@@ -25,24 +25,29 @@ public class Photo implements DomainObject {
 
 	public String getMetadata() {
 		if (this.metadata == null || this.metadata.isEmpty()) {
-			return	"Photo:\n" +
-					"   Description:\n" +
-					"   Photographer:\n" +
-					"       Drue Carr\n" +
-					"   Tags:\n" +
-					"       Colors:\n" +
-					"           - code";
+			return	"{" +
+						"\"id\":" +
+							"\"" + this.id + "\"," +
+						"\"metadata\":" +
+							"\"Photo:\\n" +
+							"   Description:\\n" +
+							"   Photographer:\\n" +
+							"       Drue Carr\\n" +
+							"   Tags:\\n" +
+							"       Colors:\\n" +
+							"           - code\\n\"" +
+					"}";
 		}
 
 		return metadata;
 	}
 
 	public List<String> getColors() {
-		return new ColorSwatchMetadata(this.id, getMetadata()).getValue("Colors");
+		return ColorSwatchMetadata.fromJson(getMetadata(), id).getValue("Colors");
 	}
 
 	public List<String> getFeaturedColors() {
-		return new ColorSwatchMetadata(this.id, getMetadata()).getValue("FeaturedColor");
+		return ColorSwatchMetadata.fromJson(getMetadata()).getValue("FeaturedColor");
 	}
 
 	@Override

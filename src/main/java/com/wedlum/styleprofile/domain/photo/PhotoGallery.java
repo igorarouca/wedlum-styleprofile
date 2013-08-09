@@ -55,7 +55,7 @@ public class PhotoGallery  {
     }
 
 	public void storeDetail(String id, String $metadata) {
-        ColorSwatchMetadata metadata = new ColorSwatchMetadata(id, $metadata);
+        ColorSwatchMetadata metadata = ColorSwatchMetadata.fromJson($metadata);
 		source.setMetadata(id, metadata);
     }
 

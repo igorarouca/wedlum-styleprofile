@@ -11,7 +11,7 @@ public class ColorSwatchMetadataTest {
     @Test
     public void _null(){
         try {
-            new ColorSwatchMetadata(photoId, null);
+            ColorSwatchMetadata.fromYaml(photoId, null);
             Assert.fail();
         } catch (IllegalStateException ex){
             Assert.assertEquals("myPhoto.png: invalid metadata: Root tag 'Photo:' not found.", ex.getMessage());
@@ -21,7 +21,7 @@ public class ColorSwatchMetadataTest {
     @Test
     public void empty(){
         try {
-            new ColorSwatchMetadata(photoId, "");
+        	ColorSwatchMetadata.fromYaml(photoId, "");
             Assert.fail();
         } catch (IllegalStateException ex){
             Assert.assertEquals("myPhoto.png: invalid metadata: Root tag 'Photo:' not found.", ex.getMessage());
@@ -31,7 +31,7 @@ public class ColorSwatchMetadataTest {
     @Test
     public void withoutPhoto(){
         try {
-            new ColorSwatchMetadata(photoId, "Custom: one");
+        	ColorSwatchMetadata.fromYaml(photoId, "Custom: one");
             Assert.fail();
         } catch (IllegalStateException ex){
             Assert.assertEquals("myPhoto.png: invalid metadata: Root tag 'Photo:' not found.", ex.getMessage());
@@ -41,7 +41,7 @@ public class ColorSwatchMetadataTest {
     @Test
     public void withoutTags(){
         try {
-            new ColorSwatchMetadata(
+        	ColorSwatchMetadata.fromYaml(
         		photoId,
                 "Photo:\n" +
                 "   Anything:"
@@ -54,13 +54,22 @@ public class ColorSwatchMetadataTest {
 
     @Test
     public void withTabs() {
-    	new ColorSwatchMetadata(
+    	ColorSwatchMetadata.fromYaml(
     		photoId,
-            "Photo:\n" + 
+    		"Photo:\n" + 
+    		"   Description:\n" + 
+    		"   Photographer:\n" + 
+    		"       Drue Carr\n" + 
+    		"   Tags:\n" + 
+    		"       Colors:\n" + 
+    		"           - 000M"
+    	);
+/*            "Photo:\n" + 
             "   \t  Tags:\n" +
             "			Colors:\n" +
             "				- MyFavoriteColor"
     	);
+*/
     }
 
 }
