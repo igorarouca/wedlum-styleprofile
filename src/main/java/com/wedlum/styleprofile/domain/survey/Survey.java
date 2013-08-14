@@ -35,21 +35,22 @@ public class Survey {
 	}
 
 	private void populate(String[] data, Profile profile) {
+        Map<String, String> all = new StyleProfiler(profile, photoSource).resolveAll();
 		for (int i = 0; i < data.length; ++i) {
-			String resolved = resolve(data[i], profile);
+			String resolved = resolve(data[i], profile, all);
 			data[i] = resolved;
 		}
 	}
 
-	public String resolve(String item, Profile profile) {
+	public String resolve(String item, Profile profile, Map<String, String> all) {
 		if (item.startsWith("{"))
-			return getValue(item.replace("{", "").replace("}", ""), profile);
+			return getValue(item.replace("{", "").replace("}", ""), profile, all);
 
 		return item;
 	}
 		 
-	private String getValue(String itemName, Profile profile) {
-		Map<String, String> all = new StyleProfiler(profile, photoSource).resolveAll();
+	private String getValue(String itemName, Profile profile, Map<String, String> all) {
+
 		if (!all.containsKey(itemName)) return itemName + " NOT FOUND";
 		return all.get(itemName);
 	}

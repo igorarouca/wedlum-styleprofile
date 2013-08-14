@@ -1,15 +1,22 @@
 package com.wedlum.styleprofile.domain.photo;
 
+import java.util.Collections;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.wedlum.styleprofile.domain.DomainObject;
 
 public class Photo implements DomainObject {
 
 	private static final long serialVersionUID = 1L;
+    private static Map<String, ColorSwatchMetadata> parseMetaCache =
+            Collections.synchronizedMap(new LinkedHashMap<String, ColorSwatchMetadata>());
 
-	private String id;
+
+    private String id;
 	private String metadata;
+    private ColorSwatchMetadata meta;
 
 	public Photo() {
 	}
@@ -17,6 +24,9 @@ public class Photo implements DomainObject {
 	public Photo(String id, String metadata) {
 		this.id = id;
 		this.metadata = metadata;
+        if (!parseMetaCache.containsKey(this.getMetadata()))
+            parseMetaCache.put(this.getMetadata(), ColorSwatchMetadata.fromJson(this.getMetadata()));
+        this.meta = parseMetaCache.get(this.getMetadata());
 	}
 
 	public String getId() {
@@ -43,11 +53,11 @@ public class Photo implements DomainObject {
 	}
 
 	public List<String> getColors() {
-		return ColorSwatchMetadata.fromJson(getMetadata(), id).getValue("Colors");
+		return meta.getValue("Colors");
 	}
 
 	public List<String> getFeaturedColors() {
-		return ColorSwatchMetadata.fromJson(getMetadata()).getValue("FeaturedColor");
+		return meta.getValue("FeaturedColor");
 	}
 
 	@Override

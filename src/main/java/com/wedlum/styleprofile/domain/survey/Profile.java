@@ -26,6 +26,8 @@ public class Profile {
 	@SuppressWarnings("unchecked")
 	public Profile(Map<?, ?> $sessionsByName) {
         this.photoIds = new ArrayList<String>();
+        if ($sessionsByName.containsKey("photoIds"))
+            this.photoIds = (List<String>) $sessionsByName.get("photoIds");
         this.sessionsByName = (Map<String, List<String>>) $sessionsByName;
 	}
 

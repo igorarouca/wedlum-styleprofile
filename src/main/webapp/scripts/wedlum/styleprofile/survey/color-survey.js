@@ -100,7 +100,9 @@ var PhotoView = Backbone.View.extend({
 });
 
 $(function() {
-    var profile = {};
+    var profile = {
+        photoIds: []
+    };
     var survey = new wedlum.styleprofile.survey.Survey(profile);
 
     wedlum.styleprofile.survey.session = new wedlum.styleprofile.survey.Session();
@@ -111,6 +113,7 @@ $(function() {
 	            wedlum.styleprofile.survey.session.resetAll();
 	           _(nextStep.data).each(function(photo){
 	               wedlum.styleprofile.survey.session.addPhoto(photo);
+                   profile.photoIds.push(photo);
 	           });
 	            var view = new PhotoListView({ model: wedlum.styleprofile.survey.session });
 	            view.el = $("ul#photo-group-list")[0];

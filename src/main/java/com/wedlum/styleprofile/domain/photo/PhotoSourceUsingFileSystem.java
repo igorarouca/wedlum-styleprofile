@@ -83,7 +83,11 @@ public class PhotoSourceUsingFileSystem implements PhotoSource {
             if (isImageFile(file)) {
                 String photoId = file.getName();
 				updated(photoId);
-                setMetadata(photoId, ColorSwatchMetadata.fromJson(getMetadata(photoId)));
+                System.out.println(photoId);
+                String metadataSource = getMetadata(photoId);
+                if (metadataSource.isEmpty())
+                    continue;
+                setMetadata(photoId, ColorSwatchMetadata.fromJson(metadataSource));
             }
         }
     }
