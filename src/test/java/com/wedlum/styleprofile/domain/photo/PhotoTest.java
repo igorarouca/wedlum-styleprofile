@@ -7,12 +7,11 @@ public class PhotoTest {
 
     @Test
     public void invalidMetadata(){
-        Photo subject = new Photo("myPhoto.png", "garbage");
         try {
-            subject.getColors();
+            Photo subject = new Photo("myPhoto.png", "garbage");
             Assert.fail();
         } catch (IllegalStateException ex){
-            Assert.assertEquals("myPhoto.png: invalid metadata: Root tag 'Photo:' not found.", ex.getMessage());
+            Assert.assertEquals("Invalid: invalid metadata: Root tag 'Photo:' not found.", ex.getMessage());
         }
 
     }
