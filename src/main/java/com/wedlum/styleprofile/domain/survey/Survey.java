@@ -34,6 +34,11 @@ public class Survey {
 		throw new IllegalStateException("end of test not yet implemented");
 	}
 
+	public Result resultFor(Profile profile) {
+		String style = new StyleProfiler(profile, photoSource).style(); 
+		return new Result(style);
+	}
+
 	private void populate(String[] data, Profile profile) {
         Map<String, String> all = new StyleProfiler(profile, photoSource).resolveAll();
 		for (int i = 0; i < data.length; ++i) {
