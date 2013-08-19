@@ -47,11 +47,22 @@ public class SurveyController {
         if (jsonProfile == null)
         	return new Profile();
 
-        return new Profile(parse(jsonProfile));
+        return new Profile(parseSessionByName(jsonProfile), parseSessionDataByName(jsonProfile));
     }
 
-	@SuppressWarnings("unchecked")
-	private Map<String, List<String>> parse(String jsonProfile) {
+    private Map<?, ?> parseSessionDataByName(String jsonProfile) {
+        HashMap<String, Object> $profile = (HashMap<String, Object>) ParseUtils.fromJson(jsonProfile, HashMap.class);
+        Map<String, Map<String, Object>> result = new LinkedHashMap<String, Map<String, Object>>();
+
+        for (Entry<String, Object> entry : $profile.entrySet())
+            if (entry.getValue() instanceof Map)
+                result.put(entry.getKey(), (Map<String, Object>) entry.getValue());
+
+        return result;
+    }
+
+    @SuppressWarnings("unchecked")
+	private Map<String, List<String>> parseSessionByName(String jsonProfile) {
 		HashMap<String, Object> $profile = (HashMap<String, Object>) ParseUtils.fromJson(jsonProfile, HashMap.class);
 		Map<String, List<String>> result = new LinkedHashMap<String, List<String>>();
 

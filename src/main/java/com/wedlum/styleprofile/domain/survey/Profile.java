@@ -11,24 +11,27 @@ import com.wedlum.styleprofile.domain.photo.PhotoSource;
 // Profile is a DTO used to store the interaction of the user with the survey.
 public class Profile {
 
-	// List of photos the user has been exposed
+
+    // List of photos the user has been exposed
 	public List<String> photoIds;
 
 	PhotoSource photoSource;
 
 	// List of photos the user liked
 	private Map<String, List<String>> sessionsByName;
+    private final Map<String, Map<String, Object>> sessionsDataByName;
 
     public Profile() {
-        this(new LinkedHashMap<Object, Object>());
+        this(new LinkedHashMap<Object, Object>(), new LinkedHashMap<Object, Object>());
 	}
 
 	@SuppressWarnings("unchecked")
-	public Profile(Map<?, ?> $sessionsByName) {
+	public Profile(Map<?, ?> $sessionsByName, Map<?, ?> $sessionDataByName) {
         this.photoIds = new ArrayList<String>();
         if ($sessionsByName.containsKey("photoIds"))
             this.photoIds = (List<String>) $sessionsByName.get("photoIds");
         this.sessionsByName = (Map<String, List<String>>) $sessionsByName;
+        this.sessionsDataByName = (Map<String, Map<String, Object>>) $sessionDataByName;
 	}
 
 	public void addSession(String name, List<String> session) {
