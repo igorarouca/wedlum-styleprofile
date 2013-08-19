@@ -42,12 +42,6 @@ public class TagAutocompleteImpl implements TagAutocomplete {
         for(String source : storage.values()) {
             Map<String, Object> model = ParseUtils.fromYaml(source);
             if (model == null) continue;
-            Object metadata = ParseUtils.fromYaml(model.get("metadata").toString());
-            if (!(metadata instanceof Map))
-            	continue;
-
-            model = (Map<String, Object>) metadata;
-
             traverse("Root", model, result);
         }
 
@@ -69,6 +63,8 @@ public class TagAutocompleteImpl implements TagAutocomplete {
                 traverse(child, (Map<String, Object>) value,result);
             } else if (value instanceof String) {
                 addChild(result, child, value);
+            } else if (value instanceof Integer) {
+                addChild(result, child, "" + value);
             } else if (value instanceof ArrayList) {
                 ArrayList<String> list = (ArrayList<String>) value;
                 for(Object each : list)

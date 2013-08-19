@@ -51,7 +51,7 @@ public class PhotoGallery  {
         String stored = source.getMetadata(id);
         if (stored == "")
             return ParseUtils.toJson(new Photo(id, ""));
-        return stored;
+        return ParseUtils.toJson(new Photo(id, stored));
     }
 
 	public void storeDetail(String id, String $metadata) {
