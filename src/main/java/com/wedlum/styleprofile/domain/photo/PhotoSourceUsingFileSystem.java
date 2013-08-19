@@ -83,7 +83,6 @@ public class PhotoSourceUsingFileSystem implements PhotoSource {
             if (isImageFile(file)) {
                 String photoId = file.getName();
 				updated(photoId);
-                System.out.println(photoId);
                 String metadataSource = getMetadata(photoId);
                 if (metadataSource.isEmpty())
                     continue;
