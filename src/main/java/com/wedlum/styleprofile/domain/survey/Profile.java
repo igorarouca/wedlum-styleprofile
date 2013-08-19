@@ -18,8 +18,7 @@ public class Profile {
 	PhotoSource photoSource;
 
 	// List of photos the user liked
-	private Map<String, List<String>> sessionsByName;
-    private final Map<String, Map<String, Object>> sessionsDataByName;
+    private final Map<String, Map<String, Object>> sessionDataByName;
 
     public Profile() {
         this(new LinkedHashMap<Object, Object>(), new LinkedHashMap<Object, Object>());
@@ -30,34 +29,36 @@ public class Profile {
         this.photoIds = new ArrayList<String>();
         if ($sessionsByName.containsKey("photoIds"))
             this.photoIds = (List<String>) $sessionsByName.get("photoIds");
-        this.sessionsByName = (Map<String, List<String>>) $sessionsByName;
-        this.sessionsDataByName = (Map<String, Map<String, Object>>) $sessionDataByName;
+        this.sessionDataByName = (Map<String, Map<String, Object>>) $sessionDataByName;
 	}
 
 	public void addSession(String name, List<String> session) {
-		sessionsByName.put(name, session);
+		Map<String, Object> sessionData = new LinkedHashMap<String, Object>();
+		sessionData.put("likedPhotos", session);
+		sessionDataByName.put(name + "Data", sessionData);
 	}
 
+	@SuppressWarnings("unchecked")
 	public List<String> getSession(String name) {
-		return sessionsByName.get(name);
+		return (List<String>) sessionDataByName.get(name + "Data").get("likedPhotos");
 	}
 
 	public boolean hasSession(String name) {
-		return sessionsByName.containsKey(name);
-	}
-
-	public boolean isEmpty() {
-		return sessionsByName.isEmpty();
+		return sessionDataByName.containsKey(name + "Data");
 	}
 
     public Iterable<String> allSessions() {
-        return sessionsByName.keySet();
+    	List<String> result = new ArrayList<String>();
+        for (String sessionDataName: sessionDataByName.keySet())
+        	result.add(sessionDataName.replaceAll("Data$", ""));
+
+        return result;
     }
 
     public List<Photo> getLikedPhotos() {
     	List<String> likedPhotoIds = new ArrayList<String>();
-        for (List<String> likes : sessionsByName.values())
-			likedPhotoIds.addAll(likes);
+        for (String sessionName : allSessions())
+        	likedPhotoIds.addAll(getSession(sessionName));
 
         return asPhotos(likedPhotoIds);
     }

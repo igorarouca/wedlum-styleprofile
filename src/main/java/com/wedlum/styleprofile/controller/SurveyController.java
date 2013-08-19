@@ -50,7 +50,8 @@ public class SurveyController {
         return new Profile(parseSessionByName(jsonProfile), parseSessionDataByName(jsonProfile));
     }
 
-    private Map<?, ?> parseSessionDataByName(String jsonProfile) {
+    @SuppressWarnings("unchecked")
+	private Map<?, ?> parseSessionDataByName(String jsonProfile) {
         HashMap<String, Object> $profile = (HashMap<String, Object>) ParseUtils.fromJson(jsonProfile, HashMap.class);
         Map<String, Map<String, Object>> result = new LinkedHashMap<String, Map<String, Object>>();
 
