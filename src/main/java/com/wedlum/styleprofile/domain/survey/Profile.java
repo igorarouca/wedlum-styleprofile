@@ -1,9 +1,6 @@
 package com.wedlum.styleprofile.domain.survey;
 
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import com.wedlum.styleprofile.domain.photo.Photo;
 import com.wedlum.styleprofile.domain.photo.PhotoSource;
@@ -11,30 +8,28 @@ import com.wedlum.styleprofile.domain.photo.PhotoSource;
 // Profile is a DTO used to store the interaction of the user with the survey.
 public class Profile {
 
-
-    // List of photos the user has been exposed
-	public List<String> photoIds;
-
 	PhotoSource photoSource;
 
 	// List of photos the user liked
     private final Map<String, Map<String, Object>> sessionDataByName;
 
     public Profile() {
-        this(new LinkedHashMap<Object, Object>(), new LinkedHashMap<Object, Object>());
+        this(new LinkedHashMap<Object, Object>());
 	}
 
 	@SuppressWarnings("unchecked")
-	public Profile(Map<?, ?> $sessionsByName, Map<?, ?> $sessionDataByName) {
-        this.photoIds = new ArrayList<String>();
-        if ($sessionsByName.containsKey("photoIds"))
-            this.photoIds = (List<String>) $sessionsByName.get("photoIds");
+	public Profile(Map<?, ?> $sessionDataByName) {
         this.sessionDataByName = (Map<String, Map<String, Object>>) $sessionDataByName;
 	}
 
-	public void addSession(String name, List<String> session) {
+    public void addSession(String name, List<String> liked) {
+        this.addSession(name, liked, Collections.EMPTY_LIST);
+    }
+
+	public void addSession(String name, List<String> liked, List<String> all) {
 		Map<String, Object> sessionData = new LinkedHashMap<String, Object>();
-		sessionData.put("likedPhotos", session);
+		sessionData.put("likedPhotos", liked);
+        sessionData.put("allPhotos", all);
 		sessionDataByName.put(name + "Data", sessionData);
 	}
 
@@ -64,7 +59,14 @@ public class Profile {
     }
 
 	public List<Photo> getPhotos() {
-		return asPhotos(photoIds);
+        List<String> result = new ArrayList<String>();
+        for (String sessionName : allSessions()) {
+            Collection<? extends String> allPhotos = (Collection<? extends String>) sessionDataByName.get(sessionName + "Data").get("allPhotos");
+            if (allPhotos != null)
+                result.addAll(allPhotos);
+        }
+
+        return asPhotos(result);
 	}
 
     private List<Photo> asPhotos(List<String> ids) {

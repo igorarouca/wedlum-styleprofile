@@ -36,9 +36,8 @@ public class StyleProfilerTest {
     public void testResolvePalettes() {
     	Profile profile = new Profile();
 
-    	profile.addSession("session1", Arrays.asList("1a.png","2b.png"));
-        profile.addSession("session2", Arrays.asList("1a.png"));
-        profile.photoIds = Arrays.asList("1a.png", "1a.png", "1a.png", "2b.png", "2b.png");
+    	profile.addSession("session1", Arrays.asList("1a.png","2b.png"), Arrays.asList("1a.png", "1a.png","1a.png"));
+        profile.addSession("session2", Arrays.asList("1a.png"), Arrays.asList("2b.png", "2b.png"));
 
         PhotoSourceMock photoSourceMock = new PhotoSourceMock();
         StyleProfiler subject = new StyleProfiler(profile, photoSourceMock);
