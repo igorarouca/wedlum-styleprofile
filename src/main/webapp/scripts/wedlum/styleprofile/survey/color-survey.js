@@ -127,11 +127,20 @@ $(function() {
                     view.render();
                     $("#central-photos").attr("class", "photo-list " + nextStep.name);
                     $("#central-photos").toggle("slide", { direction: "right" }, 800);
+
                     wedlum.styleprofile.survey.session.on("complete", function() {
                         if (profile[nextStep.name]) return;
-                        profile[nextStep.name] = _(wedlum.styleprofile.survey.session.likes.models).map(function(each){return each.id;});
+
+                        profile[nextStep.name] = _(wedlum.styleprofile.survey.session.likes.models).map(function(each){ return each.id; });
+                        profile[nextStep.name + 'Data'] = {
+                            allPhotos : nextStep.data,
+                            likedPhotos : profile[nextStep.name],
+                            availableLikes: wedlum.styleprofile.survey.session.limit
+                        };
+
                         next();
                     });
+
                 });
         	});
         });

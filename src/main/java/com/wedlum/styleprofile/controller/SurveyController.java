@@ -1,11 +1,14 @@
 package com.wedlum.styleprofile.controller;
 
 import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 
-import com.wedlum.styleprofile.util.web.ParseUtils;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,6 +19,7 @@ import com.wedlum.styleprofile.domain.survey.Profile;
 import com.wedlum.styleprofile.domain.survey.Result;
 import com.wedlum.styleprofile.domain.survey.Step;
 import com.wedlum.styleprofile.domain.survey.Survey;
+import com.wedlum.styleprofile.util.web.ParseUtils;
 
 @Controller
 @RequestMapping(value = "survey")
@@ -39,10 +43,23 @@ public class SurveyController {
 
     private Profile readProfileFrom(HttpServletRequest request) {
         String jsonProfile = request.getParameter("profile");
-        if (jsonProfile != null)
-            return new Profile(ParseUtils.fromJson(jsonProfile, HashMap.class));
 
-        return new Profile();
+        if (jsonProfile == null)
+        	return new Profile();
+
+        return new Profile(parse(jsonProfile));
     }
+
+	@SuppressWarnings("unchecked")
+	private Map<String, List<String>> parse(String jsonProfile) {
+		HashMap<String, Object> $profile = (HashMap<String, Object>) ParseUtils.fromJson(jsonProfile, HashMap.class);
+		Map<String, List<String>> result = new LinkedHashMap<String, List<String>>();
+
+		for (Entry<String, Object> entry : $profile.entrySet())
+			if (entry.getValue() instanceof List)
+				result.put(entry.getKey(), (List<String>) entry.getValue());
+		
+		return result;
+	}
 
 }
