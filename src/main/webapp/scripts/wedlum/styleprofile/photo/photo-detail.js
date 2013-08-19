@@ -31,7 +31,7 @@ var PhotoDetailView = Backbone.View.extend({
 
         codiad.autocomplete.getSuggestions = function(){
             var result = {};
-            _(wedlum.photo.tagAutocomplete.get(that.scope)).each(function(suggestion) {
+            _(wedlum.styleprofile.photo.tagAutocomplete.get(that.scope)).each(function(suggestion) {
                 result[suggestion + (wedlum.styleprofile.photo.tagAutocomplete.isBranch(that.scope + "/" + suggestion) ?":":"") + " "] = 0;
             });
             return result;
