@@ -110,22 +110,29 @@ $(function() {
     var next = function() {
         survey.nextStep(function (nextStep) {
         	$("#central-photos").toggle("slide", { direction: "left" }, 800, function() {
-	            wedlum.styleprofile.survey.session.resetAll();
-	           _(nextStep.data).each(function(photo){
-	               wedlum.styleprofile.survey.session.addPhoto(photo);
-                   profile.photoIds.push(photo);
-	           });
-	            var view = new PhotoListView({ model: wedlum.styleprofile.survey.session });
-	            view.el = $("ul#photo-group-list")[0];
-	            $(view.el).html("");
-	            view.render();
-	            $("#central-photos").attr("class", "photo-list " + nextStep.name);
-	            $("#central-photos").toggle("slide", { direction: "right" }, 800);
-	            wedlum.styleprofile.survey.session.on("complete", function() {
-	                if (profile[nextStep.name]) return;
-	                profile[nextStep.name] = _(wedlum.styleprofile.survey.session.likes.models).map(function(each){return each.id;});
-	                next();
-	            });
+
+                var imagesToPreload = [];
+                _(nextStep.data).each(function(photo){
+                    imagesToPreload.push('photo-storage/' + photo);
+                });
+                preloadImages(imagesToPreload, function(){
+                    wedlum.styleprofile.survey.session.resetAll();
+                    _(nextStep.data).each(function(photo){
+                        wedlum.styleprofile.survey.session.addPhoto(photo);
+                        profile.photoIds.push(photo);
+                    });
+                    var view = new PhotoListView({ model: wedlum.styleprofile.survey.session });
+                    view.el = $("ul#photo-group-list")[0];
+                    $(view.el).html("");
+                    view.render();
+                    $("#central-photos").attr("class", "photo-list " + nextStep.name);
+                    $("#central-photos").toggle("slide", { direction: "right" }, 800);
+                    wedlum.styleprofile.survey.session.on("complete", function() {
+                        if (profile[nextStep.name]) return;
+                        profile[nextStep.name] = _(wedlum.styleprofile.survey.session.likes.models).map(function(each){return each.id;});
+                        next();
+                    });
+                });
         	});
         });
     };

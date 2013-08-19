@@ -2,6 +2,18 @@ afterOneSecond = function(callback) {
     setTimeout(callback, 1000);
 };
 
+preloadImages = function(images, callback) {
+    var count = images.length;
+    _(images).each(function(image){
+        var subject = new Image();
+        subject.src = image;
+        subject.onload=function(){
+            count--;
+            if (count == 0) callback();
+        };
+    });
+};
+
 (function($){
     function update(modal) {
         modal.find('.modal-body').outerHeight(
