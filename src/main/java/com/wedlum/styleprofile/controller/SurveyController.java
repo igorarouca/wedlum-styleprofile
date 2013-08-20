@@ -1,10 +1,6 @@
 package com.wedlum.styleprofile.controller;
 
 import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
@@ -47,22 +43,7 @@ public class SurveyController {
         if (jsonProfile == null)
         	return new Profile();
 
-        return new Profile(parseSessionDataByName(jsonProfile));
+		return new Profile(ParseUtils.fromJson(jsonProfile, HashMap.class));
     }
-
-    @SuppressWarnings("unchecked")
-	private Map<?, ?> parseSessionDataByName(String jsonProfile) {
-        HashMap<String, Object> $profile = (HashMap<String, Object>) ParseUtils.fromJson(jsonProfile, HashMap.class);
-        Map<String, Map<String, Object>> result = new LinkedHashMap<String, Map<String, Object>>();
-
-        for (Entry<String, Object> entry : $profile.entrySet())
-            if (entry.getValue() instanceof Map)
-                result.put(entry.getKey(), (Map<String, Object>) entry.getValue());
-            else
-                System.out.println("Gotcha " + entry.getKey());
-
-        return result;
-    }
-
 
 }

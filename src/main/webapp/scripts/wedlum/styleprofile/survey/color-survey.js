@@ -9,7 +9,7 @@ wedlum.styleprofile.survey.Session = Backbone.Model.extend({
     allPhotos: new Backbone.Collection(),
     likes: new Backbone.Collection(),
 
-    initialize: function(){
+    initialize: function() {
         this.set('likesCount', 0);
         this.set('limit', this.limit);
     },
@@ -19,7 +19,7 @@ wedlum.styleprofile.survey.Session = Backbone.Model.extend({
         this.allPhotos.add(photos);
     },
 
-    like: function (photo){
+    like: function (photo) {
         this.reset(photo);
         if (this.likes.length == this.limit){
             wedlum.notifier.warning("You have already liked " + this.limit + " photos");
@@ -33,18 +33,18 @@ wedlum.styleprofile.survey.Session = Backbone.Model.extend({
         }
     },
 
-    reset: function (photo){
+    reset: function (photo) {
         this.likes.remove(photo);
         photo.set('status', 'default');
         this.set('likesCount', this.likes.length);
     },
 
-    resetAll: function (){
+    resetAll: function () {
         this.likes.reset();
         this.allPhotos.reset();
     },
 
-    statusChange: function(photo){
+    statusChange: function(photo) {
         this.trigger("statusChange", photo);
     }
 });
@@ -92,7 +92,7 @@ var PhotoView = Backbone.View.extend({
         this.session.reset(this.model);
     },
 
-    render: function(){
+    render: function() {
         var input = this.model.attributes;
         parameters = _(input).extend(this.session.attributes);
         this.$el.html(this.template(parameters));
@@ -111,7 +111,7 @@ $(function() {
         	$("#central-photos").toggle("slide", { direction: "left" }, 800, function() {
 
                 var imagesToPreload = [];
-                _(nextStep.data).each(function(photo){
+                _(nextStep.data).each(function(photo) {
                     imagesToPreload.push('photo-storage/' + photo);
                 });
                 preloadImages(imagesToPreload, function(){
