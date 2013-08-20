@@ -56,6 +56,7 @@ public class Photo implements DomainObject {
 		return meta.getValue("Colors");
 	}
 
+	@SuppressWarnings("unchecked")
 	public List<String> getFeaturedColors() {
         if (meta == null) return Collections.EMPTY_LIST;
 		return meta.getValue("FeaturedColor");

@@ -26,7 +26,8 @@ public class Profile {
         this.sessionByName = (Map<String, Map<String, Object>>) $sessionByName;
 	}
 
-    public void addSession(String name, List<String> liked) {
+    @SuppressWarnings("unchecked")
+	public void addSession(String name, List<String> liked) {
         this.addSession(name, liked, Collections.EMPTY_LIST);
     }
 
@@ -61,7 +62,8 @@ public class Profile {
 	public List<Photo> getPhotos() {
         List<String> result = new ArrayList<String>();
         for (String sessionName : allSessions()) {
-            Collection<? extends String> allPhotos = (Collection<? extends String>) sessionByName.get(sessionName).get("allPhotos");
+            @SuppressWarnings("unchecked")
+			Collection<? extends String> allPhotos = (Collection<? extends String>) sessionByName.get(sessionName).get("allPhotos");
             if (allPhotos != null)
                 result.addAll(allPhotos);
         }

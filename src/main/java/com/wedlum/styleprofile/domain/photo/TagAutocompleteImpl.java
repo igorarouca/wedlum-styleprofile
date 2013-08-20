@@ -35,7 +35,6 @@ public class TagAutocompleteImpl implements TagAutocomplete {
 	}
 
     @Override
-	@SuppressWarnings("unchecked")
 	public Map<String, Set<String>> getSuggestions() {
         LinkedHashMap<String, Set<String>> result = new LinkedHashMap<String, Set<String>>();
 
