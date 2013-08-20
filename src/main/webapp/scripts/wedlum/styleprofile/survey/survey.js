@@ -16,8 +16,6 @@ wedlum.styleprofile.survey.Survey.prototype = {
 			data: { profile: JSON.stringify(this.profile) },
 			dataType: 'json',
 			success: function(step) {
-                that.profile.photos = that.profile.photos||new Array();
-                _(step.data).each(function(e){that.profile.photos.push(e)});
                 success(step);
             }
 		});

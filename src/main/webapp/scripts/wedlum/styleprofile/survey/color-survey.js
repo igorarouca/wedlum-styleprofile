@@ -101,9 +101,7 @@ var PhotoView = Backbone.View.extend({
 });
 
 $(function() {
-    var profile = {
-        photoIds: []
-    };
+    var profile = {};
     var survey = new wedlum.styleprofile.survey.Survey(profile);
 
     wedlum.styleprofile.survey.session = new wedlum.styleprofile.survey.Session();

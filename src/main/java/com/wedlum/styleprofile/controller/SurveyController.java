@@ -58,8 +58,11 @@ public class SurveyController {
         for (Entry<String, Object> entry : $profile.entrySet())
             if (entry.getValue() instanceof Map)
                 result.put(entry.getKey(), (Map<String, Object>) entry.getValue());
+            else
+                System.out.println("Gotcha " + entry.getKey());
 
         return result;
     }
+
 
 }

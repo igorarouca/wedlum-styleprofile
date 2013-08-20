@@ -17,7 +17,7 @@ asyncTest( "On empty profile return 1st single-color session", function() {
 
 	subject.nextStep(function(nextStep) {
 		equal(JSON.stringify(nextStep), JSON.stringify(firstSingleColorSession));
-        equal(18, profile.photos.length);
+        equal(18,nextStep.data.length);
 		start();
 	});
 });
