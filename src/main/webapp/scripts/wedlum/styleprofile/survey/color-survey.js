@@ -14,8 +14,9 @@ wedlum.styleprofile.survey.Session = Backbone.Model.extend({
         this.set('limit', this.limit);
     },
 
-    addPhoto: function(photo){
-        this.allPhotos.add(new wedlum.styleprofile.survey.Photo({photo: photo, id: photo, status: 'default'}));
+    setPhotos: function(photos) {
+        photos = _(photos).map(function(photo) { return new wedlum.styleprofile.survey.Photo({ photo: photo, id: photo, status: 'default' })});
+        this.allPhotos.add(photos);
     },
 
     like: function (photo){
@@ -117,10 +118,7 @@ $(function() {
                 });
                 preloadImages(imagesToPreload, function(){
                     wedlum.styleprofile.survey.session.resetAll();
-                    _(nextStep.data).each(function(photo){
-                        wedlum.styleprofile.survey.session.addPhoto(photo);
-                        profile.photoIds.push(photo);
-                    });
+                    wedlum.styleprofile.survey.session.setPhotos(nextStep.data);
                     var view = new PhotoListView({ model: wedlum.styleprofile.survey.session });
                     view.el = $("ul#photo-group-list")[0];
                     $(view.el).html("");
@@ -131,10 +129,9 @@ $(function() {
                     wedlum.styleprofile.survey.session.on("complete", function() {
                         if (profile[nextStep.name]) return;
 
-                        profile[nextStep.name] = _(wedlum.styleprofile.survey.session.likes.models).map(function(each){ return each.id; });
                         profile[nextStep.name + 'Data'] = {
                             allPhotos : nextStep.data,
-                            likedPhotos : profile[nextStep.name],
+                            likedPhotos : _(wedlum.styleprofile.survey.session.likes.models).map(function(each) { return each.id; }),
                             availableLikes: wedlum.styleprofile.survey.session.limit
                         };
 
