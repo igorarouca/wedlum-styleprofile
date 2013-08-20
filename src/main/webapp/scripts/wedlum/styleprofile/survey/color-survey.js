@@ -127,7 +127,7 @@ $(function() {
                     wedlum.styleprofile.survey.session.on("complete", function() {
                         if (profile[nextStep.name]) return;
 
-                        profile[nextStep.name + 'Data'] = {
+                        profile[nextStep.name] = {
                             allPhotos : nextStep.data,
                             likedPhotos : _(wedlum.styleprofile.survey.session.likes.models).map(function(each) { return each.id; }),
                             availableLikes: wedlum.styleprofile.survey.session.limit

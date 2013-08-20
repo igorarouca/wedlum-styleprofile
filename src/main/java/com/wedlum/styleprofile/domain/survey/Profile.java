@@ -15,16 +15,15 @@ public class Profile {
 
 	PhotoSource photoSource;
 
-	// List of photos the user liked
-    private final Map<String, Map<String, Object>> sessionDataByName;
+    private final Map<String, Map<String, Object>> sessionByName;
 
     public Profile() {
         this(new LinkedHashMap<Object, Object>());
 	}
 
 	@SuppressWarnings("unchecked")
-	public Profile(Map<?, ?> $sessionDataByName) {
-        this.sessionDataByName = (Map<String, Map<String, Object>>) $sessionDataByName;
+	public Profile(Map<?, ?> $sessionByName) {
+        this.sessionByName = (Map<String, Map<String, Object>>) $sessionByName;
 	}
 
     public void addSession(String name, List<String> liked) {
@@ -35,24 +34,20 @@ public class Profile {
 		Map<String, Object> sessionData = new LinkedHashMap<String, Object>();
 		sessionData.put("likedPhotos", liked);
         sessionData.put("allPhotos", all);
-		sessionDataByName.put(name + "Data", sessionData);
+		sessionByName.put(name, sessionData);
 	}
 
 	@SuppressWarnings("unchecked")
 	public List<String> getSession(String name) {
-		return (List<String>) sessionDataByName.get(name + "Data").get("likedPhotos");
+		return (List<String>) sessionByName.get(name).get("likedPhotos");
 	}
 
 	public boolean hasSession(String name) {
-		return sessionDataByName.containsKey(name + "Data");
+		return sessionByName.containsKey(name);
 	}
 
     public Iterable<String> allSessions() {
-    	List<String> result = new ArrayList<String>();
-        for (String sessionDataName: sessionDataByName.keySet())
-        	result.add(sessionDataName.replaceAll("Data$", ""));
-
-        return result;
+    	return sessionByName.keySet();
     }
 
     public List<Photo> getLikedPhotos() {
@@ -66,7 +61,7 @@ public class Profile {
 	public List<Photo> getPhotos() {
         List<String> result = new ArrayList<String>();
         for (String sessionName : allSessions()) {
-            Collection<? extends String> allPhotos = (Collection<? extends String>) sessionDataByName.get(sessionName + "Data").get("allPhotos");
+            Collection<? extends String> allPhotos = (Collection<? extends String>) sessionByName.get(sessionName).get("allPhotos");
             if (allPhotos != null)
                 result.addAll(allPhotos);
         }
