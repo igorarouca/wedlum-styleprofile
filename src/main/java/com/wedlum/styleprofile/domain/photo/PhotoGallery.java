@@ -38,20 +38,8 @@ public class PhotoGallery  {
 		return untagged;
 	}
 
-	public Photo photo(String id) {
-		for (String photoId : untagged)
-			if (photoId.equals(id))
-				return new Photo(id, "");
-		
-		throw new IllegalStateException("Photo not found: " + id);
-				
-	}
-
 	public String loadDetail(String id) {
-        String stored = source.getMetadata(id);
-        if (stored == "")
-            return ParseUtils.toJson(new Photo(id, ""));
-        return ParseUtils.toJson(new Photo(id, stored));
+        return ParseUtils.toJson(source.getPhoto(id));
     }
 
 	public void storeDetail(String id, String $metadata) {

@@ -69,7 +69,7 @@ public class Profile {
     private List<Photo> asPhotos(List<String> ids) {
         List<Photo> result = new ArrayList<Photo>();
         for (String id : ids)
-			result.add(new Photo(id, photoSource.getMetadata(id)));
+			result.add(photoSource.getPhoto(id));
 
         return result;
     }

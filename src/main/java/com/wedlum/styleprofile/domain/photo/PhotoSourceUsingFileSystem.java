@@ -62,6 +62,14 @@ public class PhotoSourceUsingFileSystem implements PhotoSource {
         metadataByPhotoId.remove(id);
     }
 
+    @Override
+    public Photo getPhoto(String id) {
+        String metadata = getMetadata(id);
+        if (metadata == null)
+            return new Photo(id, "");
+        return new Photo(id, metadata);
+    }
+
     private File getMetadataFile(String id) {
         return new File(STORAGE, id + ".metadata");
     }

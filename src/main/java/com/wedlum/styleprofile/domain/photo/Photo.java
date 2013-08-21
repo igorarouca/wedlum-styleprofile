@@ -1,5 +1,6 @@
 package com.wedlum.styleprofile.domain.photo;
 
+import java.io.IOException;
 import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -13,13 +14,9 @@ public class Photo implements DomainObject {
     private static Map<String, ColorSwatchMetadata> parseMetaCache =
             Collections.synchronizedMap(new LinkedHashMap<String, ColorSwatchMetadata>());
 
-
     private String id;
 	private String metadata;
     private ColorSwatchMetadata meta;
-
-	public Photo() {
-	}
 
 	public Photo(String id, String metadata) {
 		this.id = id;

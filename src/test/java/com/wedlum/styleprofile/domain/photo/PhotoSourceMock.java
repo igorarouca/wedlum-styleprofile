@@ -44,4 +44,9 @@ public class PhotoSourceMock implements PhotoSource {
     @Override
     public void delete(String id) {}
 
+    @Override
+    public Photo getPhoto(String id) {
+        return new Photo(id, getMetadata(id));
+    }
+
 }

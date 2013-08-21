@@ -41,7 +41,7 @@ class ColorRank {
     private List<String> getColors(List<String> photos) {
         List<String> result = new ArrayList<String>();
         for(String $photo : photos){
-            Photo photo = new Photo($photo, source.getMetadata($photo));
+            Photo photo = source.getPhoto($photo);
             result.addAll(photo.getColors());
         }
         return result;

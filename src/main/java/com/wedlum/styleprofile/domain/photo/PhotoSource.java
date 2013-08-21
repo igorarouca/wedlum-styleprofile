@@ -18,4 +18,5 @@ public interface PhotoSource {
 
     void delete(String photoId);
 
+    Photo getPhoto(String id);
 }

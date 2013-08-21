@@ -19,8 +19,7 @@ public class StyleProfiler {
 
     private static String selectPhotoFeaturingColor(PhotoSource photoSource, String color) {
     	for (String photo : photoSource.getPhotos()) {
-    		Photo newPhoto = new Photo(photo, photoSource.getMetadata(photo));
-			if (newPhoto.getFeaturedColors().contains(color))
+    		if (photoSource.getPhoto(photo).getFeaturedColors().contains(color))
                 return photo;
     	}
 
