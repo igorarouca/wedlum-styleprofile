@@ -1,7 +1,9 @@
 package com.wedlum.styleprofile.domain.photo;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 import com.wedlum.styleprofile.util.observer.Observer;
@@ -17,8 +19,12 @@ public class PhotoSourceMock implements PhotoSource {
     }
 
 	@Override
-	public String[] getPhotos() {
-		return storage.keySet().toArray(new String[0]);
+	public List<Photo> getPhotos() {
+		List<Photo> result = new ArrayList<Photo>();
+		for (String photoId : storage.keySet())
+			result.add(getPhoto(photoId));
+
+		return result;
 	}
 
     @Override

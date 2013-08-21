@@ -2,7 +2,9 @@ package com.wedlum.styleprofile.domain.photo;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.inject.Named;
@@ -24,10 +26,14 @@ public class PhotoSourceUsingFileSystem implements PhotoSource {
         updated(photoId);
     }
 
-    @Override
-    public String[] getPhotos() {
-    	return metadataByPhotoId.keySet().toArray(new String[0]);
-    }
+	@Override
+	public List<Photo> getPhotos() {
+		List<Photo> result = new ArrayList<Photo>();
+		for (String photoId : metadataByPhotoId.keySet())
+			result.add(getPhoto(photoId));
+
+		return result;
+	}
 
     public void addObserver(Observer<String> observer) {
         delegate.registerObserver(observer);
@@ -67,6 +73,7 @@ public class PhotoSourceUsingFileSystem implements PhotoSource {
         String metadata = getMetadata(id);
         if (metadata == null)
             return new Photo(id, "");
+
         return new Photo(id, metadata);
     }
 

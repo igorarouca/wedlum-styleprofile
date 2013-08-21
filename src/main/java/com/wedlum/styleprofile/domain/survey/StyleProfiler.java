@@ -18,9 +18,9 @@ public class StyleProfiler {
 	}
 
     private static String selectPhotoFeaturingColor(PhotoSource photoSource, String color) {
-    	for (String photo : photoSource.getPhotos()) {
-    		if (photoSource.getPhoto(photo).getFeaturedColors().contains(color))
-                return photo;
+    	for (Photo photo : photoSource.getPhotos()) {
+    		if (photo.getFeaturedColors().contains(color))
+                return photo.getId();
     	}
 
     	return "No photo found featuring color: " + color;

@@ -1,6 +1,5 @@
 package com.wedlum.styleprofile.domain.photo;
 
-import java.io.IOException;
 import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.List;
