@@ -27,7 +27,7 @@ asyncTest( "On profile with 1st single-color session return 2nd single-color ses
 
     var profile = {};
     var subject = new wedlum.styleprofile.survey.Survey(profile);
-    profile[firstSingleColorSession.name] = { likedPhotos: ["1.png", "2.png"] };
+    profile[firstSingleColorSession.name] = { likedPhotos: ["1.png", "2.png"], allPhotos: [] };
 
     subject.nextStep(function(nextStep) {
         equal(JSON.stringify(nextStep), JSON.stringify(secondSingleColorSession));
@@ -41,9 +41,9 @@ asyncTest( "On profile with favorite colors return 1st mini-palette session", fu
     var profile = {};
     var subject = new wedlum.styleprofile.survey.Survey(profile);
 
-    profile[firstSingleColorSession.name] =  { likedPhotos: ["1a.png", "2a.png", "3a.png", "4a.png"] };
-    profile[secondSingleColorSession.name] = { likedPhotos: ["1b.png", "2b.png", "3b.png", "4b.png"] };
-    profile[thirdSingleColorSession.name] =  { likedPhotos: ["1c.png", "2c.png", "3c.png", "4c.png"] };
+    profile[firstSingleColorSession.name] =  { likedPhotos: ["1a.png", "2a.png", "3a.png", "4a.png"], allPhotos: [] };
+    profile[secondSingleColorSession.name] = { likedPhotos: ["1b.png", "2b.png", "3b.png", "4b.png"], allPhotos: [] };
+    profile[thirdSingleColorSession.name] =  { likedPhotos: ["1c.png", "2c.png", "3c.png", "4c.png"], allPhotos: [] };
 
     var expected = JSON.parse(JSON.stringify(firstMiniPaletteSession));
     expected.data = [ "1a_A.png", "2a_A.png", "3a_A.png", "4a_A.png",
