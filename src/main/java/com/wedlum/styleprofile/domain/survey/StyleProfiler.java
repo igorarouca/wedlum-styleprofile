@@ -201,7 +201,7 @@ public class StyleProfiler {
         List<String> allColors = getColors(profile.getPhotos());
         List<String> likes = getColors(profile.getLikedPhotos());
 
-        List<String> ranked = ColorRank.rankColors(new ColorSession(likes, allColors));
+        List<String> ranked = new ColorRank(profile.photoSource).rankColors(profile.allSessionsObject());
 
         int i = 1;
         for (String color : ranked)

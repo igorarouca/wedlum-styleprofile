@@ -1,11 +1,6 @@
 package com.wedlum.styleprofile.domain.survey;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import com.wedlum.styleprofile.domain.photo.Photo;
 import com.wedlum.styleprofile.domain.photo.PhotoSource;
@@ -76,6 +71,19 @@ public class Profile {
         for (String id : ids)
 			result.add(new Photo(id, photoSource.getMetadata(id)));
 
+        return result;
+    }
+
+    public LinkedHashSet<Session> allSessionsObject() {
+        LinkedHashSet<Session> result = new LinkedHashSet<Session>();
+        for(Map<String, Object> $session : sessionByName.values()){
+            @SuppressWarnings("unchecked")
+            Session session =
+                    new Session(
+                            (List<String>) $session.get("likedPhotos"),
+                            (List<String>) $session.get("allPhotos"));
+            result.add(session);
+        }
         return result;
     }
 }

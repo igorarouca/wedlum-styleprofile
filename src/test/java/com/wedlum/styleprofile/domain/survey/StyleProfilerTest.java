@@ -27,7 +27,7 @@ public class StyleProfilerTest {
 
         assertEquals(
         	"{\"miniPalette1\":\"1a_A.png\",\"miniPalette2\":\"2a_A.png\",\"miniPalette3\":\"1b_A.png\"," +
-        	 "\"miniPalette4\":\"1a_C.png\",\"miniPalette5\":\"2a_C.png\",\"miniPalette6\":\"1b_C.png\",\"palette1\":\"No photo found featuring color: code\"}",
+        	 "\"miniPalette4\":\"1a_C.png\",\"miniPalette5\":\"2a_C.png\",\"miniPalette6\":\"1b_C.png\"}",
         	ParseUtils.toJson(resolved)
         );
     }

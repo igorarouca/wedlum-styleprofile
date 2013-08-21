@@ -8,12 +8,12 @@ final class ColorScoreComparator implements Comparator<String> {
 	private final List<String> likes;
 	private final List<String> allColors;
 
-	ColorScoreComparator(List<String> likes, List<String> allColors) {
-		this.likes = likes;
-		this.allColors = allColors;
-	}
+	public ColorScoreComparator(List<String> allColors, List<String> allLikes) {
+        this.allColors = allColors;
+        this.likes = allLikes;
+    }
 
-	int score(String color) {
+    int score(String color) {
 		int likesCount = count(color, likes);
 	    int timesShown = count(color, allColors);
 	    float magicFactor = 1.05f;

@@ -1,25 +1,50 @@
 package com.wedlum.styleprofile.domain.survey;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
+import com.wedlum.styleprofile.domain.photo.Photo;
+import com.wedlum.styleprofile.domain.photo.PhotoSource;
+
+import java.util.*;
 
 class ColorRank {
 
-	static List<String> rankColors(ColorSession colorSession) {
-		List<String> likes = colorSession.getLikes();
-		List<String> allColors = colorSession.getAllColors();
+    private PhotoSource source;
 
-		List<String> result = unique(likes);
-		Collections.sort(result, new ColorScoreComparator(likes, allColors));
+    public ColorRank(PhotoSource source){
+        this.source = source;
+    }
 
-		return result;
+	List<String> rankColors(LinkedHashSet<Session> allSessions) {
+        List<String> allColors = getAllColors(allSessions);
+        List<String> allLikes = getAllLikes(allSessions);
 
+        List<String> result = allColors;
+
+        Collections.sort(result, new ColorScoreComparator(allColors, allLikes));
+
+		return new ArrayList<String>(new LinkedHashSet<String>(result));
 	}
 
-	private static List<String> unique(List<String> likes) {
-		return new ArrayList<String>(new HashSet<String>(likes));
-	}
+    private List<String> getAllLikes(LinkedHashSet<Session> allSessions) {
+        List<String> result = new ArrayList<String>();
+        for (Session session : allSessions)
+            result.addAll(session.getLikes());
+        return getColors(result);
+    }
+
+    private List<String> getAllColors(LinkedHashSet<Session> allSessions) {
+        List<String> result = new ArrayList<String>();
+        for (Session session : allSessions)
+            result.addAll(getColors(session.getAllPhotos()));
+        return result;
+    }
+
+    private List<String> getColors(List<String> photos) {
+        List<String> result = new ArrayList<String>();
+        for(String $photo : photos){
+            Photo photo = new Photo($photo, source.getMetadata($photo));
+            result.addAll(photo.getColors());
+        }
+        return result;
+    }
 
 }
