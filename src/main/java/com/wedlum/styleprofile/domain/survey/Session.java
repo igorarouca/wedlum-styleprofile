@@ -7,24 +7,28 @@ import java.util.Map;
 
 public class Session {
 
-	@SuppressWarnings("unchecked")
-	public static Session fromMap(Map<String, Object> $session) {
+    @SuppressWarnings("unchecked")
+	public static Session fromMap(String name, Map<String, Object> $session) {
 		return new Session(
+                name,
 				(List<String>) $session.get("likedPhotos"),
 				(List<String>) $session.get("allPhotos")
 		);
 	}
 
+    private final String name;
 	private final List<String> likes;
-	private final List<String> allPhotos;
+    private final List<String> allPhotos;
 
-	public Session(List<String> likes, List<String> allColors) {
-		Validate.notNull(likes, "likes is required");
+	public Session(String name, List<String> likes, List<String> allColors) {
+
+        Validate.notNull(name, "name is required");
+        Validate.notNull(likes, "likes is required");
 		Validate.notNull(allColors, "allColors is required");
 
+        this.name = name;
 		this.likes = likes;
 		this.allPhotos = allColors;
-	
 	}
 
 
@@ -36,4 +40,7 @@ public class Session {
 		return allPhotos;
 	}
 
+    public String getName() {
+        return name;
+    }
 }

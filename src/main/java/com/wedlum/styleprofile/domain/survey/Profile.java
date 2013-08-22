@@ -1,11 +1,6 @@
 package com.wedlum.styleprofile.domain.survey;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.LinkedHashMap;
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import com.wedlum.styleprofile.domain.photo.Photo;
 import com.wedlum.styleprofile.domain.photo.PhotoSource;
@@ -15,20 +10,24 @@ public class Profile {
 
 	PhotoSource photoSource;
 
-    private final Map<String, Session> sessionObjectByName;
+    private final Set<Session> sessions;
+    private final Map<String, Session> sessionByName;
 
     public Profile() {
         this(new LinkedHashMap<String, Map<String, Object>>());
 	}
 
 	public Profile(Map<String, Map<String, Object>> $sessionByName) {
-        this.sessionObjectByName = parseSessions($sessionByName);
+        this.sessions = parseSessions($sessionByName);
+        this.sessionByName = new LinkedHashMap();
+        for(Session s : sessions)
+            sessionByName.put(s.getName(), s);
 	}
 
-    private static Map<String, Session> parseSessions(Map<String, Map<String, Object>> $sessionByName) {
-        Map<String, Session> result = new LinkedHashMap<String, Session>();
+    private static Set<Session> parseSessions(Map<String, Map<String, Object>> $sessionByName) {
+        Set<Session> result = new LinkedHashSet<Session>();
         for (Map.Entry<String, Map<String, Object>> entry : $sessionByName.entrySet())
-            result.put(entry.getKey(), Session.fromMap(entry.getValue()));
+            result.add(Session.fromMap(entry.getKey(), entry.getValue()));
 
         return result;
     }
@@ -43,19 +42,21 @@ public class Profile {
 		Map<String, Object> sessionData = new LinkedHashMap<String, Object>();
 		sessionData.put("likedPhotos", liked);
         sessionData.put("allPhotos", all);
-		sessionObjectByName.put(name, Session.fromMap(sessionData));
+        Session session = Session.fromMap(name, sessionData);
+        sessions.add(session);
+        sessionByName.put(name, session);
 	}
 
 	public List<String> getLikedPhotosFor(String session) {
-		return sessionObjectByName.get(session).getLikes();
+		return sessionByName.get(session).getLikes();
 	}
 
 	public boolean hasSession(String name) {
-		return sessionObjectByName.containsKey(name);
+		return sessionByName.containsKey(name);
 	}
 
     public Iterable<String> allSessions() {
-    	return sessionObjectByName.keySet();
+    	return sessionByName.keySet();
     }
 
     public List<Photo> getLikedPhotos() {
@@ -69,7 +70,7 @@ public class Profile {
 	public List<Photo> getPhotos() {
         List<String> result = new ArrayList<String>();
         for (String sessionName : allSessions()) {
-            List<String> allPhotos = sessionObjectByName.get(sessionName).getAllPhotos();
+            List<String> allPhotos = sessionByName.get(sessionName).getAllPhotos();
             if (allPhotos != null)
                 result.addAll(allPhotos);
         }
@@ -86,7 +87,7 @@ public class Profile {
     }
 
     public LinkedHashSet<Session> allSessionsObject() {
-        return new LinkedHashSet<Session>(sessionObjectByName.values());
+        return (LinkedHashSet<Session>) sessions;
     }
 
 }
