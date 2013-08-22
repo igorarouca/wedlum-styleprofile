@@ -11,15 +11,24 @@ public class Profile {
 	PhotoSource photoSource;
 
     private final Map<String, Map<String, Object>> sessionByName;
+    private final Map<String, Session> sessionObjectByName;
 
     public Profile() {
-        this(new LinkedHashMap<Object, Object>());
+        this(new LinkedHashMap<String, Map<String, Object>>());
 	}
 
 	@SuppressWarnings("unchecked")
-	public Profile(Map<?, ?> $sessionByName) {
-        this.sessionByName = (Map<String, Map<String, Object>>) $sessionByName;
+	public Profile(Map<String, Map<String, Object>> $sessionByName) {
+        this.sessionByName = $sessionByName;
+        this.sessionObjectByName = parseSessions($sessionByName);
 	}
+
+    private static Map<String, Session> parseSessions(Map<String, Map<String, Object>> $sessionByName) {
+        Map<String, Session> result = new LinkedHashMap<String, Session>();
+        for (Map.Entry<String, Map<String, Object>> entry : $sessionByName.entrySet())
+            result.put(entry.getKey(), Session.fromMap(entry.getValue()));
+        return result;
+    }
 
     @SuppressWarnings("unchecked")
 	public void addSession(String name, List<String> liked) {
@@ -78,12 +87,10 @@ public class Profile {
         LinkedHashSet<Session> result = new LinkedHashSet<Session>();
         for(Map<String, Object> $session : sessionByName.values()){
             @SuppressWarnings("unchecked")
-            Session session =
-                    new Session(
-                            (List<String>) $session.get("likedPhotos"),
-                            (List<String>) $session.get("allPhotos"));
+            Session session = Session.fromMap($session);
             result.add(session);
         }
         return result;
     }
+
 }

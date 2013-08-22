@@ -1,8 +1,9 @@
 package com.wedlum.styleprofile.domain.survey;
 
-import java.util.List;
-
 import org.apache.commons.lang3.Validate;
+
+import java.util.List;
+import java.util.Map;
 
 public class Session {
 
@@ -18,7 +19,13 @@ public class Session {
 	
 	}
 
-	public List<String> getLikes() {
+    public static Session fromMap(Map<String, Object> $session) {
+        return new Session(
+                (List<String>) $session.get("likedPhotos"),
+                (List<String>) $session.get("allPhotos"));
+    }
+
+    public List<String> getLikes() {
 		return likes;
 	}
 
