@@ -5,7 +5,6 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.wedlum.styleprofile.domain.photo.Photo;
 import com.wedlum.styleprofile.domain.photo.PhotoSource;
 
 public class StyleProfiler {
@@ -208,14 +207,10 @@ public class StyleProfiler {
             return new ArrayList<String>();
 
         List<String> result = new ArrayList<String>();
-        for (String item : getSession(sessionName))
+        for (String item : profile.getLikedPhotosFor(sessionName))
             result.add(item.replace(".png", suffix + ".png"));
 
         return result;
-    }
-
-	private List<String> getSession(String sessionName) {
-        return profile.getSession(sessionName);
     }
 
 }

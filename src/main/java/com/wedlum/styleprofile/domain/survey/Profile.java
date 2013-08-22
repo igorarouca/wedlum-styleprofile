@@ -34,8 +34,8 @@ public class Profile {
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<String> getSession(String name) {
-		return (List<String>) sessionByName.get(name).get("likedPhotos");
+	public List<String> getLikedPhotosFor(String session) {
+		return (List<String>) sessionByName.get(session).get("likedPhotos");
 	}
 
 	public boolean hasSession(String name) {
@@ -49,7 +49,7 @@ public class Profile {
     public List<Photo> getLikedPhotos() {
     	List<String> likedPhotoIds = new ArrayList<String>();
         for (String sessionName : allSessions())
-        	likedPhotoIds.addAll(getSession(sessionName));
+        	likedPhotoIds.addAll(getLikedPhotosFor(sessionName));
 
         return asPhotos(likedPhotoIds);
     }
