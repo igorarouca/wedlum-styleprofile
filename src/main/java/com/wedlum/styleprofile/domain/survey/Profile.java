@@ -19,7 +19,7 @@ public class Profile {
 
 	public Profile(Map<String, Map<String, Object>> $sessionByName) {
         this.sessions = parseSessions($sessionByName);
-        this.sessionByName = new LinkedHashMap();
+        this.sessionByName = new LinkedHashMap<String, Session>();
         for(Session s : sessions)
             sessionByName.put(s.getName(), s);
 	}
