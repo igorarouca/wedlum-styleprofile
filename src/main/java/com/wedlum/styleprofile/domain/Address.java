@@ -49,32 +49,6 @@ public class Address implements DomainObject {
 	}
 
 	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((zipCode == null) ? 0 : zipCode.hashCode());
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj) return true;
-		if (obj == null) return false;
-
-		if (getClass() != obj.getClass())
-			return false;
-
-		Address other = (Address) obj;
-		if (zipCode == null) {
-			if (other.zipCode != null)
-				return false;
-		} else if (!zipCode.equals(other.zipCode))
-			return false;
-
-		return true;
-	}
-
-	@Override
 	public String toString() {
 		return "Address [id=" + id + ", zipCode=" + zipCode + "]";
 	}
