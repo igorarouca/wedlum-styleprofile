@@ -3,7 +3,10 @@ package com.wedlum.styleprofile.domain.survey;
 import static junit.framework.Assert.assertEquals;
 
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.LinkedHashSet;
 import java.util.Map;
+import java.util.Set;
 
 import org.junit.Ignore;
 import org.junit.Test;
@@ -14,11 +17,15 @@ import com.wedlum.styleprofile.util.web.ParseUtils;
 
 public class StyleProfilerTest {
 
-    @Test
+	@Test
+    @SuppressWarnings("unchecked")
     public void testResolveMiniPalettes() throws Exception {
-        Profile profile = new Profile();
-        profile.addSession("singleColorSession1", Arrays.asList("1a.png","2a.png"));
-        profile.addSession("singleColorSession2", Arrays.asList("1b.png"));
+		Profile profile = new Profile(
+			asSet(
+				new Session("singleColorSession1", Arrays.asList("1a.png","2a.png"), Collections.EMPTY_LIST),
+				new Session("singleColorSession2", Arrays.asList("1b.png"), Collections.EMPTY_LIST)
+			)
+    	);
 
         profile.photoSource = new PhotoSourceMock();
 
@@ -32,12 +39,15 @@ public class StyleProfilerTest {
         );
     }
 
-    @Test
-    public void testResolvePalettes() {
-    	Profile profile = new Profile();
 
-    	profile.addSession("session1", Arrays.asList("1a.png","2b.png"), Arrays.asList("1a.png", "1a.png","1a.png"));
-        profile.addSession("session2", Arrays.asList("1a.png"), Arrays.asList("2b.png", "2b.png"));
+	@Test
+    public void testResolvePalettes() {
+		Profile profile = new Profile(
+			asSet(
+				new Session("session1", Arrays.asList("1a.png","2b.png"), Arrays.asList("1a.png", "1a.png","1a.png")),
+		    	new Session("session2", Arrays.asList("1a.png"), Arrays.asList("2b.png", "2b.png"))
+		    )
+    	);
 
         PhotoSourceMock photoSourceMock = new PhotoSourceMock();
         StyleProfiler subject = new StyleProfiler(profile, photoSourceMock);
@@ -126,11 +136,14 @@ public class StyleProfilerTest {
 
     @Test
     @Ignore
+    @SuppressWarnings("unchecked")
     public void testStyleAnalysis() {
-    	Profile profile = new Profile();
-//        profile.addSession("session1", Arrays.asList("1a.png","2b.png"));
-//        profile.addSession("session2", Arrays.asList("1a.png"));
-//        profile.photoIds = Arrays.asList("1a.png", "1a.png", "1a.png", "2b.png", "2b.png");
+		Profile profile = new Profile(
+    		asSet(
+    			new Session("session1", Arrays.asList("1a.png","2b.png"), Collections.EMPTY_LIST),
+    			new Session("session2", Arrays.asList("1a.png"), Collections.EMPTY_LIST)
+    		)
+    	);
 
         PhotoSourceMock photoSourceMock = new PhotoSourceMock();
         StyleProfiler subject = new StyleProfiler(profile, photoSourceMock);
@@ -305,6 +318,14 @@ public class StyleProfilerTest {
 
         String style = subject.style();
         assertEquals("Adjective Noun", style);
+    }
+
+    private Set<Session> asSet(Session... sessions) {
+    	LinkedHashSet<Session> result = new LinkedHashSet<Session>();
+    	for (Session session : sessions)
+    		result.add(session);
+
+    	return result;
     }
 
 }

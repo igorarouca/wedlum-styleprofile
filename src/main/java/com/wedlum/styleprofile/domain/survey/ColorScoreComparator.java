@@ -8,7 +8,7 @@ final class ColorScoreComparator implements Comparator<String> {
 	private final List<String> likes;
 	private final List<String> allColors;
 
-	public ColorScoreComparator(List<String> allColors, List<String> allLikes) {
+	ColorScoreComparator(List<String> allColors, List<String> allLikes) {
         this.allColors = allColors;
         this.likes = allLikes;
     }

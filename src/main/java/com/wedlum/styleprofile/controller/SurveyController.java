@@ -1,6 +1,6 @@
 package com.wedlum.styleprofile.controller;
 
-import java.util.HashMap;
+import java.util.Map;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
@@ -37,14 +37,14 @@ public class SurveyController {
 		return survey.resultFor(readProfileFrom(request));
 	}
 
-    @SuppressWarnings("unchecked")
+	@SuppressWarnings("unchecked")
 	private Profile readProfileFrom(HttpServletRequest request) {
         String jsonProfile = request.getParameter("profile");
 
         if (jsonProfile == null)
         	return new Profile();
 
-		return new Profile(ParseUtils.fromJson(jsonProfile, HashMap.class));
+		return new Profile(ParseUtils.fromJson(jsonProfile, Map.class));
     }
 
 }

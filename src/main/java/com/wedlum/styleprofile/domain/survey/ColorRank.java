@@ -9,7 +9,7 @@ class ColorRank {
 
     private PhotoSource source;
 
-    public ColorRank(PhotoSource source){
+    ColorRank(PhotoSource source){
         this.source = source;
     }
 

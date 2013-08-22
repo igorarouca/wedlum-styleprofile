@@ -1,6 +1,11 @@
 package com.wedlum.styleprofile.domain.survey;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import com.wedlum.styleprofile.domain.photo.Photo;
 import com.wedlum.styleprofile.domain.photo.PhotoSource;
@@ -14,37 +19,32 @@ public class Profile {
     private final Map<String, Session> sessionByName;
 
     public Profile() {
-        this(new LinkedHashMap<String, Map<String, Object>>());
+        this(new LinkedHashSet<Session>());
 	}
 
-	public Profile(Map<String, Map<String, Object>> $sessionByName) {
-        this.sessions = parseSessions($sessionByName);
-        this.sessionByName = new LinkedHashMap<String, Session>();
-        for(Session s : sessions)
-            sessionByName.put(s.getName(), s);
+    public Profile(Set<Session> sessions) {
+    	this.sessions = sessions;
+    	this.sessionByName = new LinkedHashMap<String, Session>();
+
+    	for (Session session : sessions)
+        	sessionByName.put(session.getName(), session);
+    }
+
+	public Profile(Map<String, Map<String, List<String>>> $sessionByName) {
+		this(parse($sessionByName));
 	}
 
-    private static Set<Session> parseSessions(Map<String, Map<String, Object>> $sessionByName) {
-        Set<Session> result = new LinkedHashSet<Session>();
-        for (Map.Entry<String, Map<String, Object>> entry : $sessionByName.entrySet())
-            result.add(Session.fromMap(entry.getKey(), entry.getValue()));
+	private static Set<Session> parse(Map<String, Map<String, List<String>>> $sessionByName) {
+		Set<Session> sessions = new LinkedHashSet<Session>();
 
-        return result;
-    }
+		for (Map.Entry<String, Map<String, List<String>>> nameDataPair : $sessionByName.entrySet()) {
+			String name = nameDataPair.getKey();
+			Map<String, List<String>> data = nameDataPair.getValue();
+			Session session = new Session(name, data);
+			sessions.add(session);
+		}
 
-    @SuppressWarnings("unchecked")
-	public void addSession(String name, List<String> liked) {
-        this.addSession(name, liked, Collections.EMPTY_LIST);
-    }
-
-    // TODO: Remove
-	public void addSession(String name, List<String> liked, List<String> all) {
-		Map<String, Object> sessionData = new LinkedHashMap<String, Object>();
-		sessionData.put("likedPhotos", liked);
-        sessionData.put("allPhotos", all);
-        Session session = Session.fromMap(name, sessionData);
-        sessions.add(session);
-        sessionByName.put(name, session);
+		return sessions;
 	}
 
 	public List<String> getLikedPhotosFor(String session) {
