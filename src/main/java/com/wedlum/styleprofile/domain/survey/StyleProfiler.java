@@ -5,6 +5,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.wedlum.styleprofile.domain.photo.Photo;
 import com.wedlum.styleprofile.domain.photo.PhotoSource;
 
 public class StyleProfiler {

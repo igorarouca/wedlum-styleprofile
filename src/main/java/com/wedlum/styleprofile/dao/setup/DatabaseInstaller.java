@@ -9,9 +9,8 @@ import javax.sql.DataSource;
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
-@Component
+//@Component
 public class DatabaseInstaller implements InitializingBean {
 
 	@Autowired
