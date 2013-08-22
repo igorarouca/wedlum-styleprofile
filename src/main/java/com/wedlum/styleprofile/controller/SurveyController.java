@@ -37,7 +37,8 @@ public class SurveyController {
 		return survey.resultFor(readProfileFrom(request));
 	}
 
-    private Profile readProfileFrom(HttpServletRequest request) {
+    @SuppressWarnings("unchecked")
+	private Profile readProfileFrom(HttpServletRequest request) {
         String jsonProfile = request.getParameter("profile");
 
         if (jsonProfile == null)

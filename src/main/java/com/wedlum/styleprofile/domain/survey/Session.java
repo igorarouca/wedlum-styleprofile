@@ -7,6 +7,14 @@ import java.util.Map;
 
 public class Session {
 
+	@SuppressWarnings("unchecked")
+	public static Session fromMap(Map<String, Object> $session) {
+		return new Session(
+				(List<String>) $session.get("likedPhotos"),
+				(List<String>) $session.get("allPhotos")
+		);
+	}
+
 	private final List<String> likes;
 	private final List<String> allPhotos;
 
@@ -19,11 +27,6 @@ public class Session {
 	
 	}
 
-    public static Session fromMap(Map<String, Object> $session) {
-        return new Session(
-                (List<String>) $session.get("likedPhotos"),
-                (List<String>) $session.get("allPhotos"));
-    }
 
     public List<String> getLikes() {
 		return likes;
