@@ -320,7 +320,8 @@ public class StyleProfilerTest {
         assertEquals("Adjective Noun", style);
     }
 
-    private Set<Session> asSet(Session... sessions) {
+    // TODO: Extract this method to commons
+    public static Set<Session> asSet(Session... sessions) {
     	LinkedHashSet<Session> result = new LinkedHashSet<Session>();
     	for (Session session : sessions)
     		result.add(session);
