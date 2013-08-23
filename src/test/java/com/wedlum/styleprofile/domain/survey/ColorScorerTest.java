@@ -1,8 +1,6 @@
 package com.wedlum.styleprofile.domain.survey;
 
 import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -10,7 +8,7 @@ import org.junit.Test;
 import com.wedlum.styleprofile.domain.photo.PhotoSource;
 import com.wedlum.styleprofile.domain.photo.PhotoSourceMock;
 
-public class ColorScoreComparatorNGTest {
+public class ColorScorerTest {
 
 	private ColorScoreComparatorNG subject;
 	private PhotoSource photoSource;
@@ -20,15 +18,10 @@ public class ColorScoreComparatorNGTest {
 		photoSource = createPhotoSource();
 		Session session = new Session("My Session", Arrays.asList("1a.png"), Arrays.asList("1a.png", "2b.png"));
 
-		ColorScorer scorer = new ColorScorer(photoSource, StyleProfilerTest.asSet(session));
-		subject = new ColorScoreComparatorNG(scorer);
-		List<String> colors = Arrays.asList("220S", "100S", "000S");
-		Collections.sort(colors, subject);
-		Assert.assertEquals("[000S, 220S, 100S]", colors.toString());
-	}
-
-	@Test
-	public void testScore() {
+		ColorScorer subject = new ColorScorer(photoSource, StyleProfilerTest.asSet(session));
+		Assert.assertEquals(new Integer(0), subject.score("100S"));
+        Assert.assertEquals(new Integer(0), subject.score("220S"));
+        Assert.assertEquals(new Integer(1), subject.score("000S"));
 	}
 
 	private static PhotoSourceMock createPhotoSource() {
@@ -40,15 +33,6 @@ public class ColorScoreComparatorNGTest {
                 "   Tags:\n" +
                 "       Colors:\n" +
                 "           - 000S\n" +
-                "           - 100S"
-        );
-
-        source.setMetadataWithoutValidation(
-                "2b.png",
-                "Photo:\n" +
-                "   Tags:\n" +
-                "       Colors:\n" +
-                "           - 220S\n" +
                 "           - 100S"
         );
 
