@@ -12,7 +12,7 @@ class ColorScoreComparatorNG implements Comparator<String> {
 
 	@Override
 	public int compare(String color1, String color2) {
-		return colorScorer.getScore(color2).compareTo(colorScorer.getScore(color1));
+		return colorScorer.score(color2).compareTo(colorScorer.score(color1));
 	}
 
 }

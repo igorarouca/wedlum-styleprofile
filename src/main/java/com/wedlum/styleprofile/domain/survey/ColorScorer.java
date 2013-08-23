@@ -6,44 +6,47 @@ import java.util.Set;
 import com.wedlum.styleprofile.domain.photo.Photo;
 import com.wedlum.styleprofile.domain.photo.PhotoSource;
 
-public class ColorScorer {
+class ColorScorer {
 
 	private final Set<Session> sessions;
 	private final PhotoSource photoSource;
 
-	public ColorScorer(PhotoSource photoSource, Set<Session> sessions) {
+	ColorScorer(PhotoSource photoSource, Set<Session> sessions) {
 		this.photoSource = photoSource;
 		this.sessions = sessions;
 	}
 
-	Integer getScore(String color) {
+	Integer score(String color) {
         int sumOfScores = 0;
         int relevantSessionsCount = 0;
-        for (Session s : sessions){
-            int scoreOfSession = getScoreOfColorInSession(color, s);
+        for (Session session : sessions) {
+            int scoreOfSession = getScoreOfColorInSession(color, session);
             sumOfScores += scoreOfSession;
-            if (scoreOfSession >0) relevantSessionsCount++;
+            if (scoreOfSession > 0) relevantSessionsCount++;
         }
 
         if (relevantSessionsCount == 0) return 0;
         return sumOfScores/relevantSessionsCount;
     }
 
-    int getScoreOfColorInSession(String color, Session s) {
-        int totalPhotos = s.getAllPhotos().size();
-        int photosContainingColor = countPhotosContainingColor(s.getAllPhotos(), color);
-        int timesLiked = countPhotosContainingColor(s.getLikes(), color);
+	int getScoreOfColorInSession(String color, Session session) {
+		List<String> allPhotos = session.getAllPhotos();
+		int totalPhotos = allPhotos.size();
+		int photosContainingColor = numberOfPhotosContainingColor(color, allPhotos);
+		int timesLiked = numberOfPhotosContainingColor(color, session.getLikedPhotos());
 
         return timesLiked * (totalPhotos - photosContainingColor);
     }
 
-    private int countPhotosContainingColor(List<String> photos, String color) {
+	private int numberOfPhotosContainingColor(String color, List<String> photos) {
         int result = 0;
-        for (String $photo : photos){
+        for (String $photo : photos) {
             Photo photo = photoSource.getPhoto($photo);
             if (photo.getColors().contains(color))
                 result++;
         }
+
         return result;
     }
+
 }

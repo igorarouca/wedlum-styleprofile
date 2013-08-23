@@ -48,7 +48,7 @@ public class Profile {
 	}
 
 	public List<String> getLikedPhotosFor(String session) {
-		return sessionByName.get(session).getLikes();
+		return sessionByName.get(session).getLikedPhotos();
 	}
 
 	public boolean hasSession(String name) {

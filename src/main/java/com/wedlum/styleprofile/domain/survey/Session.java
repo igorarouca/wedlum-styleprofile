@@ -8,21 +8,21 @@ import org.apache.commons.lang3.Validate;
 public class Session {
 
     private final String name;
-	private final List<String> likes;
+	private final List<String> likedPhotos;
     private final List<String> allPhotos;
 
     public Session(String name, Map<String, List<String>> sessioData) {
     	this(name, sessioData.get("likedPhotos"), sessioData.get("allPhotos"));
     }
 
-	public Session(String name, List<String> likes, List<String> allColors) {
+	public Session(String name, List<String> likedPhotos, List<String> allPhotos) {
 		Validate.notNull(name, "name is required");
-        Validate.notNull(likes, "likes is required");
-		Validate.notNull(allColors, "allColors is required");
+        Validate.notNull(likedPhotos, "likedPhotos is required");
+		Validate.notNull(allPhotos, "allColors is required");
 
         this.name = name;
-		this.likes = likes;
-		this.allPhotos = allColors;
+		this.likedPhotos = likedPhotos;
+		this.allPhotos = allPhotos;
 	}
 
 	public String getName() {
@@ -33,12 +33,8 @@ public class Session {
 		return allPhotos;
 	}
 
-	public List<String> getLikes() {
-		return likes;
-	}
-
-	public int getLikesCount() {
-		return likes.size();
+	public List<String> getLikedPhotos() {
+		return likedPhotos;
 	}
 
 }

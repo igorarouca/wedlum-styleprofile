@@ -27,7 +27,7 @@ class ColorRank {
     private List<String> getAllLikes(LinkedHashSet<Session> allSessions) {
         List<String> result = new ArrayList<String>();
         for (Session session : allSessions)
-            result.addAll(session.getLikes());
+            result.addAll(session.getLikedPhotos());
         return getColors(result);
     }
 
