@@ -16,7 +16,6 @@ public class ColorScoreComparatorNGTest {
 	private ColorScoreComparatorNG subject;
 	private PhotoSource photoSource;
 
-	@Ignore
 	@Test
 	public void testScoreIsZeroWhenColorAppearsInAllSwatches() {
 		photoSource = createPhotoSource();
@@ -24,7 +23,7 @@ public class ColorScoreComparatorNGTest {
 		subject = new ColorScoreComparatorNG(photoSource, StyleProfilerTest.asSet(session));
 		List<String> colors = Arrays.asList("220S", "100S", "000S");
 		Collections.sort(colors, subject);
-		Assert.assertEquals("000S, 220S, 100S", colors.toString());
+		Assert.assertEquals("[000S, 220S, 100S]", colors.toString());
 	}
 
 	private static PhotoSourceMock createPhotoSource() {
