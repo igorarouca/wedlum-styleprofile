@@ -21,8 +21,21 @@ public class ColorScorerTest {
 		ColorScorer subject = new ColorScorer(photoSource, StyleProfilerTest.asSet(session));
 		Assert.assertEquals(new Integer(0), subject.score("100S"));
         Assert.assertEquals(new Integer(0), subject.score("220S"));
-        Assert.assertEquals(new Integer(1), subject.score("000S"));
+        Assert.assertEquals(new Integer(50), subject.score("000S"));
 	}
+
+
+    @Test
+    public void testScoreIs90IfOneOfTen() {
+        photoSource = createPhotoSource();
+        Session session = new Session("My Session", Arrays.asList("10b.png"),
+                Arrays.asList(  "1a.png", "2b.png", "3a.png", "4b.png",
+                                "5a.png", "6b.png", "7a.png", "8b.png",
+                                "9a.png", "10b.png"));
+
+        ColorScorer subject = new ColorScorer(photoSource, StyleProfilerTest.asSet(session));
+        Assert.assertEquals(new Integer(90), subject.score("042S"));
+    }
 
 	private static PhotoSourceMock createPhotoSource() {
         PhotoSourceMock source = new PhotoSourceMock();
@@ -43,6 +56,79 @@ public class ColorScorerTest {
                 "       Colors:\n" +
                 "           - 220S\n" +
                 "           - 100S"
+        );
+
+        source.setMetadataWithoutValidation(
+                "3a.png",
+                "Photo:\n" +
+                        "   Tags:\n" +
+                        "       Colors:\n" +
+                        "           - 000S\n" +
+                        "           - 100S"
+        );
+
+        source.setMetadataWithoutValidation(
+                "4b.png",
+                "Photo:\n" +
+                        "   Tags:\n" +
+                        "       Colors:\n" +
+                        "           - 220S\n" +
+                        "           - 100S"
+        );
+
+        source.setMetadataWithoutValidation(
+                "5a.png",
+                "Photo:\n" +
+                        "   Tags:\n" +
+                        "       Colors:\n" +
+                        "           - 000S\n" +
+                        "           - 100S"
+        );
+
+        source.setMetadataWithoutValidation(
+                "6b.png",
+                "Photo:\n" +
+                        "   Tags:\n" +
+                        "       Colors:\n" +
+                        "           - 220S\n" +
+                        "           - 100S"
+        );
+
+        source.setMetadataWithoutValidation(
+                "7a.png",
+                "Photo:\n" +
+                        "   Tags:\n" +
+                        "       Colors:\n" +
+                        "           - 000S\n" +
+                        "           - 100S"
+        );
+
+        source.setMetadataWithoutValidation(
+                "8b.png",
+                "Photo:\n" +
+                        "   Tags:\n" +
+                        "       Colors:\n" +
+                        "           - 220S\n" +
+                        "           - 100S"
+        );
+
+        source.setMetadataWithoutValidation(
+                "9a.png",
+                "Photo:\n" +
+                        "   Tags:\n" +
+                        "       Colors:\n" +
+                        "           - 000S\n" +
+                        "           - 100S"
+        );
+
+        source.setMetadataWithoutValidation(
+                "10b.png",
+                "Photo:\n" +
+                        "   Tags:\n" +
+                        "       Colors:\n" +
+                        "           - 220S\n" +
+                        "           - 100S\n" +
+                        "           - 042S"
         );
 
         return source;

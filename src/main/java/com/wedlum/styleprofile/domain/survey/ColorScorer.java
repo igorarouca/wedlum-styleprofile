@@ -34,8 +34,16 @@ class ColorScorer {
 		int totalPhotos = allPhotos.size();
 		int photosContainingColor = numberOfPhotosContainingColor(color, allPhotos);
 		int timesLiked = numberOfPhotosContainingColor(color, session.getLikedPhotos());
+        int likesAvailable = session.getLikedPhotos().size();
 
-        return timesLiked * (totalPhotos - photosContainingColor);
+        if (timesLiked == 0) return 0;
+
+        int proportionOfSwatchesContainingColor = (photosContainingColor * 100) / totalPhotos;
+        int chanceOfPickingAtRandom = Math.min(proportionOfSwatchesContainingColor * likesAvailable, 100);
+        int chanceLikeAtRandom = chanceOfPickingAtRandom / timesLiked;
+        int score = 100 - chanceLikeAtRandom;
+
+        return score;
     }
 
 	private int numberOfPhotosContainingColor(String color, List<String> photos) {
