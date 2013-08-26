@@ -29,7 +29,7 @@ class ColorScorer {
         return sumOfScores/relevantSessionsCount;
     }
 
-	int getScoreOfColorInSession(String color, Session session) {
+	private int getScoreOfColorInSession(String color, Session session) {
 		List<String> allPhotos = session.getAllPhotos();
 		int totalPhotos = allPhotos.size();
 		int photosContainingColor = numberOfPhotosContainingColor(color, allPhotos);

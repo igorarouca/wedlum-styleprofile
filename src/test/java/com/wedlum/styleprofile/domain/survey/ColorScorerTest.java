@@ -10,7 +10,6 @@ import com.wedlum.styleprofile.domain.photo.PhotoSourceMock;
 
 public class ColorScorerTest {
 
-	private ColorScoreComparatorNG subject;
 	private PhotoSource photoSource;
 
 	@Test
@@ -26,12 +25,16 @@ public class ColorScorerTest {
 
 
     @Test
-    public void testScoreIs90IfOneOfTen() {
+    public void testScoreIs90WithOneOccurrenceinTenSwatches() {
         photoSource = createPhotoSource();
-        Session session = new Session("My Session", Arrays.asList("10b.png"),
-                Arrays.asList(  "1a.png", "2b.png", "3a.png", "4b.png",
-                                "5a.png", "6b.png", "7a.png", "8b.png",
-                                "9a.png", "10b.png"));
+
+        Session session = new Session(
+        		"My Session",
+        		Arrays.asList("10b.png"),
+	            Arrays.asList("1a.png", "2b.png", "3a.png", "4b.png",
+	                          "5a.png", "6b.png", "7a.png", "8b.png",
+	                          "9a.png", "10b.png")
+        		);
 
         ColorScorer subject = new ColorScorer(photoSource, StyleProfilerTest.asSet(session));
         Assert.assertEquals(new Integer(90), subject.score("042S"));
