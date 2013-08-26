@@ -3,7 +3,6 @@ package com.wedlum.styleprofile.controller;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
-import com.wedlum.styleprofile.util.web.ParseUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.wedlum.styleprofile.domain.photo.Photo;
 import com.wedlum.styleprofile.domain.photo.PhotoGallery;
+import com.wedlum.styleprofile.util.web.ParseUtils;
 
 @Controller
 @RequestMapping(value = "photo/detail")

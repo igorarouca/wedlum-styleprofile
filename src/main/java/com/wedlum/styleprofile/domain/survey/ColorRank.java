@@ -1,9 +1,12 @@
 package com.wedlum.styleprofile.domain.survey;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.LinkedHashSet;
+import java.util.List;
+
 import com.wedlum.styleprofile.domain.photo.Photo;
 import com.wedlum.styleprofile.domain.photo.PhotoSource;
-
-import java.util.*;
 
 class ColorRank {
 

@@ -9,9 +9,8 @@ import java.util.Set;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import com.wedlum.styleprofile.util.web.ParseUtils;
-
 import com.wedlum.styleprofile.util.observer.Observer;
+import com.wedlum.styleprofile.util.web.ParseUtils;
 
 @Named(value = "tagAutocomplete")
 public class TagAutocompleteImpl implements TagAutocomplete {

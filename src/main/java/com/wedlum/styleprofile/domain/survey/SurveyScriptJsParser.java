@@ -10,8 +10,9 @@ import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
 import javax.script.ScriptException;
 
-import com.wedlum.styleprofile.util.web.ParseUtils;
 import org.apache.commons.collections4.Transformer;
+
+import com.wedlum.styleprofile.util.web.ParseUtils;
 
 @Named(value = "surveyScriptParser")
 public class SurveyScriptJsParser implements Transformer<Reader, List<Step>> {
