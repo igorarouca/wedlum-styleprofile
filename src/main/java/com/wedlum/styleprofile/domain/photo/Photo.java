@@ -17,6 +17,9 @@ public class Photo implements DomainObject {
 	private String metadata;
     private ColorSwatchMetadata meta;
 
+    public Photo(){
+        //DO NOT delete, Photo gallery needs it in order to save metadata for new photos.
+    }
 	public Photo(String id, String metadata) {
 		this.id = id;
 		this.metadata = metadata;
