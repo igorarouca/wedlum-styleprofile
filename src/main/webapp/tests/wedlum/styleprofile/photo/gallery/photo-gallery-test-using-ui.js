@@ -12,28 +12,17 @@ asyncTest( "test.png is available", function() {
 
 AdminUser = {
 
-    openPhotoGallery: function(){
+    openPhotoGallery: function() {
         BaseUser.navigate("/photo-gallery.html");
     },
 
-    waitForPhotoInGallery: function(photoId, callback){
-        Commons.waitFor(function(){
+    waitForPhotoInGallery: function(photoId, callback) {
+        Commons.waitFor(function() {
             return $("#fixture-frame").contents().find("[data-photo-id='" + photoId +  "']").length > 0;
         }, callback);
     }
 
 };
-
-Commons = {
-    waitFor: function(condition, callback){
-        var interval = setInterval(function(){
-            if (condition()){
-                clearInterval(interval);
-                callback();
-            }
-        }, 1000);
-    }
-}
 
 //Edit Metadata (test.png)
 //Save
