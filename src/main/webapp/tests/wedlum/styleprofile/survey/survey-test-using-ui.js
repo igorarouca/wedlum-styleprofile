@@ -37,7 +37,7 @@ asyncTest( "1st session completed, waiting for the 2nd", function() {
 
 var SurveyUser = {
     openWelcomePage: function(){
-        $("#fixture-frame").attr("src", "/");
+        BaseUser.navigate("/");
     },
 
     waitForSession: function(session, callback) {
