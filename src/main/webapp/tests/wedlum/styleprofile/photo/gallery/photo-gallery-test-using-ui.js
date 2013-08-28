@@ -67,7 +67,7 @@ AdminUser = {
         this.waitForPhotoInGallery(photoId, function() {
             that.findPhoto(photoId).click();
             that.waitForPhotoEditor(function() {
-                that.findPhotoEditor().getSession().setValue(metadata);
+                $("#fixture-frame")[0].contentWindow.eval('ace.edit("photo-tags-editor").getSession().setValue(' + JSON.stringify(metadata) + ')');
             });
         });
     },
