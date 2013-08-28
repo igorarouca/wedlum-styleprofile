@@ -14,20 +14,19 @@ asyncTest( "edit test.png metadata", function() {
     expect(1);
 
     AdminUser.openPhotoGallery();
-    AdminUser.setPhotoMetadata(
-        "test.png",
+    var metadata =
         "Photo:\n" +
         "   Tags:\n" +
         "       Colors:\n" +
-        "           - 042",
+        "           - 042";
+    AdminUser.setPhotoMetadata(
+        "test.png",
+        metadata,
         function() {
-            AdminUser.assertPhotoMetadata(
+            AdminUser.onPhotoMetadata(
                 "test.png",
-                "Photo:\n" +
-                "   Tags:\n" +
-                "       Colors:\n" +
-                "           - 042",
-                function() {
+                function(meta) {
+                    equal(metadata, meta);
                     start();
                 }
             );
@@ -89,8 +88,12 @@ AdminUser = {
         });
     },
 
-    assertPhotoMetadata: function(photoId, metadata, callback) {
-        alert("Ha!");
+    onPhotoMetadata: function(photoId, callback) {
+        this.openPhotoDetails(photoId, function() {
+            var meta = $("#fixture-frame")[0].contentWindow.eval(
+                'ace.edit("photo-tags-editor").getSession().getValue()');
+            callback(meta);
+        });
     }
 
 };
