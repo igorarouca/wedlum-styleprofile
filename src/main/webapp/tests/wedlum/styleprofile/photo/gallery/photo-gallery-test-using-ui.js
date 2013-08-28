@@ -21,7 +21,7 @@ asyncTest( "edit test.png metadata", function() {
         "       Colors:\n" +
         "           - 042",
         function() {
-            AdminUser.assertMetadataOf(
+            AdminUser.assertPhotoMetadata(
                 "test.png",
                 "Photo:\n" +
                 "   Tags:\n" +
@@ -58,7 +58,12 @@ AdminUser = {
     waitForPhotoEditor: function(callback) {
         var that = this;
         Commons.waitFor(function() {
-            return that.findPhotoEditor().length > 0;
+            if (that.findPhotoEditor().length > 0) {
+                return $("#fixture-frame")[0].contentWindow.eval(
+                    'ace.edit("photo-tags-editor").getSession().getValue() != ""'
+                );
+            }
+            return false;
         }, callback);
     },
 
@@ -67,12 +72,15 @@ AdminUser = {
         this.waitForPhotoInGallery(photoId, function() {
             that.findPhoto(photoId).click();
             that.waitForPhotoEditor(function() {
-                $("#fixture-frame")[0].contentWindow.eval('ace.edit("photo-tags-editor").getSession().setValue(' + JSON.stringify(metadata) + ')');
+                $("#fixture-frame")[0].contentWindow.eval(
+                    'ace.edit("photo-tags-editor").getSession().setValue(' + JSON.stringify(metadata) + ')'
+                );
+                $("#fixture-frame").contents().find("#savePhotoDetail").click();
             });
         });
     },
 
-    assertMetadataOf: function(photoId, metadata, callback) {
+    assertPhotoMetadata: function(photoId, metadata, callback) {
 
     }
 
