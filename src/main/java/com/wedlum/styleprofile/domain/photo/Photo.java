@@ -5,8 +5,10 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.wedlum.styleprofile.domain.DomainObject;
 
+@JsonIgnoreProperties({"colors"})
 public class Photo implements DomainObject {
 
 	private static final long serialVersionUID = 1L;
@@ -15,7 +17,7 @@ public class Photo implements DomainObject {
 
     private String id;
 	private String metadata;
-    private ColorSwatchMetadata meta;
+    private transient ColorSwatchMetadata meta;
 
     public Photo(){
         //DO NOT delete, Photo gallery needs it in order to save metadata for new photos.

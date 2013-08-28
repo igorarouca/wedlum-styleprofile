@@ -83,7 +83,7 @@ public class TagAutocompleteImpl implements TagAutocomplete {
 		if (!map.containsKey(key))
 			map.put(key, new LinkedHashSet<String>());
 
-		map.get(key).add((String) child);
+		map.get(key).add("" + child);
 	}
 
 }
