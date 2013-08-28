@@ -67,21 +67,30 @@ AdminUser = {
         }, callback);
     },
 
-    setPhotoMetadata: function(photoId, metadata, callback) {
+    openPhotoDetails: function(photoId, callback) {
         var that = this;
         this.waitForPhotoInGallery(photoId, function() {
             that.findPhoto(photoId).click();
             that.waitForPhotoEditor(function() {
-                $("#fixture-frame")[0].contentWindow.eval(
-                    'ace.edit("photo-tags-editor").getSession().setValue(' + JSON.stringify(metadata) + ')'
-                );
-                $("#fixture-frame").contents().find("#savePhotoDetail").click();
+                callback();
             });
         });
     },
 
-    assertPhotoMetadata: function(photoId, metadata, callback) {
+    setPhotoMetadata: function(photoId, metadata, callback) {
+        this.openPhotoDetails(photoId, function() {
+            $("#fixture-frame")[0].contentWindow.eval(
+                'ace.edit("photo-tags-editor").getSession().setValue(' + JSON.stringify(metadata) + ')'
+            );
+            $("#fixture-frame").contents().find("#savePhotoDetail").click();
+            Commons.waitFor(function() {
+                return $("#fixture-frame").contents().find("body").html().indexOf("Photo details saved for " + photoId) >= 0;
+            }, callback);
+        });
+    },
 
+    assertPhotoMetadata: function(photoId, metadata, callback) {
+        alert("Ha!");
     }
 
 };

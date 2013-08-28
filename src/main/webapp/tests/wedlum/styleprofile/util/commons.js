@@ -5,6 +5,6 @@ Commons = {
                 clearInterval(interval);
                 callback();
             }
-        }, 1000);
+        }, 400);
     }
 }
