@@ -1,6 +1,6 @@
 package com.wedlum.styleprofile.domain.survey;
 
-import static junit.framework.Assert.assertEquals;
+import static org.junit.Assert.assertEquals;
 
 import java.util.Arrays;
 import java.util.Collections;

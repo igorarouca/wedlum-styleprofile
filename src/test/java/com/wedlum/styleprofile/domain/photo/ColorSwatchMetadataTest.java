@@ -1,6 +1,6 @@
 package com.wedlum.styleprofile.domain.photo;
 
-import junit.framework.Assert;
+import static org.junit.Assert.*;
 
 import org.junit.Test;
 
@@ -12,9 +12,9 @@ public class ColorSwatchMetadataTest {
     public void _null(){
         try {
             ColorSwatchMetadata.fromYaml(photoId, null);
-            Assert.fail();
+            fail();
         } catch (IllegalStateException ex){
-            Assert.assertEquals("myPhoto.png: invalid metadata: Root tag 'Photo:' not found.", ex.getMessage());
+            assertEquals("myPhoto.png: invalid metadata: Root tag 'Photo:' not found.", ex.getMessage());
         }
     }
 
@@ -22,9 +22,9 @@ public class ColorSwatchMetadataTest {
     public void empty(){
         try {
         	ColorSwatchMetadata.fromYaml(photoId, "");
-            Assert.fail();
+            fail();
         } catch (IllegalStateException ex){
-            Assert.assertEquals("myPhoto.png: invalid metadata: Root tag 'Photo:' not found.", ex.getMessage());
+            assertEquals("myPhoto.png: invalid metadata: Root tag 'Photo:' not found.", ex.getMessage());
         }
     }
 
@@ -32,9 +32,9 @@ public class ColorSwatchMetadataTest {
     public void withoutPhoto(){
         try {
         	ColorSwatchMetadata.fromYaml(photoId, "Custom: one");
-            Assert.fail();
+            fail();
         } catch (IllegalStateException ex){
-            Assert.assertEquals("myPhoto.png: invalid metadata: Root tag 'Photo:' not found.", ex.getMessage());
+            assertEquals("myPhoto.png: invalid metadata: Root tag 'Photo:' not found.", ex.getMessage());
         }
     }
 
@@ -46,9 +46,9 @@ public class ColorSwatchMetadataTest {
                 "Photo:\n" +
                 "   Anything:"
             );
-            Assert.fail();
+            fail();
         } catch (IllegalStateException ex){
-            Assert.assertEquals("myPhoto.png: invalid metadata: 'Tags:' not found.", ex.getMessage());
+            assertEquals("myPhoto.png: invalid metadata: 'Tags:' not found.", ex.getMessage());
         }
     }
 
@@ -64,12 +64,6 @@ public class ColorSwatchMetadataTest {
     		"       Colors:\n" + 
     		"           - 000M"
     	);
-/*            "Photo:\n" + 
-            "   \t  Tags:\n" +
-            "			Colors:\n" +
-            "				- MyFavoriteColor"
-    	);
-*/
     }
 
 }

@@ -1,6 +1,6 @@
 package com.wedlum.styleprofile.dao;
 
-import static junit.framework.Assert.assertEquals;
+import static org.junit.Assert.assertEquals;
 
 import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;

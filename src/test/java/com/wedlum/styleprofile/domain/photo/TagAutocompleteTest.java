@@ -1,10 +1,11 @@
 package com.wedlum.styleprofile.domain.photo;
 
 import java.util.Arrays;
+
 import java.util.Map;
 import java.util.Set;
 
-import junit.framework.Assert;
+import static org.junit.Assert.*;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -31,7 +32,7 @@ public class TagAutocompleteTest {
 
         Map<String, Set<String>> suggestMap = subject.getSuggestions();
 
-        Assert.assertEquals(
+        assertEquals(
                 "Root/Tag/Sub-Tag [Tag Value 1, Tag Value 2]\n" +
                 "Root/Tag [Sub-Tag]\n" +
                 "Root [Tag]",
@@ -44,7 +45,7 @@ public class TagAutocompleteTest {
         photoSourceMock.setMetadataWithoutValidation("42.png", "");
 
         Map<String, Set<String>> suggestMap = subject.getSuggestions();
-        Assert.assertEquals("", toString(suggestMap)
+        assertEquals("", toString(suggestMap)
         );
     }
 
@@ -54,7 +55,7 @@ public class TagAutocompleteTest {
          photoSourceMock.setMetadataWithoutValidation("43.png", "Tag:");
 
          Map<String, Set<String>> suggestMap = subject.getSuggestions();
-         Assert.assertEquals("Root [Tag]", toString(suggestMap));
+         assertEquals("Root [Tag]", toString(suggestMap));
 	}
 
     private String toString(Map<String, Set<String>> suggestMap) {

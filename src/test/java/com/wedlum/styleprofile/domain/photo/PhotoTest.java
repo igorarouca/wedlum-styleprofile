@@ -1,6 +1,6 @@
 package com.wedlum.styleprofile.domain.photo;
 
-import junit.framework.Assert;
+import static org.junit.Assert.*;
 
 import org.junit.Test;
 
@@ -10,9 +10,9 @@ public class PhotoTest {
     public void invalidMetadata(){
         try {
             new Photo("myPhoto.png", "garbage");
-            Assert.fail();
+            fail();
         } catch (IllegalStateException ex){
-            Assert.assertEquals("Invalid: invalid metadata: Root tag 'Photo:' not found.", ex.getMessage());
+            assertEquals("Invalid: invalid metadata: Root tag 'Photo:' not found.", ex.getMessage());
         }
 
     }
