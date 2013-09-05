@@ -7,7 +7,6 @@ var thirdSingleColorSession = wedlum.styleprofile.survey.script[2];
 
 // Mini Palette Swatch Sessions
 var firstMiniPaletteSession = wedlum.styleprofile.survey.script[3];
-var secondMiniPaletteSession = wedlum.styleprofile.survey.script[4];
 
 asyncTest( "On empty profile return 1st single-color session", function() {
 	expect(2);
